@@ -1,0 +1,23 @@
+{
+  "name": "GDES_OD",
+  "version": "1.0.0",
+  "description": "GDES Gestión de Objetivos y desempeño",
+  "scripts": {
+    "install-windows-service": "node_modules\\.bin\\winser -i",
+    "uninstall-windows-service": "node_modules\\.bin\\winser -r"
+  },
+  "dependencies": {
+    "mysql": "*",
+    "express": "~4.0.0",
+    "body-parser": "~1.0.1",
+    "morgan": "*",
+    "cors": "*",
+    "formidable": "^1.0.14",
+    "async": "^0.9.0",
+    "moment": "^2.7.0",
+    "nodemailer": "^0.7.0",
+    "winser": "^0.2.0",
+    "handlebars": "^2.0.0-alpha.4",
+    "edge": "*"
+  }
+}

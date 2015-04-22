@@ -1,0 +1,10 @@
+{
+  "app": {
+    "name": "i18next"
+  },
+  "trat": {
+    "home": "EL CALORET DEL VERANO",
+    "page1": "Page One",
+    "page2": "Page Two"
+  }
+}

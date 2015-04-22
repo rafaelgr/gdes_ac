@@ -1,0 +1,9 @@
+{
+  "app": {
+    "name": "i18next"
+  },
+  "test": {
+    "field1": "Test field1",
+    "field2": "Test field2"
+  }
+}

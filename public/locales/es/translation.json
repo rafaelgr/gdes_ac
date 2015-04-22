@@ -1,0 +1,26 @@
+{
+  "app": {
+    "name": "i18next"
+  },
+  "test": {
+    "field1": "Campo de testeo 1",
+    "field2": "Campo de testeo 2"
+  },
+  "menu":{
+	"home": {
+		"title":"INICIO"
+	},
+	"basic_data":{
+		"title":"DATOS BASICOS",
+		"workers":"TRABAJADORES",
+		"evaluators":"EVALUADORES",
+		"projects": "PROYECTOS"
+	},
+	"evaluations":{
+		"title":"EVALUACIONES",
+		"myEvaluations":"MIS EVALUACIONES",
+		"byProject":"POR PROYECTO",
+		"byWorker": "POR TRABAJADOR"
+	}
+  }
+}

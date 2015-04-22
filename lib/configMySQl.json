@@ -1,0 +1,7 @@
+{
+    "host": "localhost",
+    "user": "root",
+    "password": "aritel",
+    "database": "gdes_od",
+    "port": 3306
+}
