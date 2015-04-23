@@ -2,7 +2,7 @@
 <html lang="en-us">
     <head>
         <meta charset="utf-8">
-        <title>  GDESOD (Administradores) </title>
+        <title> GDES AC </title>
         <meta name="description" content="">
         <meta name="author" content="">
 
@@ -20,6 +20,7 @@
 
         <!-- SmartAdmin RTL Support -->
         <link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-rtl.min.css">
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
 
         <!-- We recommend you use "your_style.css" to override SmartAdmin
         specific styles this will also ensure you retrain your customization with each SmartAdmin update.
@@ -103,7 +104,7 @@
         <header id="header" style="background-color:#E0ECFF; background-image:none;">
             <!-- #PROJECTS: projects dropdown -->
             <div>
-                <span id="logo"> <img src="img/ariface/logo_ariadna.png" alt="Gdes Od" style="height:30px;"> </span>
+                <span id="logo"> <img src="img/ariface/logo_ariadna.png" alt="GDESAC" style="height:30px;"> </span>
             </div>
             <div>
 
@@ -112,6 +113,7 @@
                 <h1> Áreas de conocimiento</h1>
             </div>
             <!-- end projects dropdown -->
+
             <!-- #TOGGLE LAYOUT BUTTONS -->
             <!-- pulled right: nav area -->
             <div class="pull-right">
@@ -119,7 +121,7 @@
                 <!-- collapse menu button -->
                 <div id="hide-menu" class="btn-header pull-right">
                     <span>
-                        <a href="javascript:void(0);" data-action="toggleMenu" title="Collapse Menu">
+                        <a href="javascript:void(0);" data-action="toggleMenu" title="Menú">
                             <i class="fa fa-reorder"></i>
                         </a>
                     </span>
@@ -134,6 +136,7 @@
                     </span>
                 </div>
                 <!-- end logout button -->
+
                 <!-- fullscreen button -->
                 <div id="fullscreen" class="btn-header transparent pull-right">
                     <span>
@@ -143,7 +146,6 @@
                     </span>
                 </div>
                 <!-- end fullscreen button -->
-
             </div>
             <!-- end pulled right: nav area -->
 
@@ -193,7 +195,7 @@
                             <li>
                                 <a href="ConocimientoGeneral.html">
                                     <i class="fa fa-square"></i> Conocimientos
-                                </a>
+                                </a> 
                             </li>
                             <li>
                                 <a href="RolGeneral.html">
@@ -251,26 +253,23 @@
                 <!-- breadcrumb -->
                 <ol class="breadcrumb">
                     <li>Inicio</li>
-                    <li>Administracion</li>
-                    <li>Administradores</li>
-                    <li>Detalle administrador</li>
+                    <li>Administración</li>
+                    <li>Conocimientos</li>
                 </ol>
                 <!-- end breadcrumb -->
-
                 <!-- You can also add more buttons to the
-                ribbon for further usability
+            ribbon for further usability
 
-                Example below:
+            Example below:
 
-                <span class="ribbon-button-alignment pull-right">
-                <span id="search" class="btn btn-ribbon hidden-xs" data-title="search"><i class="fa-grid"></i> Change Grid</span>
-                <span id="add" class="btn btn-ribbon hidden-xs" data-title="add"><i class="fa-plus"></i> Add</span>
-                <span id="search" class="btn btn-ribbon" data-title="search"><i class="fa-search"></i> <span class="hidden-mobile">Search</span></span>
-                </span> -->
+            <span class="ribbon-button-alignment pull-right">
+            <span id="search" class="btn btn-ribbon hidden-xs" data-title="search"><i class="fa-grid"></i> Change Grid</span>
+            <span id="add" class="btn btn-ribbon hidden-xs" data-title="add"><i class="fa-plus"></i> Add</span>
+            <span id="search" class="btn btn-ribbon" data-title="search"><i class="fa-search"></i> <span class="hidden-mobile">Search</span></span>
+            </span> -->
 
             </div>
             <!-- END RIBBON -->
-
             <!-- MAIN CONTENT -->
             <div id="content">
 
@@ -282,41 +281,38 @@
                         <h1 class="page-title txt-color-blueDark">
 
                             <!-- PAGE HEADER -->
-                            <i class="fa-fw fa fa-mortar-board"></i>
-                            Detalle administrador <a href="#" title="Ayuda"><i class="fa fa-question"></i></a>
+                            <i class="fa-fw fa fa-square"></i>
+                            Conocimientos <a href="#" title="Ayuda"><i class="fa fa-question"></i></a>
                         </h1>
                     </div>
                     <!-- end col -->
-
                     <!-- right side of the page with the sparkline graphs -->
                     <!-- col -->
                     <div class="col-xs-12 col-sm-5 col-md-5 col-lg-8">
                         <!-- sparks -->
                         <!--                        <ul id="sparks">
-                        <li class="sparks-info">
-                        <h5>
-                        Facturas pendientes <span class="txt-color-blue">3520</span>
-                        </h5>
-                        </li>
-                        <li class="sparks-info">
-                        <h5>
-                        Clientes <span class="txt-color-purple"><i class="fa fa-arrow-circle-up" data-rel="bootstrap-tooltip" title="Increased"></i>&nbsp;45%</span>
-                        </h5>
-                        </li>
-                        </ul>-->
+                    <li class="sparks-info">
+                    <h5>
+                    Facturas pendientes <span class="txt-color-blue">3520</span>
+                    </h5>
+                    </li>
+                    <li class="sparks-info">
+                    <h5>
+                    Clientes <span class="txt-color-purple"><i class="fa fa-arrow-circle-up" data-rel="bootstrap-tooltip" title="Increased"></i>&nbsp;45%</span>
+                    </h5>
+                    </li>
+                    </ul>-->
                         <!-- end sparks -->
                     </div>
                     <!-- end col -->
 
                 </div>
                 <!-- end row -->
-
                 <!--
-                The ID "widget-grid" will start to initialize all widgets below 
-                You do not need to use widgets if you dont want to. Simply remove 
-                the <section></section> and you can use wells or panels instead 
-                -->
-
+            The ID "widget-grid" will start to initialize all widgets below
+            You do not need to use widgets if you dont want to. Simply remove
+            the <section></section> and you can use wells or panels instead
+            -->
                 <!-- widget grid -->
                 <section id="widget-grid" class="">
 
@@ -329,21 +325,21 @@
                             <!-- Widget ID (each widget will need unique ID)-->
                             <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false" data-widget-colorbutton="false" data-widget-deletebutton="false">
                                 <!-- widget options:
-                                usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
-									
-                                data-widget-colorbutton="false"	
-                                data-widget-editbutton="false"
-                                data-widget-togglebutton="false"
-                                data-widget-deletebutton="false"
-                                data-widget-fullscreenbutton="false"
-                                data-widget-custombutton="false"
-                                data-widget-collapsed="true" 
-                                data-widget-sortable="false"
-									
-                                -->
+                            usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+                            data-widget-colorbutton="false"
+                            data-widget-editbutton="false"
+                            data-widget-togglebutton="false"
+                            data-widget-deletebutton="false"
+                            data-widget-fullscreenbutton="false"
+                            data-widget-custombutton="false"
+                            data-widget-collapsed="true"
+                            data-widget-sortable="false"
+
+                            -->
                                 <header>
                                     <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
-                                    <h2>Mantenimiento administradores </h2>
+                                    <h2>Mantenimiento conocimientos</h2>
 
                                 </header>
 
@@ -356,66 +352,51 @@
                                         <input class="form-control" type="text">
                                     </div>
                                     <!-- end widget edit box -->
-
                                     <!-- widget content -->
                                     <div class="widget-body">
                                         <!-- this is what the user will see -->
-                                        <form id="frmAdministrador" class="smart-form">
+                                        <form id="frmBuscar" class="smart-form">
                                             <header>
-                                                Datos del administrador.
+                                                Buscar conocimientos por nombre.
                                             </header>
                                             <fieldset>
                                                 <div class="row">
-                                                    <section class="col col-md-6">
-                                                        <label class="label">Nombre</label>
+                                                    <section class="col col-md-12">
+                                                        <label class="label">Introduzca el texto a buscar (* = Ver todos)</label>
                                                         <label class="input">
-                                                            <input id="txtNombre" name="txtNombre" type="text" data-bind="value: nombre" />
-                                                        </label>
-                                                    </section>
-                                                    <section class="col col-md-6">
-                                                        <label class="label">Login</label>
-                                                        <label class="input">
-                                                            <input id="txtLogin" name="txtLogin" type="text" data-bind="value: login" />
+                                                            <input id="txtBuscar" name="txtBuscar" type="text" />
                                                         </label>
                                                     </section>
                                                 </div>
-                                                <div class="row">
-                                                    <section class="col col-md-6">
-                                                        <label class="label">Contraseña</label>
-                                                        <label class="input">
-                                                            <input id="txtPassword1" name="txtPassword1" type="password" />
-                                                        </label>
-                                                    </section>
-                                                    <section class="col col-md-6">
-                                                        <label class="label">Repita contraseña</label>
-                                                        <label class="input">
-                                                            <input id="txtPassword2" name="txtPassword2" type="password" />
-                                                        </label>
-                                                    </section>
-                                                </div>
-                                                <div class="row">
-                                                    <section class="col col-md-6">
-                                                        <label class="label">Correo electrónico</label>
-                                                        <label class="input">
-                                                            <input id="txtEmail" name="txtEmail" type="email" data-bind="value: email" />
-                                                        </label>
-                                                    </section>
-                                                    <section class="col col-md-6">
-                                                    </section>
-                                                </div>
-
                                             </fieldset>
                                             <fieldset>
                                                 <div class="pull-right">
-                                                    <button id="btnSalir" title="Salir sin guardar" class="btn btn-warning btn-circle btn-lg">
-                                                        <i class="fa fa-lg fa-sign-out"></i>
+                                                    <button id="btnBuscar" title="Buscar" class="btn btn-primary btn-circle btn-lg">
+                                                        <i class="fa fa-lg fa-search"></i>
                                                     </button>
-                                                    <button id="btnAceptar" title="Guardar y salir" class="btn btn-success btn-circle btn-lg">
-                                                        <i class="fa fa-lg fa-check"></i>
+                                                    <button id="btnAlta" title="Crear nuevo registro" class="btn btn-success btn-circle btn-lg">
+                                                        <i class="fa fa-lg fa-plus"></i>
                                                     </button>
                                                 </div>
                                             </fieldset>
                                         </form>
+                                        <div id="tbConocimiento" style="display:none;">
+                                            <table id="dt_conocimiento" class="table table-striped table-bordered table-hover" width="100%">
+                                                <thead>
+                                                    <tr>
+                                                        <th data-class="expand">
+                                                            <i class="fa fa-fw fa-user text-muted hidden-md hidden-sm hidden-xs"></i> Nombre
+                                                        </th>
+                                                        <th data-hide="phone">
+                                                            Categoria
+                                                        </th>
+                                                        <th>
+
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                            </table>
+                                        </div>
                                     </div>
                                     <!-- end widget content -->
 
@@ -444,7 +425,7 @@
         <div class="page-footer">
             <div class="row">
                 <div class="col-xs-12 col-sm-6">
-                    <span class="txt-color-white">GDESAC <span id="versionFooter">1.0</span> <span class="hidden-xs"> -Áreas de conocimiento</span> © Ariadna Software S.L. 2014-2015</span>
+                    <span class="txt-color-white">GDESAC <span id="versionFooter">NO VERSION</span> <span class="hidden-xs"> - Áreas de conocimiento</span> © Ariadna Software S.L. 2014-2015</span>
                 </div>
 
                 <div class="col-xs-6 col-sm-6 text-right hidden-xs">
@@ -523,6 +504,8 @@
 
         <!-- Demo purpose only -->
         <!--<script src="js/demo.min.js"></script>-->
+        <!-- Numeral para manipular números -->
+        <script src="js/numeral.min.js"></script>
 
         <!-- MAIN APP JS FILE -->
         <script src="js/app.min.js"></script>
@@ -531,17 +514,20 @@
         <!-- Voice command : plugin -->
         <script src="js/speech/voicecommand.min.js"></script>
 
+        <!--- KNOCKOUT JS -->
+        <script src="//cdnjs.cloudflare.com/ajax/libs/knockout/3.2.0/knockout-min.js"></script>
+
         <!-- SmartChat UI : plugin -->
         <script src="js/smart-chat-ui/smart.chat.ui.min.js"></script>
         <script src="js/smart-chat-ui/smart.chat.manager.min.js"></script>
 
-        <!--- KNOCKOUT JS -->
-        <script src="//cdnjs.cloudflare.com/ajax/libs/knockout/3.2.0/knockout-min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
 
         <!-- PAGE RELATED PLUGIN(S) 
         <script src="..."></script>-->
-        <script src="js/ariadna/administradorDetalle.js"></script>
         <script src="js/ariadna/comun.js"></script>
+        <script src="js/ariadna/conocimientoGeneral.js"></script>
 
         <!-- PAGE RELATED PLUGIN(S) -->
         <script src="js/plugin/datatables/jquery.dataTables.min.js"></script>
