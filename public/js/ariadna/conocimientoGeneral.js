@@ -60,20 +60,37 @@ function initForm() {
 
 function initTablaConocimientos() {
     tablaCarro = $('#dt_conocimiento').dataTable({
-        autoWidth: true,
-        preDrawCallback: function () {
+        "autoWidth": true,
+        "columnDefs": [
+            { "targets":[1], "visible":false}
+        ],
+        "order": [[1, 'asc']],
+        "preDrawCallback": function () {
             // Initialize the responsive datatables helper once.
             if (!responsiveHelper_dt_basic) {
                 responsiveHelper_dt_basic = new ResponsiveDatatablesHelper($('#dt_conocimiento'), breakpointDefinition);
             }
         },
-        rowCallback: function (nRow) {
+        "rowCallback": function (nRow) {
             responsiveHelper_dt_basic.createExpandIcon(nRow);
         },
-        drawCallback: function (oSettings) {
+        "drawCallback": function (oSettings) {
             responsiveHelper_dt_basic.respond();
+            var api = this.api();
+            var rows = api.rows({ page: 'current' }).nodes();
+            var last = null;
+            
+            api.column(1, { page: 'current' }).data().each(function (group, i) {
+                if (last !== group) {
+                    $(rows).eq(i).before(
+                        '<tr class="group"><td colspan="3">' + group + '</td></tr>'
+                    );
+                    
+                    last = group;
+                }
+            });
         },
-        language: {
+        "language": {
             processing: "Procesando...",
             info: "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
             infoEmpty: "Mostrando registros del 0 al 0 de un total de 0 registros",
@@ -93,13 +110,13 @@ function initTablaConocimientos() {
                 sortDescending: ": Activar para ordenar la columna de manera descendente"
             }
         },
-        data: dataConocimientos,
+        "data": dataConocimientos,
         columns: [
             {
             data: "nombre"
             }, 
             {
-                data: "categoria.nombre"
+                data: "catConocimiento.nombre"
             }, 
             {
                 data: "conocimientoId",
