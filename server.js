@@ -23,6 +23,9 @@ var administradores_api = require("./lib/administradores_api");
 var version_api = require("./lib/version_api.js");
 var catConocimientos_api = require("./lib/catConocimientos_api.js");
 var conocimientos_api = require("./lib/conocimientos_api.js");
+var roles_api = require("./lib/roles_api.js");
+var trabajadores_api = require("./lib/trabajadores_api.js");
+var evaluados_api = require("./lib/evaluados_api.js");
 
 
 // ficheros en los que se grabarán los log de aplicación
@@ -154,7 +157,50 @@ router.route("/conocimientos/:conocimientoId")
 
 router.route("/conocimientos-buscar")
 	.post(conocimientos_api.postConocimientosBuscar);
+    
 
+// --> Relacionadas con categorias de roles
+router.route("/roles")
+	.get(roles_api.getRoles)
+	.post(roles_api.postRol);
+
+
+router.route("/roles/:rolId")
+	.get(roles_api.getRol)
+	.put(roles_api.putRol)
+	.delete(roles_api.deleteRol);
+
+router.route("/roles-buscar")
+	.post(roles_api.postRolesBuscar);
+
+// --> Relacionadas con trabajadores
+router.route("/trabajadores")
+	.get(trabajadores_api.getTrabajadores)
+	.post(trabajadores_api.postTrabajador);
+
+
+router.route("/trabajadores/:trabajadorId")
+	.get(trabajadores_api.getTrabajador)
+	.put(trabajadores_api.putTrabajador)
+	.delete(trabajadores_api.deleteTrabajador);
+
+router.route("/trabajadores-buscar")
+	.post(trabajadores_api.postTrabajadoresBuscar);
+
+router.route("/trabajadores-login")
+	.post(trabajadores_api.postTrabajadorLogin);
+
+router.route("/evaluadores")
+	.get(trabajadores_api.getEvaluadores)
+
+// --> Relacionadas con evaluador - evaluado
+
+router.route("/evaluados/:id")
+	.post(evaluados_api.postTrabajadorEvaluado)
+	.delete(evaluados_api.deleteTrabajadorEvaluado);
+
+router.route("/evaluados-buscar")
+	.post(evaluados_api.postEvaluadosBuscar);
 
 //================================================================
 // Registro de rutas y arranque del servidor

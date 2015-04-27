@@ -18,8 +18,12 @@
   <ItemGroup>
     <Content Include="config.json" />
     <Content Include="package.json" />
+    <Compile Include="lib\roles_api.js" />
     <Compile Include="lib\catConocimientos_api.js" />
+    <Compile Include="lib\roles_db_mysql.js" />
     <Compile Include="lib\catConocimientos_db_mysql.js" />
+    <Compile Include="public\js\ariadna\rolDetalle.js" />
+    <Compile Include="public\js\ariadna\rolGeneral.js" />
     <Compile Include="public\js\ariadna\proyectoDetalle.js" />
     <Compile Include="public\js\ariadna\proyectoGeneral.js" />
     <Compile Include="server.js" />
@@ -56,6 +60,8 @@
     <Compile Include="lib\version_api.js" />
     <Content Include="public\AdministradorDetalle.html" />
     <Content Include="public\AdministradorGeneral.html" />
+    <Content Include="public\RolDetalle.html" />
+    <Content Include="public\RolGeneral.html" />
     <Content Include="public\ConocimientoDetalle.html" />
     <Content Include="public\CatConocimientoDetalle.html" />
     <Content Include="public\ConocimientoGeneral.html" />

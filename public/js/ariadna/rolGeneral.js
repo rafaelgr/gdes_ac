@@ -1,6 +1,6 @@
 ﻿/*-------------------------------------------------------------------------- 
-conocimientoGeneral.js
-Funciones js par la página ConocimientoGeneral.html
+rolGeneral.js
+Funciones js par la página RolGeneral.html
 
 ---------------------------------------------------------------------------*/
 var responsiveHelper_dt_basic = undefined;
@@ -8,8 +8,8 @@ var responsiveHelper_datatable_fixed_column = undefined;
 var responsiveHelper_datatable_col_reorder = undefined;
 var responsiveHelper_datatable_tabletools = undefined;
 
-var dataConocimientos;
-var conocimientoId;
+var dataRoles;
+var rolId;
 
 var breakpointDefinition = {
     tablet: 1024,
@@ -23,72 +23,57 @@ function initForm() {
     pageSetUp();
     getVersionFooter();
     //
-    $('#btnBuscar').click(buscarConocimientos());
-    $('#btnAlta').click(crearConocimiento());
+    $('#btnBuscar').click(buscarRoles());
+    $('#btnAlta').click(crearRol());
     $('#frmBuscar').submit(function () {
         return false
     });
     //$('#txtBuscar').keypress(function (e) {
     //    if (e.keyCode == 13)
-    //        buscarConocimientos();
+    //        buscarRoles();
     //});
     //
-    initTablaConocimientos();
+    initTablaRoles();
     // comprobamos parámetros
-    conocimientoId = gup('ConocimientoId');
-    if (conocimientoId !== '') {
+    rolId = gup('RolId');
+    if (rolId !== '') {
         // cargar la tabla con un único valor que es el que corresponde.
         var data = {
-            id: conocimientoId
+            id: rolId
         }
         // hay que buscar ese elemento en concreto
         $.ajax({
             type: "GET",
-            url: "api/conocimientos/" + conocimientoId,
+            url: "api/roles/" + rolId,
             dataType: "json",
             contentType: "application/json",
             data: JSON.stringify(data),
             success: function (data, status) {
                 // hay que mostrarlo en la zona de datos
                 var data2 = [data];
-                loadTablaConocimientos(data2);
+                loadTablaRoles(data2);
             },
             error: errorAjax
         });
     }
 }
 
-function initTablaConocimientos() {
-    tablaCarro = $('#dt_conocimiento').dataTable({
-        "autoWidth": true,
-        "columnDefs": [
-            { "targets":1, "visible":false}
-        ],
-        "preDrawCallback": function () {
+function initTablaRoles() {
+    tablaCarro = $('#dt_rol').dataTable({
+        autoWidth: true,
+        preDrawCallback: function () {
             // Initialize the responsive datatables helper once.
             if (!responsiveHelper_dt_basic) {
-                responsiveHelper_dt_basic = new ResponsiveDatatablesHelper($('#dt_conocimiento'), breakpointDefinition);
+                responsiveHelper_dt_basic = new ResponsiveDatatablesHelper($('#dt_rol'), breakpointDefinition);
             }
         },
-        "rowCallback": function (nRow) {
+        rowCallback: function (nRow) {
             responsiveHelper_dt_basic.createExpandIcon(nRow);
         },
-        "drawCallback": function (oSettings) {
+        drawCallback: function (oSettings) {
             responsiveHelper_dt_basic.respond();
-            var api = this.api();
-            var rows = api.rows({ page: 'current' }).nodes();
-            var last = null;
-            
-            api.column(1, { page: 'current' }).data().each(function (group, i) {
-                if (last !== group) {
-                    $(rows).eq(i).before(
-                        '<tr class="group"><td colspan="3"  style="background-color:#808080">' + group + '</td></tr>'
-                    );
-                    last = group;
-                }
-            });
         },
-        "language": {
+        language: {
             processing: "Procesando...",
             info: "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
             infoEmpty: "Mostrando registros del 0 al 0 de un total de 0 registros",
@@ -108,23 +93,18 @@ function initTablaConocimientos() {
                 sortDescending: ": Activar para ordenar la columna de manera descendente"
             }
         },
-        "data": dataConocimientos,
-        columns: [
-            {
+        data: dataRoles,
+        columns: [{
             data: "nombre"
-            }, 
-            {
-                data: "catConocimiento.nombre"
-            }, 
-            {
-                data: "conocimientoId",
-                render: function (data, type, row) {
-                    var bt1 = "<button class='btn btn-circle btn-danger btn-lg' onclick='deleteConocimiento(" + data + ");' title='Eliminar registro'> <i class='fa fa-trash-o fa-fw'></i> </button>";
-                    var bt2 = "<button class='btn btn-circle btn-success btn-lg' onclick='editConocimiento(" + data + ");' title='Editar registro'> <i class='fa fa-edit fa-fw'></i> </button>";
-                    var html = "<div class='pull-right'>" + bt1 + " " + bt2 + "</div>";
-                    return html;
-                }
-            }]
+        }, {
+            data: "rolId",
+            render: function (data, type, row) {
+                var bt1 = "<button class='btn btn-circle btn-danger btn-lg' onclick='deleteRol(" + data + ");' title='Eliminar registro'> <i class='fa fa-trash-o fa-fw'></i> </button>";
+                var bt2 = "<button class='btn btn-circle btn-success btn-lg' onclick='editRol(" + data + ");' title='Editar registro'> <i class='fa fa-edit fa-fw'></i> </button>";
+                var html = "<div class='pull-right'>" + bt1 + " " + bt2 + "</div>";
+                return html;
+            }
+        }]
     });
 }
 
@@ -148,20 +128,20 @@ function datosOK() {
     return $('#frmBuscar').valid();
 }
 
-function loadTablaConocimientos(data) {
-    var dt = $('#dt_conocimiento').dataTable();
+function loadTablaRoles(data) {
+    var dt = $('#dt_rol').dataTable();
     if (data !== null && data.length === 0) {
         mostrarMensajeSmart('No se han encontrado registros');
-        $("#tbConocimiento").hide();
+        $("#tbRol").hide();
     } else {
         dt.fnClearTable();
         dt.fnAddData(data);
         dt.fnDraw();
-        $("#tbConocimiento").show();
+        $("#tbRol").show();
     }
 }
 
-function buscarConocimientos() {
+function buscarRoles() {
     var mf = function () {
         if (!datosOK()) {
             return;
@@ -174,13 +154,13 @@ function buscarConocimientos() {
         };
         $.ajax({
             type: "POST",
-            url: "api/conocimientos-buscar",
+            url: "api/roles-buscar",
             dataType: "json",
             contentType: "application/json",
             data: JSON.stringify(data),
             success: function (data, status) {
                 // hay que mostrarlo en la zona de datos
-                loadTablaConocimientos(data);
+                loadTablaRoles(data);
             },
             error: errorAjax
         });
@@ -188,15 +168,15 @@ function buscarConocimientos() {
     return mf;
 }
 
-function crearConocimiento() {
+function crearRol() {
     var mf = function () {
-        var url = "ConocimientoDetalle.html?ConocimientoId=0";
+        var url = "RolDetalle.html?RolId=0";
         window.open(url, '_self');
     };
     return mf;
 }
 
-function deleteConocimiento(id) {
+function deleteRol(id) {
     // mensaje de confirmación
     var mens = "¿Realmente desea borrar este registro?";
     $.SmartMessageBox({
@@ -206,16 +186,16 @@ function deleteConocimiento(id) {
     }, function (ButtonPressed) {
         if (ButtonPressed === "Aceptar") {
             var data = {
-                conocimientoId: id
+                rolId: id
             };
             $.ajax({
                 type: "DELETE",
-                url: "api/conocimientos/" + id,
+                url: "api/roles/" + id,
                 dataType: "json",
                 contentType: "application/json",
                 data: JSON.stringify(data),
                 success: function (data, status) {
-                    var fn = buscarConocimientos();
+                    var fn = buscarRoles();
                     fn();
                 },
                 error: errorAjax
@@ -227,10 +207,10 @@ function deleteConocimiento(id) {
     });
 }
 
-function editConocimiento(id) {
-    // hay que abrir la página de detalle de conocimiento
+function editRol(id) {
+    // hay que abrir la página de detalle de rol
     // pasando en la url ese ID
-    var url = "ConocimientoDetalle.html?ConocimientoId=" + id;
+    var url = "RolDetalle.html?RolId=" + id;
     window.open(url, '_self');
 }
 
