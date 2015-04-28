@@ -2,7 +2,7 @@
 <html lang="en-us">
     <head>
         <meta charset="utf-8">
-        <title>  GDESOD (Asignacion trabajadores) </title>
+        <title>  GDES AC </title>
         <meta name="description" content="">
         <meta name="author" content="">
 
@@ -100,16 +100,16 @@
     <body class="">
 
         <!-- #HEADER -->
-        <header id="header" style="background-color:beige; background-image:none;">
+        <header id="header" style="background-color:#E0ECFF; background-image:none;">
             <!-- #PROJECTS: projects dropdown -->
             <div>
-                <span id="logo"> <img src="img/ariface/logo_ariadna.png" alt="Gdes Od" style="height:30px;"> </span>
+                <span id="logo"> <img src="img/ariface/logo_ariadna.png" alt="GDES AC" style="height:30px;"> </span>
             </div>
             <div>
 
             </div>
             <div style="padding-left:5px">
-                <h1>Objetivos y Desempeño</h1>
+                <h1> Áreas de conocimiento</h1>
             </div>
             <!-- end projects dropdown -->
             <!-- #TOGGLE LAYOUT BUTTONS -->
@@ -166,7 +166,7 @@
             <nav>
                 <ul>
                     <li>
-                        <a href="index.html" title="Dashboard">
+                        <a href="Index.html" title="Dashboard">
                             <i class="fa fa-lg fa-fw fa-home"></i> <span class="menu-item-parent">INICIO</span>
                         </a>
                     </li>
@@ -181,28 +181,23 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="EjercicioGeneral.html">
-                                    <i class="fa fa-cubes"></i> Ejercicios
+                                <a href="ProyectoGeneral.html">
+                                    <i class="fa fa-cubes"></i> Proyectos
                                 </a>
                             </li>
                             <li>
-                                <a href="PaisGeneral.html">
-                                    <i class="fa fa-globe"></i> Paises
+                                <a href="CatConocimientoGeneral.html">
+                                    <i class="fa fa-sitemap"></i> Cat. conocimiento
                                 </a>
                             </li>
                             <li>
-                                <a href="UnidadNegocioGeneral.html">
-                                    <i class="fa fa-sitemap"></i> Unidades negocio
+                                <a href="ConocimientoGeneral.html">
+                                    <i class="fa fa-square"></i> Conocimientos
                                 </a>
                             </li>
                             <li>
-                                <a href="PuestoTrabajoGeneral.html">
-                                    <i class="fa fa-random"></i> Puestos de trabajo
-                                </a>
-                            </li>
-                            <li>
-                                <a href="AreaGeneral.html">
-                                    <i class="fa fa-square"></i> Áreas de trabajo
+                                <a href="RolGeneral.html">
+                                    <i class="fa fa-cube"></i> Roles en proyecto
                                 </a>
                             </li>
                             <li>
@@ -210,26 +205,33 @@
                                     <i class="fa fa-users"></i> Trabajadores
                                 </a>
                             </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-lg fa-fw fa-puzzle-piece"></i> <span class="menu-item-parent">ASIGNACIONES</span>
+                        </a>
+                        <ul>
                             <li>
-                                <a href="ObjetivoGeneral.html">
-                                    <i class="fa fa-bullseye"></i> Objetivos
+                                <a href="AsgTrabajadorProyecto.html">
+                                    <i class="fa fa-puzzle-piece"></i> Trabajador - Proyecto
                                 </a>
                             </li>
                         </ul>
                     </li>
                     <li>
                         <a href="#">
-                            <i class="fa fa-lg fa-fw fa-gears"></i> <span class="menu-item-parent">ASIGNACIONES</span>
+                            <i class="fa fa-lg fa-fw fa-gears"></i> <span class="menu-item-parent">EVALUACIONES</span>
                         </a>
                         <ul>
                             <li>
-                                <a href="AsgTrabajadorGeneral.html">
-                                    <i class="fa fa-puzzle-piece"></i> Asg. Trabajadores
+                                <a href="EvaPorTrabajador.html">
+                                    <i class="fa fa-gears"></i> Por trabajador
                                 </a>
                             </li>
                             <li>
-                                <a href="AsgObjetivoGeneral.html">
-                                    <i class="fa fa-share-alt"></i> Asg. Objetivos
+                                <a href="EvaPorProyecto.html">
+                                    <i class="fa fa-gears"></i> Por proyecto
                                 </a>
                             </li>
                         </ul>
@@ -250,7 +252,7 @@
                 <ol class="breadcrumb">
                     <li>Inicio</li>
                     <li>Administracion</li>
-                    <li>Asignación trabajadores</li>
+                    <li>Asignación trabajadores-proyecto</li>
                     <li>Detalle asignación</li>
                 </ol>
                 <!-- end breadcrumb -->
@@ -281,7 +283,7 @@
 
                             <!-- PAGE HEADER -->
                             <i class="fa-fw fa fa-puzzle-piece"></i>
-                            Detalle asignación trabajador <a href="#" title="Ayuda"><i class="fa fa-question"></i></a>
+                            Detalle asignación trabajador-proyecto <a href="#" title="Ayuda"><i class="fa fa-question"></i></a>
                         </h1>
                     </div>
                     <!-- end col -->
@@ -341,7 +343,7 @@
                                 -->
                                 <header>
                                     <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
-                                    <h2>Mantenimiento asignación trabajador </h2>
+                                    <h2>Mantenimiento asignación trabajador-proyecto </h2>
 
                                 </header>
 
@@ -358,16 +360,16 @@
                                     <!-- widget content -->
                                     <div class="widget-body">
                                         <!-- this is what the user will see -->
-                                        <form id="frmAsgTrabajador" class="smart-form">
+                                        <form id="frmAsgProyecto" class="smart-form">
                                             <header>
-                                                Datos del objetivo.
+                                                Datos de la asignación.
                                             </header>
                                             <fieldset>
                                                 <div class="row">
                                                     <section class="col col-md-12">
                                                         <label class="label">Nombre asignación</label>
                                                         <label class="input">
-                                                            <input id="txtAsgTrabajador" name="txtAsgTrabajador" type="text" data-bind="value: nombre" />
+                                                            <input id="txtAsgProyecto" name="txtAsgProyecto" type="text" data-bind="value: nombre" />
                                                         </label>
                                                     </section>
                                                 </div>
@@ -379,54 +381,19 @@
                                                         </label>
                                                     </section>
                                                     <section class="col col-md-6">
-                                                        <label class="label">Ejercicio</label>
+                                                        <label class="label">Proyectos</label>
                                                         <label class="select">
-                                                            <select id="cmbEjercicios" name="cmbEjercicios" data-bind="options: posiblesEjercicios, optionsText: 'nombre', optionsValue: 'ejercicioId', value: sejercicioId, valueAllowUnset: true"></select><i></i>
+                                                            <select id="cmbProyectos" name="cmbProyectos" data-bind="options: posiblesProyectos, optionsText: 'nombre', optionsValue: 'proyectoId', value: sproyectoId, valueAllowUnset: true"></select><i></i>
                                                         </label>
                                                     </section>
                                                 </div>
                                                 <div class="row">
                                                     <section class="col col-md-6">
-                                                        <label class="label">Pais</label>
-                                                        <label class="select">
-                                                            <select id="cmbPaises" name="cmbPaises" data-bind="options: posiblesPaises, optionsText: 'nombre', optionsValue: 'paisId', value: spaisId, valueAllowUnset: true"></select><i></i>
-                                                        </label>
                                                     </section>
                                                     <section class="col col-md-6">
-                                                        <label class="label">Unidad</label>
+                                                        <label class="label">Rol</label>
                                                         <label class="select">
-                                                            <select id="cmbUnidades" name="cmbUnidades" data-bind="options: posiblesUnidades, optionsText: 'nombre', optionsValue: 'unidadId', value: sunidadId, valueAllowUnset: true"></select><i></i>
-                                                        </label>
-                                                    </section>
-                                                </div>
-                                                <div class="row">
-                                                    <section class="col col-md-6">
-                                                        <label class="label">Area</label>
-                                                        <label class="select">
-                                                            <select id="cmbAreas" name="cmbAreas" data-bind="options: posiblesAreas, optionsText: 'nombre', optionsValue: 'areaId', value: sareaId, valueAllowUnset: true"></select><i></i>
-                                                        </label>
-                                                    </section>
-                                                    <section class="col col-md-6">
-                                                        <label class="label">Puesto</label>
-                                                        <label class="select">
-                                                            <select id="cmbPuestos" name="cmbPuestos" data-bind="options: posiblesPuestos, optionsText: 'nombre', optionsValue: 'puestoId', value: spuestoId, valueAllowUnset: true"></select><i></i>
-                                                        </label>
-                                                    </section>
-                                                </div>
-                                                <div class="row">
-                                                    <section class="col col-md-6">
-
-                                                    </section>
-                                                    <section class="col col-md-3" >
-                                                        <label class="label" style="text-align:right">Fijo</label>
-                                                        <label class="input">
-                                                            <input id="txtFijo" name="txtFijo" data-bind="value: fijo" style="text-align:right" />
-                                                        </label>
-                                                    </section>
-                                                    <section class="col col-md-3" style="text-align:right">
-                                                        <label class="label" style="text-align:right">Variable</label>
-                                                        <label class="input">
-                                                            <input id="txtVariable" name="txtVariable" data-bind="value: variable" style="text-align:right" />
+                                                            <select id="cmbRoles" name="cmbRoles" data-bind="options: posiblesRoles, optionsText: 'nombre', optionsValue: 'rolId', value: srolId, valueAllowUnset: true"></select><i></i>
                                                         </label>
                                                     </section>
                                                 </div>
@@ -470,7 +437,7 @@
         <div class="page-footer">
             <div class="row">
                 <div class="col-xs-12 col-sm-6">
-                    <span class="txt-color-white">AriFace <span id="versionFooter">1.0</span> <span class="hidden-xs"> - Facturación electrónica</span> © Ariadna Software S.L. 2014-2015</span>
+                    <span class="txt-color-white">GDESAC <span id="versionFooter">1.0</span> <span class="hidden-xs"> - Áreas de conocimiento</span> © Ariadna Software S.L. 2014-2015</span>
                 </div>
 
                 <div class="col-xs-6 col-sm-6 text-right hidden-xs">
@@ -566,7 +533,7 @@
 
         <!-- PAGE RELATED PLUGIN(S) <script src="..."></script>-->
         <script src="js/ariadna/comun.js"></script>
-        <script src="js/ariadna/asgTrabajadorDetalle.js"></script>
+        <script src="js/ariadna/asgTrabajadorProyectoDetalle.js"></script>
 
         <!-- PAGE RELATED PLUGIN(S) -->
         <script src="js/plugin/datatables/jquery.dataTables.min.js"></script>

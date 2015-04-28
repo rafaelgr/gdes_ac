@@ -18,10 +18,14 @@
   <ItemGroup>
     <Content Include="config.json" />
     <Content Include="package.json" />
+    <Compile Include="lib\asg_proyectos_api.js" />
+    <Compile Include="lib\asg_proyectos_db_mysql.js" />
     <Compile Include="lib\roles_api.js" />
     <Compile Include="lib\catConocimientos_api.js" />
     <Compile Include="lib\roles_db_mysql.js" />
     <Compile Include="lib\catConocimientos_db_mysql.js" />
+    <Compile Include="public\js\ariadna\asgTrabajadorProyectoDetalle.js" />
+    <Compile Include="public\js\ariadna\asgTrabajadorProyectoGeneral.js" />
     <Compile Include="public\js\ariadna\rolDetalle.js" />
     <Compile Include="public\js\ariadna\rolGeneral.js" />
     <Compile Include="public\js\ariadna\proyectoDetalle.js" />

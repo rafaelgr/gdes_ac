@@ -26,6 +26,7 @@ var conocimientos_api = require("./lib/conocimientos_api.js");
 var roles_api = require("./lib/roles_api.js");
 var trabajadores_api = require("./lib/trabajadores_api.js");
 var evaluados_api = require("./lib/evaluados_api.js");
+var asg_proyectos_api = require("./lib/asg_proyectos_api.js");
 
 
 // ficheros en los que se grabarán los log de aplicación
@@ -201,6 +202,27 @@ router.route("/evaluados/:id")
 
 router.route("/evaluados-buscar")
 	.post(evaluados_api.postEvaluadosBuscar);
+
+
+// --> Relacionadas con asignación de proyectos
+router.route("/asg-proyectos")
+	.get(asg_proyectos_api.getAsgProyectos)
+	.post(asg_proyectos_api.postAsgProyecto);
+
+
+router.route("/asg-proyectos/:asgProyectoId")
+	.get(asg_proyectos_api.getAsgProyecto)
+	.put(asg_proyectos_api.putAsgProyecto)
+	.delete(asg_proyectos_api.deleteAsgProyecto);
+
+router.route("/asg-proyectos-buscar")
+	.post(asg_proyectos_api.postAsgProyectosBuscar);
+
+router.route("/asg-proyecto-buscar")
+	.post(asg_proyectos_api.postAsgProyectoBuscar);
+
+router.route("/asg-proyecto-evaluador-buscar")
+	.post(asg_proyectos_api.postAsgProyectoEvaluadorBuscar);
 
 //================================================================
 // Registro de rutas y arranque del servidor
