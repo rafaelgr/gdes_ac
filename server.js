@@ -27,6 +27,7 @@ var roles_api = require("./lib/roles_api.js");
 var trabajadores_api = require("./lib/trabajadores_api.js");
 var evaluados_api = require("./lib/evaluados_api.js");
 var asg_proyectos_api = require("./lib/asg_proyectos_api.js");
+var evaluaciones_api = require("./lib/evaluaciones_api.js");
 
 
 // ficheros en los que se grabarán los log de aplicación
@@ -223,6 +224,20 @@ router.route("/asg-proyecto-buscar")
 
 router.route("/asg-proyecto-evaluador-buscar")
 	.post(asg_proyectos_api.postAsgProyectoEvaluadorBuscar);
+
+// --> Relacionadas con evaluaciones
+router.route("/evaluaciones")
+	.get(evaluaciones_api.getEvaluaciones)
+	.post(evaluaciones_api.postEvaluacion);
+
+
+router.route("/evaluaciones/:evaluacionId")
+	.get(evaluaciones_api.getEvaluacion)
+	.put(evaluaciones_api.putEvaluacion)
+	.delete(evaluaciones_api.deleteEvaluacion);
+
+router.route("/evaluaciones-buscar")
+	.post(evaluaciones_api.postEvaluacionesBuscar);
 
 //================================================================
 // Registro de rutas y arranque del servidor
