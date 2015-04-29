@@ -65,9 +65,11 @@ function initForm() {
     // asignación de eventos al clic
     $("#btnAceptar").click(aceptar());
     $("#btnSalir").click(salir());
+    $("#cmbCatConocimientos").change(cambioCategoria());
     $("#frmEvaluacion").submit(function () {
         return false;
     });
+
     
     initTablaEvaluaciones();
 
@@ -87,15 +89,12 @@ function initForm() {
                 // hay que mostrarlo en la zona de datos
                 loadData(data);
                 loadTable1Evaluaciones(asgProyectoId);
+                loadCatConocimientos(-1);
             },
             error: errorAjax
         });
     } else {
-        // se trata de un alta ponemos el id a cero para indicarlo.
-        vm.asgProyectoId(0);
-        loadTrabajadores(-1);
-        loadProyectos(-1);
-        loadRoles(-1);
+        // aqui no debería llegar
     }
 }
 
@@ -138,21 +137,24 @@ function datosOK() {
         rules: {
             cmbCatConocimientos: { required: true },
             cmbConocimientos: { required: true },
-            txtDFecha: { required: true },
-            txtHFecha: { required: true }
+            txtDFecha: { required: true, date:true },
+            txtHFecha: { required: true, date:true, greaterThan: "#txtDFecha" }
         },
         // Messages for form validation
         messages: {
             cmbCatConocimientos: {required: 'Seleccione una categoría'},
             cmbConocimientos: { required: 'Seleccione un conocimiento' },
-            txtDFecha: { required: 'Introduzca fecha' },
-            txtHFecha: { required: 'Introduzca fecha' },
+            txtDFecha: { required: 'Introduzca fecha', date: 'Debe ser una fecha válida' },
+            txtHFecha: { required: 'Introduzca fecha', date: 'Debe ser una fecha válida' },
         },
         // Do not change code below
         errorPlacement: function (error, element) {
             error.insertAfter(element.parent());
         }
     });
+    $.validator.methods.date = function (value, element) {
+        return this.optional(element) || moment(value, "DD/MM/YYYY").isValid();
+    }
     return $('#frmEvaluacion').valid();
 }
 
@@ -160,50 +162,38 @@ function aceptar() {
     var mf = function () {
         if (!datosOK())
             return;
+        // control de fechas 
+        var fecha1, fecha2;
+        if (moment(vm.dFecha(), "DD/MM/YYYY").isValid())
+            fecha1 = moment(vm.dFecha(), "DD/MM/YYYY").format("YYYY-MM-DD");
+        if (moment(vm.hFecha(), "DD/MM/YYYY").isValid())
+            fecha2 = moment(vm.hFecha(), "DD/MM/YYYY").format("YYYY-MM-DD");
         var data = {
-            asgProyecto: {
-                "asgProyectoId": vm.asgProyectoId(),
-                "nombre": vm.nombre(),
-                "trabajador": {
-                    "trabajadorId": vm.strabajadorId()
+            evaluacion: {
+                "evaluacionId": 0,
+                "asgProyecto": {
+                    "asgProyectoId": asgProyectoId
                 },
-                "proyecto": {
-                    "proyectoId": vm.sproyectoId()
+                "conocimiento": {
+                    "conocimientoId": vm.sconocimientoId()
                 },
-                "rol": {
-                    "rolId": vm.srolId()
-                }
+                "dFecha": fecha1,
+                "hFecha": fecha2,
+                "observaciones": vm.observaciones()
             }
         };
-        if (asgProyectoId == 0) {
-            $.ajax({
-                type: "POST",
-                url: "api/asg-proyectos",
-                dataType: "json",
-                contentType: "application/json",
-                data: JSON.stringify(data),
-                success: function (data, status) {
-                    // Nos volvemos al general
-                    var url = "AsgTrabajadorProyecto.html?AsgProyectoId=" + data.asgProyectoId;
-                    window.open(url, '_self');
-                },
-                error: errorAjax
-            });
-        } else {
-            $.ajax({
-                type: "PUT",
-                url: "api/asg-proyectos/" + asgProyectoId,
-                dataType: "json",
-                contentType: "application/json",
-                data: JSON.stringify(data),
-                success: function (data, status) {
-                    // Nos volvemos al general
-                    var url = "AsgTrabajadorProyecto.html?AsgProyectoId=" + data.asgProyectoId;
-                    window.open(url, '_self');
-                },
-                error: errorAjax
-            });
-        }
+        $.ajax({
+            type: "POST",
+            url: "api/evaluaciones",
+            dataType: "json",
+            contentType: "application/json",
+            data: JSON.stringify(data),
+            success: function (data, status) {
+                // Nos volvemos al general
+                loadTable1Evaluaciones(asgProyectoId);
+            },
+            error: errorAjax
+        });
     };
     return mf;
 }
@@ -296,8 +286,6 @@ function initTablaEvaluaciones() {
     });
 }
 
-
-
 function loadTable1Evaluaciones(asgProyectoId) {
     // enviar la consulta por la red (AJAX)
     var data = {
@@ -327,4 +315,43 @@ function loadTable2Evaluaciones(data) {
         dt.fnDraw();
         $("#tbEvaluacion").show();
     }
+}
+
+function loadCatConocimientos(catConocimientoId) {
+    $.ajax({
+        type: "GET",
+        url: "/api/catConocimientos",
+        dataType: "json",
+        contentType: "application/json",
+        success: function (data, status) {
+            vm.posiblesCatConocimientos(data);
+            vm.scatConocimientoId(catConocimientoId);
+        },
+        error: errorAjax
+    });
+}
+
+function loadConocimientos(catConocimientoId) {
+    var data = {
+        catConocimientoId: catConocimientoId
+    }
+    $.ajax({
+        type: "POST",
+        url: "/api/conocimientos-buscar",
+        dataType: "json",
+        contentType: "application/json",
+        data: JSON.stringify(data),
+        success: function (data, status) {
+            vm.posiblesConocimientos(data);
+            vm.sconocimientoId(-1);
+        },
+        error: errorAjax
+    });
+}
+
+function cambioCategoria() {
+    var mf = function () {
+        loadConocimientos(vm.scatConocimientoId());
+    }
+    return mf;
 }
