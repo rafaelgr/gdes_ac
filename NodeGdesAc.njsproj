@@ -26,7 +26,10 @@
     <Compile Include="lib\catConocimientos_api.js" />
     <Compile Include="lib\roles_db_mysql.js" />
     <Compile Include="lib\catConocimientos_db_mysql.js" />
+    <Compile Include="public\js\ariadna\evaAsgDetalle.js" />
     <Compile Include="public\js\ariadna\asgTrabajadorProyectoDetalle.js" />
+    <Compile Include="public\js\ariadna\evaPorProyecto.js" />
+    <Compile Include="public\js\ariadna\evaPorTrabajador.js" />
     <Compile Include="public\js\ariadna\asgTrabajadorProyectoGeneral.js" />
     <Compile Include="public\js\ariadna\rolDetalle.js" />
     <Compile Include="public\js\ariadna\rolGeneral.js" />
