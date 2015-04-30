@@ -355,3 +355,34 @@ function cambioCategoria() {
     }
     return mf;
 }
+
+
+function deleteEvaluacion(id) {
+    // mensaje de confirmación
+    var mens = "¿Realmente desea borrar este registro?";
+    $.SmartMessageBox({
+        title: "<i class='fa fa-info'></i> Mensaje",
+        content: mens,
+        buttons: '[Aceptar][Cancelar]'
+    }, function (ButtonPressed) {
+        if (ButtonPressed === "Aceptar") {
+            var data = {
+                proyectoId: id
+            };
+            $.ajax({
+                type: "DELETE",
+                url: "api/evaluaciones/" + id,
+                dataType: "json",
+                contentType: "application/json",
+                data: JSON.stringify(data),
+                success: function (data, status) {
+                    loadTable1Evaluaciones(asgProyectoId);
+                },
+                error: errorAjax
+            });
+        }
+        if (ButtonPressed === "Cancelar") {
+            // no hacemos nada (no quiere borrar)
+        }
+    });
+}
