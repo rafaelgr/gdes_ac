@@ -130,6 +130,12 @@ function loadData(data) {
     vm.nomProyecto(data.proyecto.nombre);
     vm.rol(data.rol);
     vm.nomRol(data.rol.nombre);
+
+    // fechas por defecto igual a las del proyecto
+    vm.dFecha(moment(data.proyecto.fechaInicio).format("DD/MM/YYYY"));
+    if (data.proyecto.fechaFinal != null) {
+        vm.hFecha(moment(data.proyecto.fechaFinal).format("DD/MM/YYYY"));
+    }
 }
 
 function datosOK() {
@@ -308,7 +314,7 @@ function loadTable1Evaluaciones(asgProyectoId) {
 function loadTable2Evaluaciones(data) {
     var dt = $('#dt_evaluacion').dataTable();
     if (data !== null && data.length === 0) {
-        mostrarMensajeSmart('No se han encontrado registros');
+        //mostrarMensajeSmart('No se han encontrado registros');
     } else {
         dt.fnClearTable();
         dt.fnAddData(data);
@@ -355,6 +361,8 @@ function cambioCategoria() {
     }
     return mf;
 }
+
+
 
 
 function deleteEvaluacion(id) {

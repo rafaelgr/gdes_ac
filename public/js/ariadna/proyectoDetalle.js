@@ -16,9 +16,10 @@ function initForm() {
         var fp = moment($(params).val(), "DD/MM/YYYY").format("YYYY-MM-DD");
             if (!/Invalid|NaN/.test(new Date(fv))) {
                 return new Date(fv) > new Date(fp);
-            }
-            return isNaN(value) && isNaN($(params).val()) 
-            || (Number(value) > Number($(params).val()));
+        } else {
+            // esto es debido a que permitimos que la segunda fecha nula
+            return true;
+        }
     }, 'La fecha final debe ser mayor que la inicial.');
     
 
@@ -90,7 +91,11 @@ function loadData(data) {
     vm.proyectoId(data.proyectoId);
     vm.nombre(data.nombre);
     vm.fechaInicio(moment(data.fechaInicio).format("DD/MM/YYYY"));
-    vm.fechaFinal(moment(data.fechaFinal).format("DD/MM/YYYY"));
+    if (data.fechaFinal != null){
+        vm.fechaFinal(moment(data.fechaFinal).format("DD/MM/YYYY"));
+    } else {
+        vm.fechaFinal(null);
+    }
 }
 
 function datosOK() {
@@ -98,13 +103,13 @@ function datosOK() {
         rules: {
             txtNombre: { required: true },
             txtFechaInicio: { required: true, date: true },
-            txtFechaFinal: { required: true, date: true, greaterThan: "#txtFechaInicio"}
+            txtFechaFinal: { date: true, greaterThan: "#txtFechaInicio"}
         },
         // Messages for form validation
         messages: {
             txtNombre: {required: 'Introduzca el nombre'},
             txtFechaInicio: {required: 'Introduzca una fecha de inicio', date: 'Debe ser una fecha válida'},
-            txtFechaFinal: { required: 'Introduzca una fecha final', date: 'Debe ser una fecha válida' }
+            txtFechaFinal: { date: 'Debe ser una fecha válida' }
         },
         // Do not change code below
         errorPlacement: function (error, element) {
@@ -125,8 +130,11 @@ function aceptar() {
         var fecha1, fecha2;
         if (moment(vm.fechaInicio(), "DD/MM/YYYY").isValid())
             fecha1 = moment(vm.fechaInicio(), "DD/MM/YYYY").format("YYYY-MM-DD");
-        if (moment(vm.fechaFinal(), "DD/MM/YYYY").isValid())
+        if (moment(vm.fechaFinal(), "DD/MM/YYYY").isValid()){
             fecha2 = moment(vm.fechaFinal(), "DD/MM/YYYY").format("YYYY-MM-DD");
+        } else {
+            fecha2 = null;
+        }
         var data = {
             proyecto: {
                 "proyectoId": vm.proyectoId(),

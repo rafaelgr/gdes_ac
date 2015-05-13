@@ -44,6 +44,7 @@ function initForm() {
         loadTrabajadores(-1);
         loadProyectos(-1);
         loadRoles(-1);
+        loadEvaluadores(-1);
     }
 }
 
@@ -58,10 +59,12 @@ function asgProyectoData() {
     self.posiblesTrabajadores = ko.observableArray([]);
     self.posiblesProyectos = ko.observableArray([]);
     self.posiblesRoles = ko.observableArray([]);
+    self.posiblesEvaluadores = ko.observableArray([]);
     // valores escogidos
     self.strabajadorId = ko.observable();
     self.sproyectoId = ko.observable();
     self.srolId = ko.observable();
+    self.sevaluadorId = ko.observable();
 }
 
 function loadData(data) {
@@ -73,6 +76,11 @@ function loadData(data) {
     loadTrabajadores(data.trabajador.trabajadorId);
     loadProyectos(data.proyecto.proyectoId);
     loadRoles(data.rol.rolId);
+    if (data.evaluador != null) {
+        loadEvaluadores(data.evaluador.evaluadorId);
+    } else {
+        loadEvaluadores(-1);
+    }
 }
 
 function loadTrabajadores(trabajadorId){
@@ -84,6 +92,20 @@ function loadTrabajadores(trabajadorId){
         success: function (data, status){
             vm.posiblesTrabajadores(data);
             vm.strabajadorId(trabajadorId);
+        },
+        error: errorAjax
+    });
+}
+
+function loadEvaluadores(evaluadorId) {
+    $.ajax({
+        type: "GET",
+        url: "/api/evaluadores",
+        dataType: "json",
+        contentType: "application/json",
+        success: function (data, status) {
+            vm.posiblesEvaluadores(data);
+            vm.sevaluadorId(evaluadorId);
         },
         error: errorAjax
     });
@@ -161,9 +183,15 @@ function aceptar() {
                 },
                 "rol": {
                     "rolId": vm.srolId()
+                },
+                "evaluador": {
+                    "evaluadorId": vm.sevaluadorId()
                 }
             }
         };
+        if (vm.sevaluadorId() == -1) {
+            data.asgProyecto.evaluador.evaluadorId = null;
+        }
         if (asgProyectoId == 0) {
             $.ajax({
                 type: "POST",

@@ -7,7 +7,7 @@ var responsiveHelper_datatable_fixed_column = undefined;
 var responsiveHelper_datatable_col_reorder = undefined;
 var responsiveHelper_datatable_tabletools = undefined;
 
-var dataTrabajadores;
+var dataAsgProyectos;
 
 var breakpointDefinition = {
     tablet: 1024,
@@ -28,13 +28,11 @@ function initForm() {
     $("#btnAceptar").click(aceptar());
     $("#btnSalir").click(salir());
     $("#btnAceptarEvaluado").click(aceptarEvaluado());    
-    
-    loadPosiblesTrabajadores();
 
     $("#frmTrabajador").submit(function () {
         return false;
     });
-    initTablaTrabajadores();
+    initTablaAsgProyectos();
     trabajadorId = gup('TrabajadorId');
     if (trabajadorId != 0) {
         var data = {
@@ -50,7 +48,6 @@ function initForm() {
             success: function (data, status) {
                 // hay que mostrarlo en la zona de datos
                 loadData(data);
-                cargarEvaluados(vm.trabajadorId());
             },
             error: errorAjax
         });
@@ -82,6 +79,7 @@ function loadData(data) {
     vm.evaluador(data.evaluador);
     if (data.evaluador == 1) {
         $("#flEvaluados").show();
+        cargarEvaluados(vm.trabajadorId());
     }
 }
 
@@ -205,26 +203,29 @@ function cargarEvaluados(id){
     // hay que buscar ese elemento en concreto
     $.ajax({
         type: "POST",
-        url: "api/evaluados-buscar",
+        url: "api/asg-proyectos-buscar",
         dataType: "json",
         contentType: "application/json",
         data: JSON.stringify(buscar),
         success: function (data, status) {
             // hay que mostrarlo en la zona de datos
             //var data2 = [data];
-            loadTablaTrabajadores(data);
+            loadTablaAsgProyectos(data);
         },
         error: errorAjax
     });
 }
 
-function initTablaTrabajadores() {
-    tablaCarro = $('#dt_trabajador').dataTable({
+function initTablaAsgProyectos() {
+    tablaCarro = $('#dt_asgProyecto').dataTable({
+        bPaginate: false,
+        bFilter: false,
+        bInfo: false,
         autoWidth: true,
         preDrawCallback: function () {
             // Initialize the responsive datatables helper once.
             if (!responsiveHelper_dt_basic) {
-                responsiveHelper_dt_basic = new ResponsiveDatatablesHelper($('#dt_trabajador'), breakpointDefinition);
+                responsiveHelper_dt_basic = new ResponsiveDatatablesHelper($('#dt_asgProyecto'), breakpointDefinition);
             }
         },
         rowCallback: function (nRow) {
@@ -253,61 +254,29 @@ function initTablaTrabajadores() {
                 sortDescending: ": Activar para ordenar la columna de manera descendente"
             }
         },
-        data: dataTrabajadores,
+        data: dataAsgProyectos,
         columns: [{
                 data: "nombre"
             }, {
-                data: "dni"
-            }
-        , {
-                data: "evaluadorTrabajadorId",
-                render: function (data, type, row) {
-                    var bt1 = "<button class='btn btn-circle btn-danger btn-lg' onclick='deleteEvaluadorTrabajador(" + data + ");' title='Eliminar registro'> <i class='fa fa-trash-o fa-fw'></i> </button>";
-                    var html = "<div class='pull-right'>" + bt1 + "</div>";
-                    return html;
-                }
+                data: "trabajador.nombre"
+            }, {
+                data: "proyecto.nombre"
+            }, {
+                data: "rol.nombre"
             }]
     });
 }
 
-function loadTablaTrabajadores(data) {
-    var dt = $('#dt_trabajador').dataTable();
+function loadTablaAsgProyectos(data) {
+    var dt = $('#dt_asgProyecto').dataTable();
     if (data !== null && data.length === 0) {
-        dt.fnClearTable();
-        dt.fnDraw();
+        mostrarMensajeSmart('No se han encontrado registros');
+        $("#tbAsgProyecto").hide();
     } else {
         dt.fnClearTable();
         dt.fnAddData(data);
         dt.fnDraw();
+        $("#tbAsgProyecto").show();
     }
 }
 
-function deleteEvaluadorTrabajador(id){
-    // mensaje de confirmación
-    var mens = "¿Realmente desea borrar este registro?";
-    $.SmartMessageBox({
-        title: "<i class='fa fa-info'></i> Mensaje",
-        content: mens,
-        buttons: '[Aceptar][Cancelar]'
-    }, function (ButtonPressed) {
-        if (ButtonPressed === "Aceptar") {
-            var data = {
-                objetivoId: id
-            };
-            $.ajax({
-                type: "DELETE",
-                url: "api/evaluados/" + id,
-                dataType: "json",
-                contentType: "application/json",
-                data: JSON.stringify(data),
-                success: function (data, status) {
-                    cargarEvaluados(vm.trabajadorId());
-                },
-                error: errorAjax
-            });
-        }
-        if (ButtonPressed === "Cancelar") {
-            // no hacemos nada (no quiere borrar)
-        }
-    });
-}

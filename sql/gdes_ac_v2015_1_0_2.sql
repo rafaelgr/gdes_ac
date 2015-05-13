@@ -15,3 +15,7 @@ CREATE TABLE `gdes_ac`.`evaluaciones`(
   `observaciones` TEXT,
   PRIMARY KEY (`evaluacionId`)
 );
+
+ALTER TABLE `gdes_ac`.`evaluaciones`  
+  ADD CONSTRAINT `ref_asg_proyectos` FOREIGN KEY (`asgProyectoId`) REFERENCES `gdes_ac`.`asg_proyectos`(`asgProyectoId`),
+  ADD CONSTRAINT `ref_conocimientos` FOREIGN KEY (`conocimientoId`) REFERENCES `gdes_ac`.`conocimientos`(`conocimientoId`);
