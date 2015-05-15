@@ -18,6 +18,8 @@
   <ItemGroup>
     <Content Include="config.json" />
     <Content Include="package.json" />
+    <Compile Include="lib\informes_api.js" />
+    <Compile Include="lib\informes_db_mysql.js" />
     <Compile Include="lib\evaluaciones_api.js" />
     <Compile Include="lib\evaluaciones_db_mysql.js" />
     <Compile Include="lib\asg_proyectos_api.js" />
@@ -26,15 +28,22 @@
     <Compile Include="lib\catConocimientos_api.js" />
     <Compile Include="lib\roles_db_mysql.js" />
     <Compile Include="lib\catConocimientos_db_mysql.js" />
+    <Compile Include="public\js\ariadna\cliEvaAsgDetalle.js" />
     <Compile Include="public\js\ariadna\evaAsgDetalle.js" />
     <Compile Include="public\js\ariadna\asgTrabajadorProyectoDetalle.js" />
     <Compile Include="public\js\ariadna\evaPorProyecto.js" />
+    <Compile Include="public\js\ariadna\cliEvaPorTrabajador.js" />
     <Compile Include="public\js\ariadna\evaPorTrabajador.js" />
     <Compile Include="public\js\ariadna\asgTrabajadorProyectoGeneral.js" />
     <Compile Include="public\js\ariadna\rolDetalle.js" />
     <Compile Include="public\js\ariadna\rolGeneral.js" />
     <Compile Include="public\js\ariadna\proyectoDetalle.js" />
     <Compile Include="public\js\ariadna\proyectoGeneral.js" />
+    <Compile Include="public\js\c3_renderers.js" />
+    <Compile Include="public\js\handlebars-v3.0.3.js" />
+    <Compile Include="public\js\pivot.es.js" />
+    <Compile Include="public\js\pivot.js" />
+    <Compile Include="public\myconfig.js" />
     <Compile Include="server.js" />
     <Content Include="docs\Diagramadeclase.png" />
     <Content Include="lib\configMySQl.json" />
@@ -68,7 +77,14 @@
     <Compile Include="lib\unidades_db_mysql.js" />
     <Compile Include="lib\version_api.js" />
     <Content Include="public\AdministradorDetalle.html" />
+    <Content Include="public\CliEvaPorTrabajador.html" />
+    <Content Include="public\CliEvaAsgDetalle.html" />
+    <Content Include="public\Index.html" />
     <Content Include="public\AdministradorGeneral.html" />
+    <Content Include="public\css\pivot.css" />
+    <Content Include="public\js\c3_renderers.js.map" />
+    <Content Include="public\js\pivot.es.js.map" />
+    <Content Include="public\js\pivot.js.map" />
     <Content Include="public\RolDetalle.html" />
     <Content Include="public\RolGeneral.html" />
     <Content Include="public\ConocimientoDetalle.html" />
@@ -78,7 +94,7 @@
     <Content Include="public\CatConocimientoGeneral.html" />
     <Content Include="public\ProyectoDetalle.html" />
     <Content Include="public\ProyectoGeneral.html" />
-    <Content Include="public\Index.html" />
+    <Content Include="public\Index2.html" />
     <Content Include="public\login.html" />
     <Content Include="public\Prueba.html" />
     <Compile Include="public\datepicker.es.js" />

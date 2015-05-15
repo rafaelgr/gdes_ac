@@ -18,6 +18,7 @@
     "nodemailer": "^0.7.0",
     "winser": "^0.2.0",
     "handlebars": "^2.0.0-alpha.4",
-    "edge": "*"
+    "edge": "*",
+    "sprintf-js":  "*"
   }
 }

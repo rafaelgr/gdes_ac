@@ -2,7 +2,7 @@
 <html lang="en-us">
     <head>
         <meta charset="utf-8">
-        <title> GDESAC (Administradores) </title>
+        <title> GDESAC (Trabajadores) </title>
         <meta name="description" content="">
         <meta name="author" content="">
 
@@ -20,12 +20,6 @@
 
         <!-- SmartAdmin RTL Support -->
         <link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-rtl.min.css">
-
-        <!-- Pivot table -->
-        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/pivottable/1.3.0/pivot.min.css" />
-        <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/1.3.0/pivot.min.js"></script>
-        <script src="https://code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script>
 
         <!-- We recommend you use "your_style.css" to override SmartAdmin
         specific styles this will also ensure you retrain your customization with each SmartAdmin update.
@@ -57,32 +51,6 @@
         <link rel="apple-touch-startup-image" href="img/splash/ipad-landscape.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
         <link rel="apple-touch-startup-image" href="img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
         <link rel="apple-touch-startup-image" href="img/splash/iphone.png" media="screen and (max-device-width: 320px)">
-        
-        <style>
-            body {
-                font-family: Verdana;
-            }
-
-            .c3-line {
-                stroke-width: 3px;
-            }
-
-            .c3 circle {
-                stroke: white;
-            }
-
-            .c3 text {
-                font-size: 12px;
-            }
-
-            .c3 text {
-                font-size: 12px;
-            }
-
-            .tick line {
-                stroke: white;
-            }
-        </style>
 
     </head>
 
@@ -129,19 +97,19 @@
     * 'fixed-page-footer' - Fixes footer
     * 'container'         - boxed layout mode (non-responsive: will not work with fixed-navigation & fixed-ribbon)
     -->
-    <body class="">
+    <body class="smart-style-3">
 
         <!-- #HEADER -->
-        <header id="header" style="background-color:#E0ECFF; background-image:none;">
+        <header id="header" style="background-color:white; background-image:none;">
             <!-- #PROJECTS: projects dropdown -->
-            <div>
+            <div style="background-color:white; background-image:none;">
                 <span id="logo"> <img src="img/ariface/logo_ariadna.png" alt="Gdes Od" style="height:30px;"> </span>
             </div>
             <div>
 
             </div>
             <div style="padding-left:5px">
-                <h1> Áreas de conocimiento</h1>
+                <h1> ÁREAS DE CONOCIMIENTO</h1>
             </div>
             <!-- end projects dropdown -->
             <!-- #TOGGLE LAYOUT BUTTONS -->
@@ -190,83 +158,23 @@
                 <span> <!-- User image size is adjusted inside CSS, it should stay as it -->
 
                     <a href="javascript:void(0);" id="show-shortcut">
-                        <i class="fa fa-user fa-2x"></i>
-                        <span id="userName"></span>
+                        <i class="fa fa-user fa-2x"></i> <span id="userName"></span>
                     </a> </span>
             </div>
             <!-- NAVIGATION : This navigation is also responsive-->
             <nav>
                 <ul>
-                    <li>
-                        <a href="Index.html" title="Dashboard">
-                            <i class="fa fa-lg fa-fw fa-home"></i> <span class="menu-item-parent">INICIO</span>
+                    <li id="inicio">
+                        <a href="CliIndex.html">
+                            <i class="fa fa-lg fa-fw fa-cube"></i> <span class="menu-item-parent">MIS CONOCIMIENTOS</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#">
-                            <i class="fa fa-lg fa-fw fa-bank"></i> <span class="menu-item-parent">ADMINISTRACIÓN</span>
-                        </a>
-                        <ul>
-                            <li>
-                                <a href="AdministradorGeneral.html">
-                                    <i class="fa fa-mortar-board"></i> Administradores
-                                </a>
-                            </li>
-                            <li>
-                                <a href="ProyectoGeneral.html">
-                                    <i class="fa fa-cubes"></i> Proyectos
-                                </a>
-                            </li>
-                            <li>
-                                <a href="CatConocimientoGeneral.html">
-                                    <i class="fa fa-sitemap"></i> Cat. conocimiento
-                                </a>
-                            </li>
-                            <li>
-                                <a href="ConocimientoGeneral.html">
-                                    <i class="fa fa-square"></i> Conocimientos
-                                </a>
-                            </li>
-                            <li>
-                                <a href="RolGeneral.html">
-                                    <i class="fa fa-cube"></i> Roles en proyecto
-                                </a>
-                            </li>
-                            <li>
-                                <a href="TrabajadorGeneral.html">
-                                    <i class="fa fa-users"></i> Trabajadores
-                                </a>
-                            </li>
-                        </ul>
                     </li>
-                    <li>
-                        <a href="#">
-                            <i class="fa fa-lg fa-fw fa-puzzle-piece"></i> <span class="menu-item-parent">ASIGNACIONES</span>
+                    <li id="evaluacion">
+                        <a href="CliEvaPorTrabajador.html">
+                            <i class="fa fa-lg fa-fw fa-gears"></i> <span class="menu-item-parent">REG.CONOCIMIENTOS</span>
                         </a>
-                        <ul>
-                            <li>
-                                <a href="AsgTrabajadorProyecto.html">
-                                    <i class="fa fa-puzzle-piece"></i> Trabajador - Proyecto
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="fa fa-lg fa-fw fa-gears"></i> <span class="menu-item-parent">EVALUACIONES</span>
-                        </a>
-                        <ul>
-                            <li>
-                                <a href="EvaPorTrabajador.html">
-                                    <i class="fa fa-gears"></i> Por trabajador
-                                </a>
-                            </li>
-                            <li>
-                                <a href="EvaPorProyecto.html">
-                                    <i class="fa fa-gears"></i> Por proyecto
-                                </a>
-                            </li>
-                        </ul>
                     </li>
                 </ul>
             </nav>
@@ -282,7 +190,7 @@
             <div id="ribbon">
                 <!-- breadcrumb -->
                 <ol class="breadcrumb">
-                    <li>Inicio</li>
+                    <li></li>
                 </ol>
                 <!-- end breadcrumb -->
 
@@ -301,116 +209,117 @@
             <!-- END RIBBON -->
 
             <!-- MAIN CONTENT -->
-            <div id="content">
+            <div id="content" style="padding:10px;">
 
-                <!-- row -->
-                <div class="row">
-
-                    <!-- col -->
-                    <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
-                        <h1 class="page-title txt-color-blueDark">
-
-                            <!-- PAGE HEADER -->
-                            <i class="fa-fw fa fa-home"></i>
-                            Inicio <a href="#" title="Ayuda"><i class="fa fa-question"></i></a>
-                        </h1>
+                <div class="row"> 
+                    <div class="col-md-12">
+                        <h2><i class="fa fa-lg fa-fw fa-gears"></i> Detalles de áreas de conocimiento en esta asignación</h2>
                     </div>
-                    <!-- end col -->
-
-                    <!-- right side of the page with the sparkline graphs -->
-                    <!-- col -->
-                    <div class="col-xs-12 col-sm-5 col-md-5 col-lg-8">
-                        <!-- sparks -->
-                        <!--                        <ul id="sparks">
-                        <li class="sparks-info">
-                        <h5>
-                        Facturas pendientes <span class="txt-color-blue">3520</span>
-                        </h5>
-                        </li>
-                        <li class="sparks-info">
-                        <h5>
-                        Clientes <span class="txt-color-purple"><i class="fa fa-arrow-circle-up" data-rel="bootstrap-tooltip" title="Increased"></i>&nbsp;45%</span>
-                        </h5>
-                        </li>
-                        </ul>-->
-                        <!-- end sparks -->
-                    </div>
-                    <!-- end col -->
-
                 </div>
-                <!-- end row -->
-
-                <!--
-                The ID "widget-grid" will start to initialize all widgets below 
-                You do not need to use widgets if you dont want to. Simply remove 
-                the <section></section> and you can use wells or panels instead 
-                -->
-
-                <!-- widget grid -->
-                <section id="widget-grid" class="">
-
-                    <!-- row -->
-                    <div class="row">
-
-                        <!-- NEW WIDGET START -->
-                        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-
-                            <!-- Widget ID (each widget will need unique ID)-->
-                            <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false" data-widget-colorbutton="false" data-widget-deletebutton="false">
-                                <!-- widget options:
-                                usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
-									
-                                data-widget-colorbutton="false"	
-                                data-widget-editbutton="false"
-                                data-widget-togglebutton="false"
-                                data-widget-deletebutton="false"
-                                data-widget-fullscreenbutton="false"
-                                data-widget-custombutton="false"
-                                data-widget-collapsed="true" 
-                                data-widget-sortable="false"
-									
-                                -->
-                                <header>
-                                    <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
-                                    <h2> Panel de inicio </h2>
-
-                                </header>
-
-                                <!-- widget div-->
-                                <div>
-
-                                    <!-- widget edit box -->
-                                    <div class="jarviswidget-editbox">
-                                        <!-- This area used as dropdown edit box -->
-                                        <input class="form-control" type="text">
-                                    </div>
-                                    <!-- end widget edit box -->
-
-                                    <!-- widget content -->
-                                    <div class="widget-body">
-                                        <!-- this is what the user will see -->
-                                        <form id="frmInicio" class="smart-form">
-                                            <div id="output" style="margin: 30px;"></div>
-                                            <div id="output2" style="margin: 30px;"></div>
-                                        </form>
-                                    </div>
-                                    <!-- end widget content -->
-
+                <div class="row">
+                    <div class="well">
+                        <form id="frmEvaluacion" class="smart-form">
+                            <header>
+                                Datos de la asignación.
+                            </header>
+                            <fieldset>
+                                <div class="row">
+                                    <section class="col col-md-6">
+                                        <strong>Asignacion: </strong><span data-bind="text: nombre"></span>
+                                    </section>
+                                    <section class="col col-md-6">
+                                        <strong>Proyecto: </strong><span data-bind="text: nomProyecto"></span>
+                                    </section>
                                 </div>
-                                <!-- end widget div -->
+                                <div class="row">
+                                    <section class="col col-md-6">
+                                        <strong>Trabajador: </strong><span data-bind="text: nomTrabajador"></span>
+                                    </section>
+                                    <section class="col col-md-6">
+                                        <strong>Rol: </strong><span data-bind="text: nomRol"></span>
+                                    </section>
+                                </div>
+                            </fieldset>
+                            <header>
+                                Datos del conocimiento
+                            </header>
+                            <fieldset>
+                                <div class="row">
+                                    <section class="col col-md-6">
+                                        <label class="label">Categoria</label>
+                                        <label class="select">
+                                            <select id="cmbCatConocimientos" name="cmbCatConocimientos" data-bind="options: posiblesCatConocimientos, optionsText: 'nombre', optionsValue: 'catConocimientoId', value: scatConocimientoId, valueAllowUnset: true"></select><i></i>
+                                        </label>
+                                    </section>
+                                    <section class="col col-md-6">
+                                        <label class="label">Conocimiento</label>
+                                        <label class="select">
+                                            <select id="cmbConocimientos" name="cmbConocimientos" data-bind="options: posiblesConocimientos, optionsText: 'nombre', optionsValue: 'conocimientoId', value: sconocimientoId, valueAllowUnset: true"></select><i></i>
+                                        </label>
+                                    </section>
+                                </div>
 
-                            </div>
-                            <!-- end widget -->
+                                <div class="row">
+                                    <section class="col col-md-3">
+                                        <label class="label">Desde Fecha</label>
+                                        <label class="input">
+                                            <input id="txtDFecha" name="txtDFecha" class="datepicker" data-bind="value: dFecha" data-dateformat="dd/mm/yy" />
+                                        </label>
+                                    </section>
+                                    <section class="col col-md-3">
+                                        <label class="label">Hasta Fecha</label>
+                                        <label class="input">
+                                            <input id="txtHFecha" name="txtHFecha" class="datepicker" data-bind="value: hFecha" data-dateformat="dd/mm/yy" />
+                                        </label>
+                                    </section>
+                                    <section class="col col-md-6">
+                                        <label class="label">Observaciones</label>
+                                        <label class="textarea textarea-resizable">
+                                            <textarea rows="3" class="custom-scroll" data-bind="value:observaciones"></textarea>
+                                        </label>
+                                    </section>
+                                </div>
+                            </fieldset>
+                            <fieldset>
+                                <div class="pull-right">
+                                    <button id="btnSalir" title="Salir sin guardar" class="btn btn-warning btn-circle btn-lg">
+                                        <i class="fa fa-lg fa-sign-out"></i>
+                                    </button>
+                                    <button id="btnAceptar" title="Guardar y salir" class="btn btn-success btn-circle btn-lg">
+                                        <i class="fa fa-lg fa-plus"></i>
+                                    </button>
+                                </div>
+                            </fieldset>
+                        </form>
+                        <div id="tbEvaluacion">
+                            <table id="dt_evaluacion" class="table table-striped table-bordered table-hover" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th data-class="expand">
+                                            <i class="fa fa-fw fa-cubes text-muted hidden-md hidden-sm hidden-xs"></i> Categoria
+                                        </th>
+                                        <th data-hide="phone">
+                                            <i class="fa fa-fw fa-cube text-muted hidden-md hidden-sm hidden-xs"></i> Conocimiento
+                                        </th>
+                                        <th data-hide="phone">
+                                            <i class="fa fa-fw fa-calendar text-muted hidden-md hidden-sm hidden-xs"></i> Desde Fecha
+                                        </th>
+                                        <th data-hide="phone">
+                                            <i class="fa fa-fw fa-calendar text-muted hidden-md hidden-sm hidden-xs"></i> Hasta Fecha
+                                        </th>
+                                        <th data-hide="phone">
+                                            Observaciones
+                                        </th>
 
-                        </article>
-                        <!-- WIDGET END -->
+                                        <th>
 
+                                        </th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
                     </div>
-
-                    <!-- end row -->
-                </section>
-                <!-- end widget grid -->
-
+                </div>
             </div>
             <!-- END MAIN CONTENT -->
 
@@ -421,7 +330,7 @@
         <div class="page-footer">
             <div class="row">
                 <div class="col-xs-12 col-sm-6">
-                    <span class="txt-color-white">GDESAC <span id="versionFooter">NO VERSION</span> <span class="hidden-xs"> - Facturación electrónica</span> © Ariadna Software S.L. 2014-2015</span>
+                    <span class="txt-color-white">GDESOD <span id="versionFooter">NO VERSION</span> <span class="hidden-xs"> - </span> © Ariadna Software S.L. 2014-2015</span>
                 </div>
 
                 <div class="col-xs-6 col-sm-6 text-right hidden-xs">
@@ -433,20 +342,73 @@
         </div>
         <!-- END PAGE FOOTER -->
 
+        <!-- BEGIN TEMPLATES -->
+        <script id="ac-conocimientos" type="text/x-handlebars-template">
+            <div class="well">
+                <h2>{{trabajador}}</h2>
+                {{#each categorias}}
+                <h3>{{nombre}}</h3>
+                <table class="table table-stripped table-forum">
+                    <thead class="txt-color-blue">
+                        <tr>
+                            <th>Conocimiento</th>
+                            <th>Proyecto</th>
+                            <th>F.Inicio</th>
+                            <th>F.Final</th>
+                            <th>Dias</th>
+                            <th>Comentarios</th>
+                            <th>Evaluador</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each conocimientos}}
+                        <tr>
+                            <td>{{conocimiento}}</td>
+                            <td>{{proyecto}}</td>
+                            <td>{{dfecha}}</td>
+                            <td>{{hfecha}}</td>
+                            <td>{{dias}}</td>
+                            <td>{{observaciones}}</td>
+                            <td>{{evaluador}}</td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+                {{/each}}
+            </div>
+        </script>
+        <!-- EN TEMPLATES-->
+
+
         <!--================================================== -->
 
         <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
         <script data-pace-options='{ "restartOnRequestAfter": true }' src="js/plugin/pace/pace.min.js"></script>
 
+        <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script>
+            if (!window.jQuery) {
+                document.write('<script src="js/libs/jquery-2.1.1.min.js"><\/script>');
+            }
+        </script>
+
+        <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+        <script>
+            if (!window.jQuery.ui) {
+                document.write('<script src="js/libs/jquery-ui-1.10.3.min.js"><\/script>');
+            }
+        </script>
+
         <!-- IMPORTANT: APP CONFIG -->
         <script src="js/app.config.js"></script>
-        <script src="myconfig.js"></script>
 
         <!-- JS TOUCH : include this plugin for mobile drag / drop touch events-->
         <script src="js/plugin/jquery-touch/jquery.ui.touch-punch.min.js"></script>
 
         <!-- BOOTSTRAP JS -->
         <script src="js/bootstrap/bootstrap.min.js"></script>
+        <script src="js/handlebars-v3.0.3.js"></script>
 
         <!-- CUSTOM NOTIFICATION -->
         <script src="js/notification/SmartNotification.min.js"></script>
@@ -477,6 +439,8 @@
 
         <!-- FastClick: For mobile devices -->
         <script src="js/plugin/fastclick/fastclick.min.js"></script>
+        <script src="js/moment.js"></script>
+        <script src="js/moment_locale.js"></script>
 
         <!--[if IE 8]>
 
@@ -498,12 +462,13 @@
         <script src="js/smart-chat-ui/smart.chat.ui.min.js"></script>
         <script src="js/smart-chat-ui/smart.chat.manager.min.js"></script>
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/1.3.0/pivot.min.js"></script>
+        <!--- KNOCKOUT JS -->
+        <script src="//cdnjs.cloudflare.com/ajax/libs/knockout/3.2.0/knockout-min.js"></script>
 
         <!-- PAGE RELATED PLUGIN(S) 
         <script src="..."></script>-->
         <script src="js/ariadna/comun.js"></script>
-        <script src="js/ariadna/index.js"></script>
+        <script src="js/ariadna/cliEvaAsgDetalle.js"></script>
 
         <!-- PAGE RELATED PLUGIN(S) -->
         <script src="js/plugin/datatables/jquery.dataTables.min.js"></script>

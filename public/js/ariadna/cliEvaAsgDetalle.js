@@ -18,11 +18,15 @@ var breakpointDefinition = {
 var asgProyectoId = 0;
 var evaluacionId = 0;
 
+var trabajador;
+
 function initForm() {
     // comprobarLogin();
     // de smart admin
     pageSetUp();
-    
+    trabajador = comprobarLoginTrabajador();
+    $("#userName").text(trabajador.nombre);
+
     $.validator.addMethod("greaterThan", 
         function (value, element, params) {
         var fv = moment(value, "DD/MM/YYYY").format("YYYY-MM-DD");
@@ -210,7 +214,7 @@ function aceptar() {
 
 function salir() {
     var mf = function () {
-        var url = "EvaPorTrabajador.html";
+        var url = "CliEvaPorTrabajador.html";
         window.open(url, '_self');
     }
     return mf;

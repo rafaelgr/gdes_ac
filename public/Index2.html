@@ -2,7 +2,7 @@
 <html lang="en-us">
     <head>
         <meta charset="utf-8">
-        <title> GDESAC (Administradores) </title>
+        <title> GDES AC </title>
         <meta name="description" content="">
         <meta name="author" content="">
 
@@ -20,13 +20,11 @@
 
         <!-- SmartAdmin RTL Support -->
         <link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-rtl.min.css">
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
 
-        <!-- Pivot table -->
-        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/pivottable/1.3.0/pivot.min.css" />
-        <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/1.3.0/pivot.min.js"></script>
-        <script src="https://code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script>
-
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.10/c3.min.css">
+        <link href="css/pivot.css" rel="stylesheet" />
+        
         <!-- We recommend you use "your_style.css" to override SmartAdmin
         specific styles this will also ensure you retrain your customization with each SmartAdmin update.
         <link rel="stylesheet" type="text/css" media="screen" href="css/your_style.css"> -->
@@ -57,32 +55,6 @@
         <link rel="apple-touch-startup-image" href="img/splash/ipad-landscape.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
         <link rel="apple-touch-startup-image" href="img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
         <link rel="apple-touch-startup-image" href="img/splash/iphone.png" media="screen and (max-device-width: 320px)">
-        
-        <style>
-            body {
-                font-family: Verdana;
-            }
-
-            .c3-line {
-                stroke-width: 3px;
-            }
-
-            .c3 circle {
-                stroke: white;
-            }
-
-            .c3 text {
-                font-size: 12px;
-            }
-
-            .c3 text {
-                font-size: 12px;
-            }
-
-            .tick line {
-                stroke: white;
-            }
-        </style>
 
     </head>
 
@@ -135,7 +107,7 @@
         <header id="header" style="background-color:#E0ECFF; background-image:none;">
             <!-- #PROJECTS: projects dropdown -->
             <div>
-                <span id="logo"> <img src="img/ariface/logo_ariadna.png" alt="Gdes Od" style="height:30px;"> </span>
+                <span id="logo"> <img src="img/ariface/logo_ariadna.png" alt="GDESOD" style="height:30px;"> </span>
             </div>
             <div>
 
@@ -144,6 +116,7 @@
                 <h1> Áreas de conocimiento</h1>
             </div>
             <!-- end projects dropdown -->
+
             <!-- #TOGGLE LAYOUT BUTTONS -->
             <!-- pulled right: nav area -->
             <div class="pull-right">
@@ -151,7 +124,7 @@
                 <!-- collapse menu button -->
                 <div id="hide-menu" class="btn-header pull-right">
                     <span>
-                        <a href="javascript:void(0);" data-action="toggleMenu" title="Collapse Menu">
+                        <a href="javascript:void(0);" data-action="toggleMenu" title="Menú">
                             <i class="fa fa-reorder"></i>
                         </a>
                     </span>
@@ -166,16 +139,16 @@
                     </span>
                 </div>
                 <!-- end logout button -->
+
                 <!-- fullscreen button -->
                 <div id="fullscreen" class="btn-header transparent pull-right">
                     <span>
-                        <a href="javascript:void(0);" data-action="launchFullscreen" title="Full Screen">
+                        <a href="javascript:void(0);" data-action="launchFullscreen" title="Pantalla completa">
                             <i class="fa fa-arrows-alt"></i>
                         </a>
                     </span>
                 </div>
                 <!-- end fullscreen button -->
-
             </div>
             <!-- end pulled right: nav area -->
 
@@ -225,7 +198,7 @@
                             <li>
                                 <a href="ConocimientoGeneral.html">
                                     <i class="fa fa-square"></i> Conocimientos
-                                </a>
+                                </a> 
                             </li>
                             <li>
                                 <a href="RolGeneral.html">
@@ -312,7 +285,7 @@
 
                             <!-- PAGE HEADER -->
                             <i class="fa-fw fa fa-home"></i>
-                            Inicio <a href="#" title="Ayuda"><i class="fa fa-question"></i></a>
+                            Inicio <span> Panel de control </span>  <a href="#"><i class="fa fa-question"></i></a>
                         </h1>
                     </div>
                     <!-- end col -->
@@ -321,18 +294,23 @@
                     <!-- col -->
                     <div class="col-xs-12 col-sm-5 col-md-5 col-lg-8">
                         <!-- sparks -->
-                        <!--                        <ul id="sparks">
-                        <li class="sparks-info">
-                        <h5>
-                        Facturas pendientes <span class="txt-color-blue">3520</span>
-                        </h5>
-                        </li>
-                        <li class="sparks-info">
-                        <h5>
-                        Clientes <span class="txt-color-purple"><i class="fa fa-arrow-circle-up" data-rel="bootstrap-tooltip" title="Increased"></i>&nbsp;45%</span>
-                        </h5>
-                        </li>
-                        </ul>-->
+                        <ul id="sparks">
+                            <li class="sparks-info">
+                                <h5>
+                                    Item1 <span id="facP" class="txt-color-blue">--</span>
+                                </h5>
+                            </li>
+                            <li class="sparks-info">
+                                <h5>
+                                    Item2 <span id="facA" class="txt-color-orange">--</span>
+                                </h5>
+                            </li>
+                            <li class="sparks-info">
+                                <h5>
+                                    Item3 <span id="facE" class="txt-color-green">--</span>
+                                </h5>
+                            </li>
+                        </ul>
                         <!-- end sparks -->
                     </div>
                     <!-- end col -->
@@ -356,7 +334,7 @@
                         <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
                             <!-- Widget ID (each widget will need unique ID)-->
-                            <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false" data-widget-colorbutton="false" data-widget-deletebutton="false">
+                            <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
                                 <!-- widget options:
                                 usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
 									
@@ -371,9 +349,8 @@
 									
                                 -->
                                 <header>
-                                    <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
-                                    <h2> Panel de inicio </h2>
-
+                                    <span class="widget-icon"> <i class="fa fa-home"></i> </span>
+                                    <h2>Página inicial</h2>
                                 </header>
 
                                 <!-- widget div-->
@@ -388,11 +365,12 @@
 
                                     <!-- widget content -->
                                     <div class="widget-body">
-                                        <!-- this is what the user will see -->
-                                        <form id="frmInicio" class="smart-form">
-                                            <div id="output" style="margin: 30px;"></div>
-                                            <div id="output2" style="margin: 30px;"></div>
-                                        </form>
+                                        <div>
+                                            Año seleccionado
+                                            <select id="cmbAno" data-bind="options: PosiblesAnos, optionsText: 'Nombre', value: Ano, valueAllowUnset: true">
+                                            </select>
+                                        </div>
+                                        <div id="graficoFac"></div>
                                     </div>
                                     <!-- end widget content -->
 
@@ -408,6 +386,7 @@
                     </div>
 
                     <!-- end row -->
+
                 </section>
                 <!-- end widget grid -->
 
@@ -421,7 +400,7 @@
         <div class="page-footer">
             <div class="row">
                 <div class="col-xs-12 col-sm-6">
-                    <span class="txt-color-white">GDESAC <span id="versionFooter">NO VERSION</span> <span class="hidden-xs"> - Facturación electrónica</span> © Ariadna Software S.L. 2014-2015</span>
+                    <span class="txt-color-white">GDESAC <span id="versionFooter">NO VERSION</span> <span class="hidden-xs"> - Áreas de conocimiento</span> © Ariadna Software S.L. 2014-2015</span>
                 </div>
 
                 <div class="col-xs-6 col-sm-6 text-right hidden-xs">
@@ -438,9 +417,23 @@
         <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
         <script data-pace-options='{ "restartOnRequestAfter": true }' src="js/plugin/pace/pace.min.js"></script>
 
+        <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script>
+            if (!window.jQuery) {
+                document.write('<script src="js/libs/jquery-2.1.1.min.js"><\/script>');
+            }
+        </script>
+
+        <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+        <script>
+            if (!window.jQuery.ui) {
+                document.write('<script src="js/libs/jquery-ui-1.10.3.min.js"><\/script>');
+            }
+        </script>
+
         <!-- IMPORTANT: APP CONFIG -->
         <script src="js/app.config.js"></script>
-        <script src="myconfig.js"></script>
 
         <!-- JS TOUCH : include this plugin for mobile drag / drop touch events-->
         <script src="js/plugin/jquery-touch/jquery.ui.touch-punch.min.js"></script>
@@ -486,6 +479,8 @@
 
         <!-- Demo purpose only -->
         <!--<script src="js/demo.min.js"></script>-->
+        <!-- Numeral para manipular números -->
+        <script src="js/numeral.min.js"></script>
 
         <!-- MAIN APP JS FILE -->
         <script src="js/app.min.js"></script>
@@ -494,23 +489,20 @@
         <!-- Voice command : plugin -->
         <script src="js/speech/voicecommand.min.js"></script>
 
+        <!--- KNOCKOUT JS -->
+        <script src="//cdnjs.cloudflare.com/ajax/libs/knockout/3.2.0/knockout-min.js"></script>
+
         <!-- SmartChat UI : plugin -->
         <script src="js/smart-chat-ui/smart.chat.ui.min.js"></script>
         <script src="js/smart-chat-ui/smart.chat.manager.min.js"></script>
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/1.3.0/pivot.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
 
         <!-- PAGE RELATED PLUGIN(S) 
         <script src="..."></script>-->
-        <script src="js/ariadna/comun.js"></script>
-        <script src="js/ariadna/index.js"></script>
-
-        <!-- PAGE RELATED PLUGIN(S) -->
-        <script src="js/plugin/datatables/jquery.dataTables.min.js"></script>
-        <script src="js/plugin/datatables/dataTables.colVis.min.js"></script>
-        <script src="js/plugin/datatables/dataTables.tableTools.min.js"></script>
-        <script src="js/plugin/datatables/dataTables.bootstrap.min.js"></script>
-        <script src="js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
+        <script src="js/ariface/ariface.js"></script>
+        <script src="js/ariface/index.js"></script>
 
         <script type="text/javascript">
             (function ($) {

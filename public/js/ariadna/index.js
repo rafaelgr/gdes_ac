@@ -6,116 +6,48 @@ function initForm() {
     // de smart admin
     pageSetUp();
     getVersionFooter();
-    // buscar estadísticas
+    // cargar la tabla con un único valor que es el que corresponde.
+    var data = {
+        informe: "general",
+        tipo: "p",
+        id: 0
+    }
+    // hay que buscar ese elemento en concreto
     $.ajax({
         type: "POST",
-        url: "EstadisticaApi.aspx/GetEstadistica",
-        dataType: "json",
-        contentType: "application/json",
-        success: function (data, status) {
-            var est = data.d;
-            $('#facP').text(est.NumPendientes);
-            $('#facA').text(est.NumAparcadas);
-            $('#facE').text(est.NumEnviadas);
-        },
-        error: errorAjax
-    });
-    //
-    vm = new facData();
-    ko.applyBindings(vm);
-    // cargar graficos (con anyo actual)
-    var anyo = new Date().getFullYear();
-    loadComboAnos(anyo);
-    grafico(anyo);
-    $('#cmbAno').change(function () {
-        loadComboAnos(Number(vm.Ano().Codigo));
-        grafico(Number(vm.Ano().Codigo));
-    });
-}
-
-
-function grafico(anyo) {
-    datos = [];
-    var data = { "anyo": anyo };
-    $.ajax({
-        type: "POST",
-        url: "EstadisticaApi.aspx/GetNumFacMes",
+        url: myconfig.apiUrl + "/api/informes",
         dataType: "json",
         contentType: "application/json",
         data: JSON.stringify(data),
         success: function (data, status) {
-            for (var i = 0; i < data.d.length; i++) {
-                var m = data.d[i].Mes;
-                var n = data.d[i].Numero;
-                var ms = m;
-                var d = {
-                    Mes: anyo + "-" + ms,
-                    Valor: n
-                };
-                datos.push(d);
-            }
-            if (chart == null) {
-                chart = new Morris.Line({
-                    // ID of the element in which to draw the chart.
-                    element: 'graficoFac',
-                    // Chart data records -- each entry in this array corresponds to a point on
-                    // the chart.
-                    data: datos,
-                    // The name of the data record attribute that contains x-values.
-                    xkey: 'Mes',
-                    // A list of names of data record attributes that contain y-values.
-                    ykeys: ['Valor'],
-                    // Labels for the ykeys -- will be displayed when you hover over the
-                    // chart.
-                    labels: ['Facturas mes'],
-                    xLabels: 'month'
-                });
-            } else {
-                chart.setData(datos);
-            }
-        },
-        error: errorAjax
-    });
-}
-
-var miniUnidad = function (codigo, nombre) {
-    this.Codigo = codigo;
-    this.Nombre = nombre;
-}
-
-function facData() {
-    var self = this;
-    self.Ano = ko.observable();
-    // apoyo para desplegables
-    self.PosiblesAnos = ko.observableArray([]);
-}
-
-function loadComboAnos(ano) {
-    if (ano == null) ano = 0;
-    $.ajax({
-        type: "POST",
-        url: "EstadisticaApi.aspx/GetAnosFacturados",
-        dataType: "json",
-        contentType: "application/json",
-        success: function (data, status) {
-            var v = [];
             // hay que mostrarlo en la zona de datos
-            for (var i = 0; i < data.d.length; i++) {
-                var mu = new miniUnidad(data.d[i].Codigo, data.d[i].Nombre);
-                v.push(mu);
-                if (ano != null) {
-                    if (data.d[i].Codigo == ano) {
-                        vm.Ano(mu);
-                    }
-                }
-            }
-            vm.PosiblesAnos(v);
+            // vm.asignaciones(data);
+            loadPivot(data);
+            //loadPivot2(data);
         },
         error: errorAjax
     });
+
 }
 
-function changeComboAno() {
-    var mf = function () { };
-    return mf;
+function loadPivot(data){
+    
+    $("#output").pivotUI(data, {
+        cols: ["categoria"], 
+        rows: ["proyecto"]
+    });
 }
+
+function loadPivot2(data2){
+    var derivers = $.pivotUtilities.derivers;
+    var renderers = $.extend($.pivotUtilities.renderers, 
+                    $.pivotUtilities.c3_renderers);
+    $("#output2").pivotUI(data2, {
+        renderers: renderers,
+        cols: ["categoria"], rows: ["proyecto"],
+        rendererName: "Gráfico área"
+    });    
+
+}
+
+

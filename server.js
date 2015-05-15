@@ -28,6 +28,7 @@ var trabajadores_api = require("./lib/trabajadores_api.js");
 var evaluados_api = require("./lib/evaluados_api.js");
 var asg_proyectos_api = require("./lib/asg_proyectos_api.js");
 var evaluaciones_api = require("./lib/evaluaciones_api.js");
+var informes_api = require("./lib/informes_api.js");
 
 
 // ficheros en los que se grabarán los log de aplicación
@@ -238,6 +239,10 @@ router.route("/evaluaciones/:evaluacionId")
 
 router.route("/evaluaciones-buscar")
 	.post(evaluaciones_api.postEvaluacionesBuscar);
+
+// --> Relacionadas con informes
+router.route("/informes")
+	.post(informes_api.postInformes);
 
 //================================================================
 // Registro de rutas y arranque del servidor

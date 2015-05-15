@@ -2,7 +2,7 @@
 <html lang="en-us">
     <head>
         <meta charset="utf-8">
-        <title> GDESOD (Trabajadores) </title>
+        <title> GDESAC (Trabajadores) </title>
         <meta name="description" content="">
         <meta name="author" content="">
 
@@ -109,7 +109,7 @@
 
             </div>
             <div style="padding-left:5px">
-                <h1> Objetivos y Desempeño</h1>
+                <h1> ÁREAS DE CONOCIMIENTO</h1>
             </div>
             <!-- end projects dropdown -->
             <!-- #TOGGLE LAYOUT BUTTONS -->
@@ -166,12 +166,14 @@
                 <ul>
                     <li id="inicio">
                         <a href="CliIndex.html">
-                            <i class="fa fa-lg fa-fw fa-cube"></i> <span class="menu-item-parent">Mis conocimientos</span>
+                            <i class="fa fa-lg fa-fw fa-cube"></i> <span class="menu-item-parent">MIS CONOCIMIENTOS</span>
                         </a>
                     </li>
+                    <li>
+                    </li>
                     <li id="evaluacion">
-                        <a href="#">
-                            <i class="fa fa-lg fa-fw fa-gears"></i> <span class="menu-item-parent">EVALUACION</span>
+                        <a href="CliEvaPorTrabajador.html">
+                            <i class="fa fa-lg fa-fw fa-gears"></i> <span class="menu-item-parent">REG.CONOCIMIENTOS</span>
                         </a>
                     </li>
                 </ul>
@@ -209,81 +211,16 @@
             <!-- MAIN CONTENT -->
             <div id="content" style="padding:10px;">
 
-                <!-- row -->
-                <div class="row">
-
-                    <!-- col -->
-                    <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
-                        <h1 class="page-title txt-color-blueDark" id="txtTrabajador">
-                        </h1>
-                    </div>
-                    <!-- end col -->
-
-                    <!-- right side of the page with the sparkline graphs -->
-                    <!-- col -->
-                    <div class="col-xs-12 col-sm-5 col-md-5 col-lg-8">
-                        <!-- sparks -->
-                        <!--                        <ul id="sparks">
-                        <li class="sparks-info">
-                        <h5>
-                        Facturas pendientes <span class="txt-color-blue">3520</span>
-                        </h5>
-                        </li>
-                        <li class="sparks-info">
-                        <h5>
-                        Clientes <span class="txt-color-purple"><i class="fa fa-arrow-circle-up" data-rel="bootstrap-tooltip" title="Increased"></i>&nbsp;45%</span>
-                        </h5>
-                        </li>
-                        </ul>-->
-                        <!-- end sparks -->
-                    </div>
-                    <!-- end col -->
-
-                </div>
-                <!-- end row -->
-
-                <!--
-                The ID "widget-grid" will start to initialize all widgets below 
-                You do not need to use widgets if you dont want to. Simply remove 
-                the <section></section> and you can use wells or panels instead 
-                -->
-                <div class="row">
+                <div class="row"> 
                     <div class="col-md-12">
-                        <h2><i class="fa fa-lg fa-fw fa-home"></i> Estas son sus asignaciones de objetivos disponibles</h2>
+                        <h2><i class="fa fa-lg fa-fw fa-cube"></i> Estas son sus áreas de conocimiento registradas</h2>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-12">
+                    <div id="hdbContent" class="col-md-12">
 
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div id="tbAsgTrabajador">
-                            <table id="dt_asgTrabajador" class="table table-bordered" width="100%">
-                                <thead>
-                                    <tr>
-                                        <th data-class="expand">
-                                            <i class="fa fa-fw fa-user text-muted hidden-md hidden-sm hidden-xs"></i> Asignacion
-                                        </th>
-                                        <th>
-                                            Acciones
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody data-bind="foreach:asignaciones">
-                                    <tr>
-                                        <td data-bind="text: nombre"></td>
-                                        <td>
-                                            <button data-bind="click: viewAsgTrabajador($data.asgTrabajadorId)" class='btn btn-circle btn-success' title='Ver detalle'> <i class='fa fa-edit fa-fw'></i> </button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-
             </div>
             <!-- END MAIN CONTENT -->
 
@@ -305,6 +242,43 @@
             </div>
         </div>
         <!-- END PAGE FOOTER -->
+
+        <!-- BEGIN TEMPLATES -->
+        <script id="ac-conocimientos" type="text/x-handlebars-template">
+            <div class="well">
+                <h2>{{trabajador}}</h2>
+                {{#each categorias}}
+                <h3>{{nombre}}</h3>
+                <table class="table table-stripped table-forum">
+                    <thead class="txt-color-blue">
+                        <tr>
+                            <th>Conocimiento</th>
+                            <th>Proyecto</th>
+                            <th>F.Inicio</th>
+                            <th>F.Final</th>
+                            <th>Dias</th>
+                            <th>Comentarios</th>
+                            <th>Evaluador</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each conocimientos}}
+                        <tr>
+                            <td>{{conocimiento}}</td>
+                            <td>{{proyecto}}</td>
+                            <td>{{dfecha}}</td>
+                            <td>{{hfecha}}</td>
+                            <td>{{dias}}</td>
+                            <td>{{observaciones}}</td>
+                            <td>{{evaluador}}</td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+                {{/each}}
+            </div>
+        </script>
+        <!-- EN TEMPLATES-->
 
         <!--================================================== -->
 
@@ -334,6 +308,7 @@
 
         <!-- BOOTSTRAP JS -->
         <script src="js/bootstrap/bootstrap.min.js"></script>
+        <script src="js/handlebars-v3.0.3.js"></script>
 
         <!-- CUSTOM NOTIFICATION -->
         <script src="js/notification/SmartNotification.min.js"></script>
