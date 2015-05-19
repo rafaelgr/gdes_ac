@@ -1,0 +1,24 @@
+{
+    "engine": "handlebars",
+    "recipe": "phantom-pdf",
+    "phantom": {
+        "orientation": "portrait",
+        "format": "A4",
+        "header": "<image src=\"http://www.grupodominguis.com/images/logo-grupo-dominguis.gif\" />"
+    },
+    "data": {
+        "shortid": "V1vytM3Q"
+    },
+    "script": {},
+    "resources": {
+        "items": []
+    },
+    "name": "EJEMPL2",
+    "content": "<h1>Cabecera de informe</h1>\n{{#each books}}\n    <h2>{{name}}</h2>\n        <table style='border-style:solid'>\n            <th>\n                <tr>Cabecera dato</tr>\n                <tr>Otra columna</tr>\n            </th>\n            <tbody>\n                {{#each v1}}\n                    <tr>\n                        <td>{{this}}</td>\n                        <td>{{this}}</td>\n                    </tr>\n                 {{/each}}\n            </tbody>\n        </table>\n       \n       {{/each}}\n       <image src=\"http://www.grupodominguis.com/images/logo-grupo-dominguis.gif\" style=\"display:none\" />",
+    "shortid": "NyRbWm4Q",
+    "modificationDate": {
+        "$$date": 1431528248125
+    },
+    "_id": "selFidxx4vfIIWNH",
+    "version": null
+}

@@ -1,0 +1,25 @@
+{
+    "engine": "handlebars",
+    "recipe": "phantom-pdf",
+    "phantom": {
+        "orientation": "portrait",
+        "format": "A4",
+        "header": "<div style=\"padding-bottom:2px;\">\n<image src=\"http://www.grupodominguis.com/images/logo-grupo-dominguis.gif\" />\n</div>",
+        "footer": "<div style='text-align:center'>{#pageNum}/{#numPages}</div>"
+    },
+    "data": {
+        "shortid": "VyWJGo6Q"
+    },
+    "script": {},
+    "resources": {
+        "items": []
+    },
+    "name": "acConocimientosTrabajador",
+    "shortid": "Nknhlj67",
+    "modificationDate": {
+        "$$date": 1432020615300
+    },
+    "_id": "ulsgbJoIMYXIvxdn",
+    "version": null,
+    "content": "<meta charset=\"utf-8\">\n<!-- #CSS Links -->\n<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css\">\n<image src=\"http://www.grupodominguis.com/images/logo-grupo-dominguis.gif\" style=\"display:none\" />\n<div class=\"well\">\n    <h1>Áreas conocimiento ({{trabajador}})</h1>\n    {{#each categorias}}\n    <h3>{{nombre}}</h3>\n    <table class=\"table table-stripped table-forum\">\n        <thead class=\"txt-color-blue\">\n            <tr>\n                <th>Conocimiento</th>\n                <th>Proyecto</th>\n                <th>F.Inicio</th>\n                <th>F.Final</th>\n                <th>Dias</th>\n                <th>Comentarios</th>\n                <th>Evaluador</th>\n            </tr>\n        </thead>\n        <tbody>\n            {{#each conocimientos}}\n            <tr>\n                <td>{{conocimiento}}</td>\n                <td>{{proyecto}}</td>\n                <td>{{dfecha}}</td>\n                <td>{{hfecha}}</td>\n                <td>{{dias}}</td>\n                <td>{{observaciones}}</td>\n                <td>{{evaluador}}</td>\n            </tr>\n            {{/each}}\n        </tbody>\n    </table>\n    {{/each}}\n</div>"
+}

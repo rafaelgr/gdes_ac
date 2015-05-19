@@ -1,0 +1,28 @@
+{
+    "engine": "handlebars",
+    "recipe": "wrapped-html",
+    "phantom": {
+        "orientation": "portrait",
+        "format": "A4"
+    },
+    "data": {
+        "shortid": "N1ErxX2Q"
+    },
+    "resources": {
+        "items": []
+    },
+    "script": {},
+    "name": "MYTEST",
+    "content": "<link rel=\"stylesheet\" type=\"text/css\" href=\"https://cdnjs.cloudflare.com/ajax/libs/pivottable/1.3.0/pivot.min.css\"/>\n<script src=\"https://code.jquery.com/jquery-1.11.0.min.js\"></script>\n<script src=\"https://cdnjs.cloudflare.com/ajax/libs/pivottable/1.3.0/pivot.min.js\"></script>\n<script src=\"https://code.jquery.com/ui/1.11.1/jquery-ui.min.js\"></script>\n<body>\n    <div id=\"pivottable\" style=\"margin:30px;\"></div>\n    <script>\n        $(function(){\n            $(\"#pivottable\").pivotUI(jsreport.template.data.items);\n        });\n    </script>\n</body>",
+    "shortid": "N1LueX3m",
+    "modificationDate": {
+        "$$date": 1431536150030
+    },
+    "_id": "CVdTchGgQc5Y7IK6",
+    "@odata": {
+        "context": "https://localhost:8443/odata/$metadata#templates/$entity",
+        "editLink": "https://localhost:8443/odatatemplates/('CVdTchGgQc5Y7IK6')",
+        "id": "https://localhost:8443/odatatemplates/('CVdTchGgQc5Y7IK6')"
+    },
+    "version": null
+}

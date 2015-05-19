@@ -1,0 +1,26 @@
+{
+    "name": "Sample report",
+    "content": "<!-- Latest compiled and minified CSS -->\n<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css\">\n<h2>Book sales</h2>\n<table style='border-style:solid'>\n  <tr>\n    <th>Name</th>\n    <th>Author</th>\n    <th>Sales</th>\n  </tr>\n  {{#each books}}\n  <tr>\n    <td>{{name}}</td>\n    <td>{{author}}</td>\n    <td>{{sales}}</td>\n  </tr>  \n  {{/each}}    \n</table>\n<h2>The book of the month</h2>\n<span>{{mostSelling books \"name\"}}:</span>\n<span>{{mostSelling books \"sales\"}}</span>\n\n<h2>Book sales chart</h2> \n<script src=\"//code.jquery.com/jquery-1.11.0.min.js\"></script>\n<script src=\"//cdnjs.cloudflare.com/ajax/libs/flot/0.8.1/jquery.flot.min.js\"></script>\n<script src=\"//cdnjs.cloudflare.com/ajax/libs/flot/0.8.1/jquery.flot.categories.min.js\"></script>\n<div id=\"placeholder\" style=\"width:700px;height:350px\"></div>\n\n<script>\n    $(function () {   \n  \n        var data = [];\n        {{#each books}}\n        data.push([\"{{this.name}}\", {{this.sales}}]);\n        {{/each}}  \n  \n            $.plot(\"#placeholder\", [ data ], \n            {\n                series: { \n                    bars: { show: true, barWidth: 0.6, align: \"center\" }\n                },\n                xaxis: {   mode: \"categories\", tickLength: 0 }\n            }); \n    });\n</script>",
+    "helpers": "function mostSelling(books, prop) {\r\n    return _.max(books, function(book){ return book.sales; })[prop];\r\n}\r\n",
+    "engine": "handlebars",
+    "recipe": "phantom-pdf",
+    "phantom": {
+        "header": "<h1 style='background-color: lightGray'>Library monthly report</h1> ",
+        "orientation": "portrait",
+        "format": "A4",
+        "footer": "<div style='text-align:center'>{#pageNum}/{#numPages}</div>"
+    },
+    "data": {
+        "shortid": "4yxtAfVX"
+    },
+    "shortid": "VyxeKRf4Q",
+    "modificationDate": {
+        "$$date": 1431514092217
+    },
+    "_id": "i4fOsnPP1XmeyvVq",
+    "version": null,
+    "resources": {
+        "items": []
+    },
+    "script": {}
+}

@@ -22,9 +22,12 @@ function initForm() {
     pageSetUp();
     getVersionFooter();
     //
-    var trabajador = comprobarLoginTrabajador();
-    $("#userName").text(trabajador.nombre);
+    trabajador = comprobarLoginTrabajador();
     controlBotones(trabajador);
+    $("#userName").text(trabajador.nombre);
+    
+    $("#btnPDF").click(launchPDF());
+
     // cargar la tabla con un único valor que es el que corresponde.
     var data = {
         informe: "ptrabajador",
@@ -34,7 +37,7 @@ function initForm() {
     // hay que buscar ese elemento en concreto
     $.ajax({
         type: "POST",
-        url: "api/informes",
+        url: myconfig.apiUrl + "/api/informes",
         dataType: "json",
         contentType: "application/json",
         data: JSON.stringify(data),
@@ -58,3 +61,82 @@ function loadTemplate(data){
     // Add the compiled html to the page
     $('#hdbContent').html(theCompiledHtml);
 }
+
+
+function informePDF(data){
+    var data = {
+        "template": { "shortid" : "Nknhlj67" },
+        "data": data
+    }
+    //$.ajax({
+    //    type: "POST",
+    //    url: myconfig.reportUrl + "/api/report",
+    //    dataType: "json",
+    //    contentType: "application/json",
+    //    data: JSON.stringify(data)
+    //});
+    //$.post(myconfig.reportUrl + "/api/report", data, function (d) {
+    //    var blob = new Blob([d]);
+    //    var link = document.createElement('a');
+    //    link.href = window.URL.createObjectURL(blob);
+    //    link.download = "Dossier_" + new Date() + ".pdf";
+    //    link.click();
+    //});
+    f_open_post("POST", myconfig.reportUrl + "/api/report", data);
+}
+
+function launchPDF(){
+    var mf = function () {
+        // cargar la tabla con un único valor que es el que corresponde.
+        var data = {
+            informe: "ptrabajador",
+            tipo: "j",
+            id: trabajador.trabajadorId
+        }
+        // hay que buscar ese elemento en concreto
+        $.ajax({
+            type: "POST",
+            url: myconfig.apiUrl + "/api/informes",
+            dataType: "json",
+            contentType: "application/json",
+            data: JSON.stringify(data),
+            success: function (data, status) {
+                // hay que mostrarlo en la zona de datos
+                // vm.asignaciones(data);
+                informePDF(data[0]);
+            },
+            error: errorAjax
+        });
+    };
+    return mf;
+}
+
+// f_open_post("POST", myconfig.reportUrl + "/api/report", data);
+
+var f_open_post = function (verb, url, data, target) {
+    var form = document.createElement("form");
+    form.action = url;
+    form.method = verb;
+    form.target = target || "_blank";
+    //if (data) {
+    //    for (var key in data) {
+    //        var input = document.createElement("textarea");
+    //        input.name = key;
+    //        input.value = typeof data[key] === "object" ? JSON.stringify(data[key]) : data[key];
+    //        form.appendChild(input);
+    //    }
+    //}
+    var input = document.createElement("textarea");
+    input.name = "template[shortid]";
+    input.value = data.template.shortid;
+    form.appendChild(input);
+
+    input = document.createElement("textarea");
+    input.name = "data";
+    input.value = JSON.stringify(data.data);
+    form.appendChild(input);
+
+    form.style.display = 'none';
+    document.body.appendChild(form);
+    form.submit();
+};

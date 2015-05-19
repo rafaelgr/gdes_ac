@@ -1,0 +1,10 @@
+{
+    "name": "TESTFAC",
+    "dataJson": "{\n    \"items\":[\n        {\"FAC\":12, \"CLIENTE\":\"JUAN PALOMO\", \"FECHA\":\"04/05/2012\",\"TOTAL\":12.56},\n        {\"FAC\":12, \"CLIENTE\":\"JUAN PALOMO\", \"FECHA\":\"04/05/2012\",\"TOTAL\":12.56},\n        {\"FAC\":12, \"CLIENTE\":\"JUAN PALOMO\", \"FECHA\":\"04/05/2012\",\"TOTAL\":12.56},\n        {\"FAC\":12, \"CLIENTE\":\"JUAN PALOMO\", \"FECHA\":\"04/05/2012\",\"TOTAL\":12.56},\n        {\"FAC\":12, \"CLIENTE\":\"JUAN PALOMO\", \"FECHA\":\"04/05/2012\",\"TOTAL\":12.56},\n        {\"FAC\":12, \"CLIENTE\":\"JUAN PALOMO\", \"FECHA\":\"04/05/2012\",\"TOTAL\":12.56},\n        {\"FAC\":12, \"CLIENTE\":\"JUAN PALOMO\", \"FECHA\":\"04/05/2012\",\"TOTAL\":12.56},\n        {\"FAC\":12, \"CLIENTE\":\"JUAN PALOMO\", \"FECHA\":\"04/05/2012\",\"TOTAL\":12.56},\n        {\"FAC\":12, \"CLIENTE\":\"JUAN PALOMO\", \"FECHA\":\"04/05/2012\",\"TOTAL\":12.56},\n        {\"FAC\":12, \"CLIENTE\":\"JUAN PALOMO\", \"FECHA\":\"04/05/2012\",\"TOTAL\":12.56},\n        {\"FAC\":12, \"CLIENTE\":\"JUAN PALOMO\", \"FECHA\":\"04/05/2012\",\"TOTAL\":12.56},\n        {\"FAC\":12, \"CLIENTE\":\"JUAN PALOMO\", \"FECHA\":\"04/05/2012\",\"TOTAL\":12.56}\n        ]\n}",
+    "shortid": "Nk-NS727",
+    "creationDate": "2015-05-13T11:31:28.000Z",
+    "modificationDate": {
+        "$$date": 1431613689796
+    },
+    "_id": "8PqEd2nflj5jyyEI"
+}

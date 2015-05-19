@@ -25,6 +25,7 @@ function initForm() {
     // de smart admin
     pageSetUp();
     trabajador = comprobarLoginTrabajador();
+    controlBotones(trabajador);
     $("#userName").text(trabajador.nombre);
 
     $.validator.addMethod("greaterThan", 

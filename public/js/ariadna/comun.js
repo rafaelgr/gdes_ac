@@ -142,8 +142,6 @@ function getVersionFooter() {
 
 function controlBotones(trabajador) {
     if (trabajador.evaluador == null) {
-        $("#objetivos").css("visibility", "hidden");
-        $("#objetivosAsg").css("visibility", "hidden");
         $("#evaluacion").css("visibility", "hidden");
     }
 }
