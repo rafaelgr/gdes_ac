@@ -23,6 +23,15 @@ function initForm() {
     getVersionFooter();
     //
     trabajador = comprobarLoginTrabajador();
+    if (trabajador.idioma != null) {
+        i18n.init({ lng: trabajador.idioma }, function (t) { 
+            $(".I18N").i18n();
+        });
+    } else {
+        i18n.init({ lng: "es" }, function (t) {
+            $(".I18N").i18n();
+        });
+    }
     controlBotones(trabajador);
     $("#userName").text(trabajador.nombre);
     
@@ -52,6 +61,11 @@ function initForm() {
 }
 
 function loadTemplate(data){
+    //
+    Handlebars.registerHelper('t', function (i18n_key) {
+        var result = i18n.t(i18n_key);
+        return new Handlebars.SafeString(result);
+    });
     // Grab the template script
     var theTemplateScript = $("#ac-conocimientos").html();
     // Compile the template

@@ -68,6 +68,7 @@
     <Content Include="public\js\c3_renderers.js.map" />
     <Content Include="public\js\pivot.es.js.map" />
     <Content Include="public\js\pivot.js.map" />
+    <Content Include="public\locales\es\translation.json" />
     <Content Include="public\Pivottable.html" />
     <Content Include="public\RolDetalle.html" />
     <Content Include="public\RolGeneral.html" />
@@ -970,7 +971,6 @@
     <Compile Include="public\js\plugin\fuelux\wizard\wizard.min.js" />
     <Content Include="public\locales\dev\translation.json" />
     <Content Include="public\locales\en\translation.json" />
-    <Content Include="public\locales\es\translation.json" />
     <Content Include="public\xml\gmap\pins.xml" />
   </ItemGroup>
   <ItemGroup>

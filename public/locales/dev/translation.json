@@ -1,9 +1,17 @@
-{
-  "app": {
-    "name": "i18next"
-  },
-  "test": {
-    "field1": "Test field1",
-    "field2": "Test field2"
-  }
+﻿{
+    "app": {
+        "nombre": "GDESAC"
+    },
+    "general": {
+        "trabajadores": "Trabajadores",
+        "titulo": "AREAS DE CONOCIMIENTO"
+    },
+    "menu": {
+        "MisConocimientos": "MIS CONOCIMIENTOS",
+        "RegConocimientos": "REG.CONOCIMIENTOS"
+    },
+    "cliIndex": {
+        "titulo": "Estas son sus áreas de conocimiento registradas",
+        "btnPDF":  "Informe PDF"
+    }
 }

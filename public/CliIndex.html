@@ -24,7 +24,7 @@
         <!-- We recommend you use "your_style.css" to override SmartAdmin
         specific styles this will also ensure you retrain your customization with each SmartAdmin update.
         <link rel="stylesheet" type="text/css" media="screen" href="css/your_style.css"> -->
-
+        <link href="css/ariadna.css" rel="stylesheet" />
         <!-- Demo purpose only: goes with demo.js, you can delete this css when designing your own WebApp -->
         <!--<link rel="stylesheet" type="text/css" media="screen" href="css/demo.min.css">-->
 
@@ -54,50 +54,7 @@
 
     </head>
 
-    <!--
-
-    TABLE OF CONTENTS.
-	
-    Use search to find needed section.
-	
-    ===================================================================
-	
-    |  01. #CSS Links                |  all CSS links and file paths  |
-    |  02. #FAVICONS                 |  Favicon links and file paths  |
-    |  03. #GOOGLE FONT              |  Google font link              |
-    |  04. #APP SCREEN / ICONS       |  app icons, screen backdrops   |
-    |  05. #BODY                     |  body tag                      |
-    |  06. #HEADER                   |  header tag                    |
-    |  07. #PROJECTS                 |  project lists                 |
-    |  08. #TOGGLE LAYOUT BUTTONS    |  layout buttons and actions    |
-    |  09. #MOBILE                   |  mobile view dropdown          |
-    |  10. #SEARCH                   |  search field                  |
-    |  11. #NAVIGATION               |  left panel & navigation       |
-    |  12. #MAIN PANEL               |  main panel                    |
-    |  13. #MAIN CONTENT             |  content holder                |
-    |  14. #PAGE FOOTER              |  page footer                   |
-    |  15. #SHORTCUT AREA            |  dropdown shortcuts area       |
-    |  16. #PLUGINS                  |  all scripts and plugins       |
-	
-    ===================================================================
-	
-    -->
-
-    <!-- #BODY -->
-    <!-- Possible Classes
-
-    * 'smart-style-{SKIN#}'
-    * 'smart-rtl'         - Switch theme mode to RTL
-    * 'menu-on-top'       - Switch to top navigation (no DOM change required)
-    * 'no-menu'			  - Hides the menu completely
-    * 'hidden-menu'       - Hides the main menu but still accessable by hovering over left edge
-    * 'fixed-header'      - Fixes the header
-    * 'fixed-navigation'  - Fixes the main menu
-    * 'fixed-ribbon'      - Fixes breadcrumb
-    * 'fixed-page-footer' - Fixes footer
-    * 'container'         - boxed layout mode (non-responsive: will not work with fixed-navigation & fixed-ribbon)
-    -->
-    <body class="smart-style-3">
+    <body class="smart-style-3 I18N">
 
         <!-- #HEADER -->
         <header id="header" style="background-color:white; background-image:none;">
@@ -109,7 +66,7 @@
 
             </div>
             <div style="padding-left:5px">
-                <h1> ÁREAS DE CONOCIMIENTO</h1>
+                <h1><span data-i18n="general.titulo">AREAS DE CONOCIMIENTO*</span></h1>
             </div>
             <!-- end projects dropdown -->
             <!-- #TOGGLE LAYOUT BUTTONS -->
@@ -166,14 +123,14 @@
                 <ul>
                     <li id="inicio">
                         <a href="CliIndex.html">
-                            <i class="fa fa-lg fa-fw fa-cube"></i> <span class="menu-item-parent">MIS CONOCIMIENTOS</span>
+                            <i class="fa fa-lg fa-fw fa-cube"></i> <span class="menu-item-parent" data-i18n="menu.MisConocimientos">Mis Conocimientos*</span>
                         </a>
                     </li>
                     <li>
                     </li>
                     <li id="evaluacion">
                         <a href="CliEvaPorTrabajador.html">
-                            <i class="fa fa-lg fa-fw fa-gears"></i> <span class="menu-item-parent">REG.CONOCIMIENTOS</span>
+                            <i class="fa fa-lg fa-fw fa-gears"></i> <span class="menu-item-parent" data-i18n="menu.RegConocimientos">Reg. Concimientos*</span>
                         </a>
                     </li>
                 </ul>
@@ -193,18 +150,6 @@
                     <li></li>
                 </ol>
                 <!-- end breadcrumb -->
-
-                <!-- You can also add more buttons to the
-                ribbon for further usability
-
-                Example below:
-
-                <span class="ribbon-button-alignment pull-right">
-                <span id="search" class="btn btn-ribbon hidden-xs" data-title="search"><i class="fa-grid"></i> Change Grid</span>
-                <span id="add" class="btn btn-ribbon hidden-xs" data-title="add"><i class="fa-plus"></i> Add</span>
-                <span id="search" class="btn btn-ribbon" data-title="search"><i class="fa-search"></i> <span class="hidden-mobile">Search</span></span>
-                </span> -->
-
             </div>
             <!-- END RIBBON -->
 
@@ -213,12 +158,12 @@
 
                 <div class="row"> 
                     <div class="col-md-12">
-                        <h2><i class="fa fa-lg fa-fw fa-cube"></i> Estas son sus áreas de conocimiento registradas</h2> 
+                        <h2><i class="fa fa-lg fa-fw fa-cube"></i><span data-i18n="cliIndex.titulo">Estas son sus áreas de conocimiento registradas*</span> </h2> 
                     </div>
                 </div>
                 <div class="row">
                     <div class="text-right" style="padding:5px;">
-                        <button id="btnPDF" title="Informe PDF" class="btn btn-circle btn-lg">
+                        <button id="btnPDF" class="btn btn-circle btn-lg" data-i18n="[title]cliIndex.btnPDF" title="Informe PDF*">
                             <i class="fa fa-lg fa-file-pdf-o"></i>
                         </button>
                     </div>
@@ -252,20 +197,20 @@
 
         <!-- BEGIN TEMPLATES -->
         <script id="ac-conocimientos" type="text/x-handlebars-template">
-            <div class="well">
+            <div class="well I18N">
                 <h2>{{trabajador}}</h2>
                 {{#each categorias}}
                 <h3>{{nombre}}</h3>
                 <table class="table table-stripped table-forum">
                     <thead class="txt-color-blue">
                         <tr>
-                            <th>Conocimiento</th>
-                            <th>Proyecto</th>
-                            <th>F.Inicio</th>
-                            <th>F.Final</th>
-                            <th>Dias</th>
-                            <th>Comentarios</th>
-                            <th>Evaluador</th>
+                            <th>{{t "cliIndex.template.conocimiento"}}</th>
+                            <th>{{t "cliIndex.template.proyecto"}}</th>
+                            <th>{{t "cliIndex.template.finicio"}}</th>
+                            <th>{{t "cliIndex.template.ffinal"}}</th>
+                            <th>{{t "cliIndex.template.dias"}}</th>
+                            <th>{{t "cliIndex.template.comentarios"}}</th>
+                            <th>{{t "cliIndex.template.evaluador"}}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -382,6 +327,7 @@
         <script src="js/plugin/datatables/dataTables.tableTools.min.js"></script>
         <script src="js/plugin/datatables/dataTables.bootstrap.min.js"></script>
         <script src="js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
+        <script src="js/i18next-1.9.0.js"></script>
 
         <script type="text/javascript">
             (function ($) {

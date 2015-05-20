@@ -1,26 +1,57 @@
-{
-  "app": {
-    "name": "i18next"
-  },
-  "test": {
-    "field1": "Campo de testeo 1",
-    "field2": "Campo de testeo 2"
-  },
-  "menu":{
-	"home": {
-		"title":"INICIO"
-	},
-	"basic_data":{
-		"title":"DATOS BASICOS",
-		"workers":"TRABAJADORES",
-		"evaluators":"EVALUADORES",
-		"projects": "PROYECTOS"
-	},
-	"evaluations":{
-		"title":"EVALUACIONES",
-		"myEvaluations":"MIS EVALUACIONES",
-		"byProject":"POR PROYECTO",
-		"byWorker": "POR TRABAJADOR"
-	}
-  }
+﻿{
+    "app": {
+        "nombre": "GDESAC"
+
+    },
+    "general": {
+        "trabajadores": "Trabajadores",
+        "titulo": "AREAS DE CONOCIMIENTO",
+        "jtable": {
+            "processing": "Procesando...",
+            "info": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+            "infoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+            "infoFiltered": "(filtrado de un total de _MAX_ registros)",
+            "infoPostFix": "",
+            "loadingRecords": "Cargando...",
+            "zeroRecords": "No se encontraron resultados",
+            "emptyTable": "Ningún dato disponible en esta tabla",
+            "paginate": {
+                "first": "Primero",
+                "previous": "Anterior",
+                "next": "Siguiente",
+                "last": "Último"
+            },
+            "aria": {
+                "sortAscending": ": Activar para ordenar la columna de manera ascendente",
+                "sortDescending": ": Activar para ordenar la columna de manera descendente"
+            }
+        }
+    },
+    "menu": {
+        "MisConocimientos": "MIS CONOCIMIENTOS",
+        "RegConocimientos": "REG.CONOCIMIENTOS"
+    },
+    "cliIndex": {
+        "titulo": "Estas son sus áreas de conocimiento registradas",
+        "btnPDF": "Informe PDF",
+        "template": {
+            "conocimiento": "Conocimiento",
+            "proyecto": "Proyecto",
+            "finicio": "F.Inicial",
+            "ffinal": "F.Final",
+            "dias": "Dias",
+            "comentarios": "Comentarios",
+            "evaluador": "Evaluador"
+        }
+
+    },
+    "cliEvaPorTrabajador": {
+        "titulo": "Seleccione aquí el trabajador al que registrará conocimientos",
+        "buscar": "Buscar asignaciones por trabajador.",
+        "trabajador": "Trabajador",
+        "btnBuscar": "Buscar",
+        "nombre": "Nombre",
+        "proyecto": "Proyecto",
+        "rol":  "Rol"
+    }
 }

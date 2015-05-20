@@ -68,7 +68,7 @@ function admData() {
     self.evaluador = ko.observable();
     self.posiblesTrabajadores = ko.observableArray([]);
     self.trabajadorEvaluado = ko.observable();
-    self.posiblesIdiomas = ko.observableArray(['es', 'en']);
+    self.posiblesIdiomas = ko.observableArray(myconfig.idiomas);
     self.idioma = ko.observable();
 }
 

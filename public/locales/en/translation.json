@@ -1,10 +1,55 @@
-{
-  "app": {
-    "name": "i18next"
-  },
-  "trat": {
-    "home": "EL CALORET DEL VERANO",
-    "page1": "Page One",
-    "page2": "Page Two"
-  }
+﻿{
+    "app": {
+        "nombre": "GDESAC"
+    },
+    "general": {
+        "trabajadores": "Trabajadores",
+        "titulo": "KNOWLEDGE AREAS",
+        "jtable": {
+            "processing": "Processing...",
+            "info": "Showing registers from _START_ to _END_ total of _TOTAL_ registros",
+            "infoEmpty": "Showing registers from 0 to 0 total of 0 registros",
+            "infoFiltered": "(filtered from a total of _MAX_ registers)",
+            "infoPostFix": "",
+            "loadingRecords": "Loading...",
+            "zeroRecords": "No results found",
+            "emptyTable": "No dat for this table",
+            "paginate": {
+                "first": "First",
+                "previous": "Previous",
+                "next": "Next",
+                "last": "Last"
+            },
+            "aria": {
+                "sortAscending": ": Sort ascending",
+                "sortDescending": ": Sort descending"
+            }
+        }
+    },
+    "menu": {
+        "MisConocimientos": "MY KNOWLEDGE",
+        "RegConocimientos": "KNOWLEDGE REG."
+    },
+    "cliIndex": {
+        "titulo": "This are your registered areas of knowledge",
+        "btnPDF": "PDF Report",
+        "template": {
+            "conocimiento": "Knowledge",
+            "proyecto": "Project",
+            "finicio": "S. Date",
+            "ffinal": "E. Date",
+            "dias": "Days",
+            "comentarios": "Comments",
+            "evaluador": "Evaluator"
+        }
+    },
+    "cliEvaPorTrabajador": { 
+        "titulo": "Select here the worker who you'll register knowledge",
+        "buscar": "Search assignments by worker.",
+        "trabajador": "Worker",
+        "btnBuscar": "Search",
+        "nombre":  "Name",
+        "proyecto": "Project",
+        "rol":  "Rol"
+    }
 }

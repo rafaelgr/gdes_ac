@@ -24,6 +24,18 @@ function initForm() {
     pageSetUp();
     getVersionFooter();
     trabajador = comprobarLoginTrabajador();
+    if (trabajador.idioma != null) {
+        i18n.init({ lng: trabajador.idioma }, function (t) {
+            $(".I18N").i18n();
+            initTablaAsgProyectos();
+        });
+    } else {
+        i18n.init({ lng: "es" }, function (t) {
+            $(".I18N").i18n();
+            initTablaAsgProyectos();
+        });
+    }
+   
     $("#userName").text(trabajador.nombre);
     controlBotones(trabajador);
     
@@ -40,7 +52,7 @@ function initForm() {
     //        buscarAsgProyectos();
     //});
     //
-    initTablaAsgProyectos();
+
     // carga del desplegable.
     loadTrabajadores(trabajador.trabajadorId);
 }
@@ -87,23 +99,23 @@ function initTablaAsgProyectos() {
             responsiveHelper_dt_basic.respond();
         },
         language: {
-            processing: "Procesando...",
-            info: "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-            infoEmpty: "Mostrando registros del 0 al 0 de un total de 0 registros",
-            infoFiltered: "(filtrado de un total de _MAX_ registros)",
-            infoPostFix: "",
-            loadingRecords: "Cargando...",
-            zeroRecords: "No se encontraron resultados",
-            emptyTable: "Ningún dato disponible en esta tabla",
+            processing: i18n.t("general.jtable.processing"),
+            info: i18n.t("general.jtable.info"),
+            infoEmpty: i18n.t("general.jtable.infoEmpty"),
+            infoFiltered: i18n.t("general.jtable.infoFiltered"),
+            infoPostFix: i18n.t("general.jtable.infoPostFix"),
+            loadingRecords: i18n.t("general.jtable.loadingRecords"),
+            zeroRecords: i18n.t("general.jtable.zeroRecords"),
+            emptyTable: i18n.t("general.jtable.emptyTable"),
             paginate: {
-                first: "Primero",
-                previous: "Anterior",
-                next: "Siguiente",
-                last: "Último"
+                first: i18n.t("general.jtable.paginate.first"),
+                previous: i18n.t("general.jtable.paginate.previous"),
+                next: i18n.t("general.jtable.paginate.next"),
+                last: i18n.t("general.jtable.paginate.last")
             },
             aria: {
-                sortAscending: ": Activar para ordenar la columna de manera ascendente",
-                sortDescending: ": Activar para ordenar la columna de manera descendente"
+                sortAscending: i18n.t("general.jtable.aria.sortAscending"),
+                sortDescending: i18n.t("general.jtable.aria.sortDescending")
             }
         },
         data: dataAsgProyectos,

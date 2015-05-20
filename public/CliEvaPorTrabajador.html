@@ -54,50 +54,7 @@
 
     </head>
 
-    <!--
-
-    TABLE OF CONTENTS.
-	
-    Use search to find needed section.
-	
-    ===================================================================
-	
-    |  01. #CSS Links                |  all CSS links and file paths  |
-    |  02. #FAVICONS                 |  Favicon links and file paths  |
-    |  03. #GOOGLE FONT              |  Google font link              |
-    |  04. #APP SCREEN / ICONS       |  app icons, screen backdrops   |
-    |  05. #BODY                     |  body tag                      |
-    |  06. #HEADER                   |  header tag                    |
-    |  07. #PROJECTS                 |  project lists                 |
-    |  08. #TOGGLE LAYOUT BUTTONS    |  layout buttons and actions    |
-    |  09. #MOBILE                   |  mobile view dropdown          |
-    |  10. #SEARCH                   |  search field                  |
-    |  11. #NAVIGATION               |  left panel & navigation       |
-    |  12. #MAIN PANEL               |  main panel                    |
-    |  13. #MAIN CONTENT             |  content holder                |
-    |  14. #PAGE FOOTER              |  page footer                   |
-    |  15. #SHORTCUT AREA            |  dropdown shortcuts area       |
-    |  16. #PLUGINS                  |  all scripts and plugins       |
-	
-    ===================================================================
-	
-    -->
-
-    <!-- #BODY -->
-    <!-- Possible Classes
-
-    * 'smart-style-{SKIN#}'
-    * 'smart-rtl'         - Switch theme mode to RTL
-    * 'menu-on-top'       - Switch to top navigation (no DOM change required)
-    * 'no-menu'			  - Hides the menu completely
-    * 'hidden-menu'       - Hides the main menu but still accessable by hovering over left edge
-    * 'fixed-header'      - Fixes the header
-    * 'fixed-navigation'  - Fixes the main menu
-    * 'fixed-ribbon'      - Fixes breadcrumb
-    * 'fixed-page-footer' - Fixes footer
-    * 'container'         - boxed layout mode (non-responsive: will not work with fixed-navigation & fixed-ribbon)
-    -->
-    <body class="smart-style-3">
+    <body class="smart-style-3 I18N">
 
         <!-- #HEADER -->
         <header id="header" style="background-color:white; background-image:none;">
@@ -109,7 +66,7 @@
 
             </div>
             <div style="padding-left:5px">
-                <h1> ÁREAS DE CONOCIMIENTO</h1>
+                <h1><span data-i18n="general.titulo">AREAS DE CONOCIMIENTO*</span></h1>
             </div>
             <!-- end projects dropdown -->
             <!-- #TOGGLE LAYOUT BUTTONS -->
@@ -166,14 +123,14 @@
                 <ul>
                     <li id="inicio">
                         <a href="CliIndex.html">
-                            <i class="fa fa-lg fa-fw fa-cube"></i> <span class="menu-item-parent">MIS CONOCIMIENTOS</span>
+                            <i class="fa fa-lg fa-fw fa-cube"></i> <span class="menu-item-parent" data-i18n="menu.MisConocimientos">Mis Conocimientos*</span>
                         </a>
                     </li>
                     <li>
                     </li>
                     <li id="evaluacion">
                         <a href="CliEvaPorTrabajador.html">
-                            <i class="fa fa-lg fa-fw fa-gears"></i> <span class="menu-item-parent">REG.CONOCIMIENTOS</span>
+                            <i class="fa fa-lg fa-fw fa-gears"></i> <span class="menu-item-parent" data-i18n="menu.RegConocimientos">Reg. Concimientos*</span>
                         </a>
                     </li>
                 </ul>
@@ -194,17 +151,6 @@
                 </ol>
                 <!-- end breadcrumb -->
 
-                <!-- You can also add more buttons to the
-                ribbon for further usability
-
-                Example below:
-
-                <span class="ribbon-button-alignment pull-right">
-                <span id="search" class="btn btn-ribbon hidden-xs" data-title="search"><i class="fa-grid"></i> Change Grid</span>
-                <span id="add" class="btn btn-ribbon hidden-xs" data-title="add"><i class="fa-plus"></i> Add</span>
-                <span id="search" class="btn btn-ribbon" data-title="search"><i class="fa-search"></i> <span class="hidden-mobile">Search</span></span>
-                </span> -->
-
             </div>
             <!-- END RIBBON -->
 
@@ -213,7 +159,7 @@
 
                 <div class="row"> 
                     <div class="col-md-12">
-                        <h2><i class="fa fa-lg fa-fw fa-gears"></i> Seleccione aquí el trabajador al que registrará conocimientos</h2>
+                        <h2><i class="fa fa-lg fa-fw fa-gears"></i> <span data-i18n="cliEvaPorTrabajador.titulo">Seleccione aquí el trabajador al que registrará conocimientos*</span> </h2>
                     </div>
                 </div>
                 <div class="row">
@@ -221,12 +167,12 @@
                         <div class="well">
                             <form id="frmBuscar" class="smart-form">
                                 <header>
-                                    Buscar asignaciones por trabajador.
+                                    <span data-i18n="cliEvaPorTrabajador.buscar">Buscar asignaciones por trabajador.*</span>
                                 </header>
                                 <fieldset>
                                     <div class="row">
                                         <section class="col col-md-12">
-                                            <label class="label">Trabajador</label>
+                                            <label class="label"><span data-i18n="cliEvaPorTrabajador.trabajador">Trabajador*</span></label>
                                             <label class="select">
                                                 <select id="cmbTrabajadores" name="cmbTrabajadores" data-bind="options: posiblesTrabajadores, optionsText: 'nombre', optionsValue: 'trabajadorId', value: strabajadorId, valueAllowUnset: true"></select><i></i>
                                             </label>
@@ -235,7 +181,7 @@
                                 </fieldset>
                                 <fieldset>
                                     <div class="pull-right">
-                                        <button id="btnBuscar" title="Buscar" class="btn btn-primary btn-circle btn-lg">
+                                        <button id="btnBuscar" title="Buscar" data-i18n="[title]cliEvaPorTrabajador.btnBuscar" class="btn btn-primary btn-circle btn-lg">
                                             <i class="fa fa-lg fa-search"></i>
                                         </button>
                                     </div>
@@ -246,16 +192,16 @@
                                     <thead>
                                         <tr>
                                             <th data-class="expand">
-                                                <i class="fa fa-fw fa-user text-muted hidden-md hidden-sm hidden-xs"></i> Nombre
+                                                <i class="fa fa-fw fa-user text-muted hidden-md hidden-sm hidden-xs"></i> <span data-i18n="cliEvaPorTrabajador.nombre">Nombre*</span>
                                             </th>
                                             <th data-hide="phone">
-                                                Trabajador
+                                                <span data-i18n="cliEvaPorTrabajador.trabajador">Trabajador*</span>
                                             </th>
                                             <th data-hide="phone">
-                                                Proyecto
+                                                <span data-i18n="cliEvaPorTrabajador.proyecto">Proyecto*</span>
                                             </th>
                                             <th data-hide="phone">
-                                                Rol
+                                                <span data-i18n="cliEvaPorTrabajador.rol">Rol*</span>
                                             </th>
                                             <th>
 
@@ -385,6 +331,7 @@
         <script src="js/plugin/datatables/dataTables.tableTools.min.js"></script>
         <script src="js/plugin/datatables/dataTables.bootstrap.min.js"></script>
         <script src="js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
+        <script src="js/i18next-1.9.0.js"></script>
 
         <script type="text/javascript">
             (function ($) {
