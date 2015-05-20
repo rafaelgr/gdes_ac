@@ -68,6 +68,8 @@ function admData() {
     self.evaluador = ko.observable();
     self.posiblesTrabajadores = ko.observableArray([]);
     self.trabajadorEvaluado = ko.observable();
+    self.posiblesIdiomas = ko.observableArray(['es', 'en']);
+    self.idioma = ko.observable();
 }
 
 function loadData(data) {
@@ -81,6 +83,7 @@ function loadData(data) {
         $("#flEvaluados").show();
         cargarEvaluados(vm.trabajadorId());
     }
+    vm.idioma(data.idioma);
 }
 
 function datosOK() {
@@ -113,7 +116,8 @@ function aceptar() {
                 "dni": vm.dni(),
                 "login": vm.login(),
                 "password": vm.password(),
-                "evaluador": vm.evaluador()
+                "evaluador": vm.evaluador(),
+                "idioma": vm.idioma(),
             }
         };
         if (trabajadorId == 0) {

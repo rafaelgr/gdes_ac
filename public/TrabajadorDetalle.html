@@ -366,7 +366,7 @@
                                             </header>
                                             <fieldset>
                                                 <div class="row">
-                                                    <section class="col col-md-10">
+                                                    <section class="col col-md-8">
                                                         <label class="label">Nombre</label>
                                                         <label class="input">
                                                             <input id="txtNombre" name="txtNombre" type="text" data-bind="value: nombre" />
@@ -376,6 +376,12 @@
                                                         <label class="label">DNI</label>
                                                         <label class="input">
                                                             <input id="txtDni" name="txtDni" type="text" data-bind="value: dni" />
+                                                        </label>
+                                                    </section>
+                                                    <section class="col col-md-2">
+                                                        <label class="label">Idioma</label>
+                                                        <label class="select">
+                                                            <select id="cmbIdioma" name="cmbIdioma" data-bind="options: posiblesIdiomas, value: idioma, valueAllowUnset: true"></select><i></i>
                                                         </label>
                                                     </section>
                                                 </div>
