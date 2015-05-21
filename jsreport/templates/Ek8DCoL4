@@ -1,0 +1,28 @@
+{
+    "engine": "handlebars",
+    "recipe": "phantom-pdf",
+    "phantom": {
+        "orientation": "portrait",
+        "format": "A4"
+    },
+    "resources": {
+        "items": []
+    },
+    "data": {
+        "shortid": "VyWJGo6Q"
+    },
+    "script": {},
+    "name": "en_acConocimientosTrabajador",
+    "content": "<meta charset=\"utf-8\">\n<!-- #CSS Links -->\n<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css\">\n<image src=\"http://www.grupodominguis.com/images/logo-grupo-dominguis.gif\" style=\"display:none\" />\n<div class=\"well\">\n    <h1>Knowledge areas ({{trabajador}})</h1>\n    {{#each categorias}}\n    <h3>{{nombre}}</h3>\n    <table class=\"table table-stripped table-forum\">\n        <thead class=\"txt-color-blue\">\n            <tr>\n                <th>Knowledge</th>\n                <th>Project</th>\n                <th>S.Date</th>\n                <th>E.Date</th>\n                <th>Days</th>\n                <th>Comments</th>\n                <th>Evaluator</th>\n            </tr>\n        </thead>\n        <tbody>\n            {{#each conocimientos}}\n            <tr>\n                <td>{{conocimiento}}</td>\n                <td>{{proyecto}}</td>\n                <td>{{dfecha}}</td>\n                <td>{{hfecha}}</td>\n                <td>{{dias}}</td>\n                <td>{{observaciones}}</td>\n                <td>{{evaluador}}</td>\n            </tr>\n            {{/each}}\n        </tbody>\n    </table>\n    {{/each}}\n</div>",
+    "shortid": "Ek8DCoL4",
+    "modificationDate": {
+        "$$date": 1432207286664
+    },
+    "_id": "smjdLYF8fubJQ9yd",
+    "@odata": {
+        "context": "https://localhost:8443/odata/$metadata#templates/$entity",
+        "editLink": "https://localhost:8443/odatatemplates/('smjdLYF8fubJQ9yd')",
+        "id": "https://localhost:8443/odatatemplates/('smjdLYF8fubJQ9yd')"
+    },
+    "version": null
+}
