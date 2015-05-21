@@ -79,7 +79,7 @@ function loadTemplate(data){
 
 function informePDF(data){
     var data = {
-        "template": { "shortid" : "Nknhlj67" },
+        "template": { "shortid" : i18n.t("report.acConocimientosTrabajador") },
         "data": data
     }
     //$.ajax({

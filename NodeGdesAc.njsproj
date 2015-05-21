@@ -44,6 +44,8 @@
     <Compile Include="public\js\i18next-1.9.0.js" />
     <Compile Include="public\js\pivot.es.js" />
     <Compile Include="public\js\pivot.js" />
+    <Compile Include="public\locales\datepicker-languages.js" />
+    <Compile Include="public\locales\validator-languages.js" />
     <Compile Include="public\myconfig.js" />
     <Compile Include="server.js" />
     <Content Include="docs\Diagramadeclase.png" />
@@ -151,7 +153,6 @@
     <Compile Include="public\js\moment.js" />
     <Compile Include="public\js\moment_locale.js" />
     <Compile Include="public\js\numeral.min.js" />
-    <Compile Include="public\locales\bootstrap-datepicker.es.js" />
     <Content Include="public\sound\license.txt" />
     <Content Include="public\ajax\email\email-list.html" />
     <Content Include="public\ajax\modal-content\modal-voicecommand.html" />
@@ -515,7 +516,6 @@
     <Compile Include="public\js\ariadna\asgTrabajadorDetalle.js" />
     <Compile Include="public\js\ariadna\asgTrabajadorGeneral.js" />
     <Compile Include="public\js\ariadna\blank.js" />
-    <Compile Include="public\js\ariadna\cliEvAsgObjetivoDetalle.js" />
     <Compile Include="public\js\ariadna\cliIndex.js" />
     <Compile Include="public\js\ariadna\comun.js" />
     <Compile Include="public\js\ariadna\descarga.js" />

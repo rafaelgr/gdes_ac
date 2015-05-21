@@ -19,50 +19,41 @@ var asgProyectoId = 0;
 var evaluacionId = 0;
 
 var trabajador;
+var lang;
 
 function initForm() {
     // comprobarLogin();
     // de smart admin
     pageSetUp();
     trabajador = comprobarLoginTrabajador();
+    if (trabajador.idioma != null) {
+        // el idioma del trabajador
+        lang = trabajador.idioma;
+    } else {
+        // por defecto el idioma es español
+        lang = "es";
+    }
+    // control del idioma    
+    i18n.init({ lng: lang }, function (t) {
+        $(".I18N").i18n();
+        initTablaEvaluaciones();
+        $.datepicker.setDefaults($.datepicker.regional[lang]);
+        $.validator.addMethod("greaterThan", 
+        function (value, element, params) {
+            var fv = moment(value, i18n.t("app.dateFormat")).format("YYYY-MM-DD");
+            var fp = moment($(params).val(), i18n.t("app.dateFormat")).format("YYYY-MM-DD");
+            if (!/Invalid|NaN/.test(new Date(fv))) {
+                return new Date(fv) > new Date(fp);
+            } else {
+                return true;
+            }
+        
+        }, i18n.t("app.dateInicialFinal"));
+        validator_languages(lang);
+    });
+    
     controlBotones(trabajador);
     $("#userName").text(trabajador.nombre);
-
-    $.validator.addMethod("greaterThan", 
-        function (value, element, params) {
-        var fv = moment(value, "DD/MM/YYYY").format("YYYY-MM-DD");
-        var fp = moment($(params).val(), "DD/MM/YYYY").format("YYYY-MM-DD");
-        if (!/Invalid|NaN/.test(new Date(fv))) {
-            return new Date(fv) > new Date(fp);
-        } else {
-            return true;
-        }
-        
-    }, 'La fecha final debe ser mayor que la inicial.');
-    
-    
-    $.datepicker.regional['es'] = {
-        closeText: 'Cerrar',
-        prevText: '&#x3C;Ant',
-        nextText: 'Sig&#x3E;',
-        currentText: 'Hoy',
-        monthNames: ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'],
-        monthNamesShort: ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'],
-        dayNames: ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'],
-        dayNamesShort: ['dom', 'lun', 'mar', 'mié', 'jue', 'vie', 'sáb'],
-        dayNamesMin: ['D', 'L', 'M', 'X', 'J', 'V', 'S'],
-        weekHeader: 'Sm',
-        dateFormat: 'dd/mm/yy',
-        firstDay: 1,
-        isRTL: false,
-        showMonthAfterYear: false,
-        yearSuffix: ''
-    };
-    
-    
-    $.datepicker.setDefaults($.datepicker.regional['es']);
-    
-    
     
     // 
     getVersionFooter();
@@ -77,7 +68,7 @@ function initForm() {
     });
 
     
-    initTablaEvaluaciones();
+    //initTablaEvaluaciones();
 
     asgProyectoId = gup('AsgProyectoId');
     if (asgProyectoId != 0) {
@@ -138,9 +129,9 @@ function loadData(data) {
     vm.nomRol(data.rol.nombre);
 
     // fechas por defecto igual a las del proyecto
-    vm.dFecha(moment(data.proyecto.fechaInicio).format("DD/MM/YYYY"));
+    vm.dFecha(moment(data.proyecto.fechaInicio).format(i18n.t("app.dateFormat")));
     if (data.proyecto.fechaFinal != null) {
-        vm.hFecha(moment(data.proyecto.fechaFinal).format("DD/MM/YYYY"));
+        vm.hFecha(moment(data.proyecto.fechaFinal).format(i18n.t("app.dateFormat")));
     }
 }
 
@@ -152,20 +143,13 @@ function datosOK() {
             txtDFecha: { required: true, date:true },
             txtHFecha: { date:true, greaterThan: "#txtDFecha" }
         },
-        // Messages for form validation
-        messages: {
-            cmbCatConocimientos: {required: 'Seleccione una categoría'},
-            cmbConocimientos: { required: 'Seleccione un conocimiento' },
-            txtDFecha: { required: 'Introduzca fecha', date: 'Debe ser una fecha válida' },
-            txtHFecha: { date: 'Debe ser una fecha válida' },
-        },
         // Do not change code below
         errorPlacement: function (error, element) {
             error.insertAfter(element.parent());
         }
     });
     $.validator.methods.date = function (value, element) {
-        return this.optional(element) || moment(value, "DD/MM/YYYY").isValid();
+        return this.optional(element) || moment(value, i18n.t("app.dateFormat")).isValid();
     }
     return $('#frmEvaluacion').valid();
 }
@@ -176,10 +160,10 @@ function aceptar() {
             return;
         // control de fechas 
         var fecha1, fecha2;
-        if (moment(vm.dFecha(), "DD/MM/YYYY").isValid())
-            fecha1 = moment(vm.dFecha(), "DD/MM/YYYY").format("YYYY-MM-DD");
-        if (moment(vm.hFecha(), "DD/MM/YYYY").isValid()){
-            fecha2 = moment(vm.hFecha(), "DD/MM/YYYY").format("YYYY-MM-DD");
+        if (moment(vm.dFecha(), i18n.t("app.dateFormat")).isValid())
+            fecha1 = moment(vm.dFecha(), i18n.t("app.dateFormat")).format("YYYY-MM-DD");
+        if (moment(vm.hFecha(), i18n.t("app.dateFormat")).isValid()){
+            fecha2 = moment(vm.hFecha(), i18n.t("app.dateFormat")).format("YYYY-MM-DD");
         } else {
             fecha2 = null;
         }
@@ -238,23 +222,23 @@ function initTablaEvaluaciones() {
             responsiveHelper_dt_basic.respond();
         },
         language: {
-            processing: "Procesando...",
-            info: "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-            infoEmpty: "Mostrando registros del 0 al 0 de un total de 0 registros",
-            infoFiltered: "(filtrado de un total de _MAX_ registros)",
-            infoPostFix: "",
-            loadingRecords: "Cargando...",
-            zeroRecords: "No se encontraron resultados",
-            emptyTable: "Ningún dato disponible en esta tabla",
+            processing: i18n.t("general.jtable.processing"),
+            info: i18n.t("general.jtable.info"),
+            infoEmpty: i18n.t("general.jtable.infoEmpty"),
+            infoFiltered: i18n.t("general.jtable.infoFiltered"),
+            infoPostFix: i18n.t("general.jtable.infoPostFix"),
+            loadingRecords: i18n.t("general.jtable.loadingRecords"),
+            zeroRecords: i18n.t("general.jtable.zeroRecords"),
+            emptyTable: i18n.t("general.jtable.emptyTable"),
             paginate: {
-                first: "Primero",
-                previous: "Anterior",
-                next: "Siguiente",
-                last: "Último"
+                first: i18n.t("general.jtable.paginate.first"),
+                previous: i18n.t("general.jtable.paginate.previous"),
+                next: i18n.t("general.jtable.paginate.next"),
+                last: i18n.t("general.jtable.paginate.last")
             },
             aria: {
-                sortAscending: ": Activar para ordenar la columna de manera ascendente",
-                sortDescending: ": Activar para ordenar la columna de manera descendente"
+                sortAscending: i18n.t("general.jtable.aria.sortAscending"),
+                sortDescending: i18n.t("general.jtable.aria.sortDescending")
             }
         },
         data: dataEvaluaciones,
@@ -270,7 +254,7 @@ function initTablaEvaluaciones() {
                 render: function (data) {
                     // controlamos que si la fecha es nula no se muestre
                     if (moment(data).isValid())
-                        return moment(data).format('DD/MM/YYYY');
+                        return moment(data).format(i18n.t("app.dateFormat"));
                     else
                         return "";
                 },
@@ -281,7 +265,7 @@ function initTablaEvaluaciones() {
                 render: function (data) {
                     // controlamos que si la fecha es nula no se muestre
                     if (moment(data).isValid())
-                        return moment(data).format('DD/MM/YYYY');
+                        return moment(data).format(i18n.t("app.dateFormat"));
                     else
                         return "";
                 },
@@ -293,7 +277,7 @@ function initTablaEvaluaciones() {
             {
                 data: "evaluacionId",
                 render: function (data, type, row) {
-                    var bt1 = "<button class='btn btn-circle btn-danger btn-lg' onclick='deleteEvaluacion(" + data + ");' title='Eliminar registro'> <i class='fa fa-trash-o fa-fw'></i> </button>";
+                    var bt1 = "<button class='btn btn-circle btn-danger btn-lg' onclick='deleteEvaluacion(" + data + ");' title='" + i18n.t("app.eliminar") + "'> <i class='fa fa-trash-o fa-fw'></i> </button>";
                     var html = "<div class='pull-right'>" + bt1 + "</div>";
                     return html;
                     }
@@ -376,13 +360,13 @@ function cambioCategoria() {
 
 function deleteEvaluacion(id) {
     // mensaje de confirmación
-    var mens = "¿Realmente desea borrar este registro?";
+    var mens = i18n.t("app.deleteMens");
     $.SmartMessageBox({
-        title: "<i class='fa fa-info'></i> Mensaje",
+        title: "<i class='fa fa-info'></i> " + i18n.t("app.mensaje"),
         content: mens,
-        buttons: '[Aceptar][Cancelar]'
+        buttons: '['+ i18n.t("app.aceptar") +'][' + i18n.t("app.cancelar") + ']'
     }, function (ButtonPressed) {
-        if (ButtonPressed === "Aceptar") {
+        if (ButtonPressed === i18n.t("app.aceptar")) {
             var data = {
                 proyectoId: id
             };
@@ -398,7 +382,7 @@ function deleteEvaluacion(id) {
                 error: errorAjax
             });
         }
-        if (ButtonPressed === "Cancelar") {
+        if (ButtonPressed === i18n.t("app.cancelar")) {
             // no hacemos nada (no quiere borrar)
         }
     });

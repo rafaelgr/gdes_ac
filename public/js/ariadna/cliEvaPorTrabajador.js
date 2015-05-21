@@ -17,6 +17,7 @@ var breakpointDefinition = {
 };
 
 var trabajador;
+var lang;
 
 function initForm() {
     //comprobarLogin();
@@ -25,17 +26,19 @@ function initForm() {
     getVersionFooter();
     trabajador = comprobarLoginTrabajador();
     if (trabajador.idioma != null) {
-        i18n.init({ lng: trabajador.idioma }, function (t) {
-            $(".I18N").i18n();
-            initTablaAsgProyectos();
-        });
+        // el idioma del trabajador
+        lang = trabajador.idioma;
     } else {
-        i18n.init({ lng: "es" }, function (t) {
-            $(".I18N").i18n();
-            initTablaAsgProyectos();
-        });
+        // por defecto el idioma es español
+        lang = "es";
     }
-   
+    // fijar idiona
+    i18n.init({ lng: trabajador.idioma }, function (t) {
+        $(".I18N").i18n();
+        initTablaAsgProyectos();
+        validator_languages(lang);
+    });
+
     $("#userName").text(trabajador.nombre);
     controlBotones(trabajador);
     
@@ -131,7 +134,7 @@ function initTablaAsgProyectos() {
          {
             data: "asgProyectoId",
             render: function (data, type, row) {
-                var bt1 = "<button class='btn btn-circle btn-success btn-lg' onclick='editAsgProyecto(" + data + ");' title='Evaluar asignacion'> <i class='fa fa-edit fa-gears'></i> </button>";
+                var bt1 = "<button class='btn btn-circle btn-success btn-lg' onclick='editAsgProyecto(" + data + ");' title='" + i18n.t("app.evaluar") + "'> <i class='fa fa-edit fa-gears'></i> </button>";
                 var html = "<div class='pull-right'>" + bt1 + "</div>";
                 return html;
             }
@@ -144,12 +147,6 @@ function datosOK() {
     $('#frmBuscar').validate({
         rules: {
             cmbTrabajadores: { required: true },
-        },
-        // Messages for form validation
-        messages: {
-            cmbTrabajadores: {
-                required: 'Seleccione un trabajador'
-            }
         },
         // Do not change code below
         errorPlacement: function (error, element) {

@@ -1,7 +1,20 @@
 ﻿{
     "app": {
-        "nombre": "GDESAC"
-
+        "nombre": "GDESAC",
+        "dateFormat": "DD/MM/YYYY",
+        "dateInicialFinal": "La fecha final debe ser mayor que la inicial.",
+        "deleteMens": "¿Realmente desea borrar este registro?",
+        "mensaje": "Mensaje",
+        "aceptar": "Aceptar",
+        "cancelar": "Cancelar",
+        "eliminar": "Eliminar registro",
+        "evaluar": "Evaluar asignación",
+        "salir": "Salir",
+        "cerrarMenu": "Cerrar menu",
+        "pantallaCompleta":  "Pantalla completa"
+    },
+    "report": { 
+        "acConocimientosTrabajador": "Nknhlj67"
     },
     "general": {
         "trabajadores": "Trabajadores",
@@ -52,6 +65,22 @@
         "btnBuscar": "Buscar",
         "nombre": "Nombre",
         "proyecto": "Proyecto",
-        "rol":  "Rol"
+        "rol": "Rol"
+    },
+    "cliEvaAsgDetalle": {
+        "titulo": "Detalles de áreas de conocimiento en esta asignación",
+        "datosAsignacion": "Datos de la asignación",
+        "datosConocimiento":  "Datos del conocimiento",
+        "asignacion": "Asignación: ",
+        "trabajador": "Trabajador: ",
+        "proyecto": "Proyecto: ",
+        "rol": "Rol: ",
+        "categoria": "Categoría: ",
+        "conocimiento": "Conocimiento: ",
+        "dfecha": "Desde fecha: ",
+        "hfecha": "Hasta fecha: ",
+        "observaciones": "Observaciones: ",
+        "btnSalir": "Salir sin guardar",
+        "btnAceptar":  "Agregar registro"
     }
 }
