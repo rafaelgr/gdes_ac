@@ -18,6 +18,8 @@
   <ItemGroup>
     <Content Include="config.json" />
     <Content Include="package.json" />
+    <Compile Include="lib\habilidades_api.js" />
+    <Compile Include="lib\habilidades_db_mysql.js" />
     <Compile Include="lib\informes_api.js" />
     <Compile Include="lib\informes_db_mysql.js" />
     <Compile Include="lib\evaluaciones_api.js" />
@@ -28,6 +30,10 @@
     <Compile Include="lib\catConocimientos_api.js" />
     <Compile Include="lib\roles_db_mysql.js" />
     <Compile Include="lib\catConocimientos_db_mysql.js" />
+    <Compile Include="public\js\ariadna\habilidadDetalle.js" />
+    <Compile Include="public\js\ariadna\habilidadGeneral.js" />
+    <Compile Include="public\js\ariadna\servicioDetalle.js" />
+    <Compile Include="public\js\ariadna\servicioGeneral.js" />
     <Compile Include="public\js\ariadna\cliEvaAsgDetalle.js" />
     <Compile Include="public\js\ariadna\evaAsgDetalle.js" />
     <Compile Include="public\js\ariadna\asgTrabajadorProyectoDetalle.js" />
@@ -62,6 +68,10 @@
     <Compile Include="lib\trabajadores_db_mysql.js" />
     <Compile Include="lib\version_api.js" />
     <Content Include="public\AdministradorDetalle.html" />
+    <Content Include="public\HabilidadDetalle.html" />
+    <Content Include="public\HabilidadGeneral.html" />
+    <Content Include="public\ServicioDetalle.html" />
+    <Content Include="public\ServicioGeneral.html" />
     <Content Include="public\CliEvaPorTrabajador.html" />
     <Content Include="public\CliEvaAsgDetalle.html" />
     <Content Include="public\Index.html" />

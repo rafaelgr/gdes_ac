@@ -29,6 +29,8 @@ var evaluados_api = require("./lib/evaluados_api.js");
 var asg_proyectos_api = require("./lib/asg_proyectos_api.js");
 var evaluaciones_api = require("./lib/evaluaciones_api.js");
 var informes_api = require("./lib/informes_api.js");
+var servicios_api = require("./lib/servicios_api.js");
+var habilidades_api = require("./lib/habilidades_api.js");
 
 
 // ficheros en los que se grabarán los log de aplicación
@@ -243,6 +245,35 @@ router.route("/evaluaciones-buscar")
 // --> Relacionadas con informes
 router.route("/informes")
 	.post(informes_api.postInformes);
+
+// --> Relacionadas con categorias de conocimientos
+router.route("/servicios")
+	.get(servicios_api.getServicios)
+	.post(servicios_api.postServicio);
+
+
+router.route("/servicios/:servicioId")
+	.get(servicios_api.getServicio)
+	.put(servicios_api.putServicio)
+	.delete(servicios_api.deleteServicio);
+
+router.route("/servicios-buscar")
+	.post(servicios_api.postServiciosBuscar);
+
+// --> Relacionadas con categorias de habilidades
+router.route("/habilidades")
+	.get(habilidades_api.getHabilidades)
+	.post(habilidades_api.postHabilidad);
+
+
+router.route("/habilidades/:habilidadId")
+	.get(habilidades_api.getHabilidad)
+	.put(habilidades_api.putHabilidad)
+	.delete(habilidades_api.deleteHabilidad);
+
+router.route("/habilidades-buscar")
+	.post(habilidades_api.postHabilidadesBuscar);
+    
 
 //================================================================
 // Registro de rutas y arranque del servidor
