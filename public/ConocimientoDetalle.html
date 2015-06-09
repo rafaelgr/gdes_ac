@@ -22,6 +22,8 @@
         <link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-rtl.min.css">
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
 
+        <link href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css" rel="stylesheet" />
+
         <!-- We recommend you use "your_style.css" to override SmartAdmin
         specific styles this will also ensure you retrain your customization with each SmartAdmin update.
         <link rel="stylesheet" type="text/css" media="screen" href="css/your_style.css"> -->
@@ -380,8 +382,9 @@
                                                     </section>
                                                     <section class="col col-md-4">
                                                         <label class="label">Categoria</label>
-                                                        <label class="select">
-                                                            <select id="cmbCatConocimientos" name="cmbCatConocimientos" data-bind="options: posiblesCatConocimientos, optionsText: 'nombre', optionsValue: 'catConocimientoId', value: scatConocimientoId, valueAllowUnset: true"></select><i></i>
+                                                        <label style="width:100%;">
+                                                            <select style="width:100%;" id="cmbCatConocimientos" multiple="multiple" name="cmbCatConocimientos" 
+                                                                    data-bind="options: posiblesCatConocimientos, optionsText: 'nombre', optionsValue: 'catConocimientoId', valueAllowUnset: true, selectedOptions: elegidosCatConocimientos, selected2:{}"></select><i></i>
                                                         </label>
                                                     </section>
                                                 </div>
@@ -535,6 +538,7 @@
         <script src="js/plugin/datatables/dataTables.tableTools.min.js"></script>
         <script src="js/plugin/datatables/dataTables.bootstrap.min.js"></script>
         <script src="js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
 
         <script type="text/javascript">
             (function ($) {

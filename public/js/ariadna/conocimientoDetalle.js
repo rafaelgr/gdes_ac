@@ -17,7 +17,8 @@ function initForm() {
     $("#frmConocimiento").submit(function () {
         return false;
     });
-    
+
+    $("#cmbCatConocimientos").select2();
     
 
     conocimientoId = gup('ConocimientoId');
@@ -53,6 +54,7 @@ function conocimientoData() {
     self.tipo = ko.observable();
     // soporte de combos
     self.posiblesCatConocimientos = ko.observableArray([]);
+    self.elegidosCatConocimientos = ko.observableArray([]);
     // valores escogidos
     self.scatConocimientoId = ko.observable();
 }
@@ -65,7 +67,7 @@ function loadData(data) {
     loadCatConocimientos(data.catConocimiento.catConocimientoId);
 }
 
-function loadCatConocimientos(catConocimientoId){
+function loadCatConocimientos(categorias){
     $.ajax({
         type: "GET",
         url: "/api/catConocimientos",
@@ -73,7 +75,9 @@ function loadCatConocimientos(catConocimientoId){
         contentType: "application/json",
         success: function (data, status){
             vm.posiblesCatConocimientos(data);
-            vm.scatConocimientoId(catConocimientoId);
+            //vm.scatConocimientoId(catConocimientoId);
+            //vm.elegidosCatConocimientos.push(catConocimientoId);
+            $("#cmbCatConocimientos").val(categorias).trigger('change');
         },
         error: errorAjax
     });

@@ -75,18 +75,6 @@ function initTablaConocimientos() {
         },
         "drawCallback": function (oSettings) {
             responsiveHelper_dt_basic.respond();
-            var api = this.api();
-            var rows = api.rows({ page: 'current' }).nodes();
-            var last = null;
-            
-            api.column(1, { page: 'current' }).data().each(function (group, i) {
-                if (last !== group) {
-                    $(rows).eq(i).before(
-                        '<tr class="group"><td colspan="3"  style="background-color:#808080">' + group + '</td></tr>'
-                    );
-                    last = group;
-                }
-            });
         },
         "language": {
             processing: "Procesando...",
@@ -112,9 +100,6 @@ function initTablaConocimientos() {
         columns: [
             {
             data: "nombre"
-            }, 
-            {
-                data: "catConocimiento.nombre"
             }, 
             {
                 data: "conocimientoId",
