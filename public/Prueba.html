@@ -2,7 +2,7 @@
 <html lang="en-us">
     <head>
         <meta charset="utf-8">
-        <title> GDESOD () </title>
+        <title>  GDESOD (Administradores) </title>
         <meta name="description" content="">
         <meta name="author" content="">
 
@@ -97,19 +97,19 @@
     * 'fixed-page-footer' - Fixes footer
     * 'container'         - boxed layout mode (non-responsive: will not work with fixed-navigation & fixed-ribbon)
     -->
-    <body class="smart-style-3">
+    <body class="">
 
         <!-- #HEADER -->
-        <header id="header" style="background-color:white; background-image:none;">
+        <header id="header" style="background-color:#E0ECFF; background-image:none;">
             <!-- #PROJECTS: projects dropdown -->
-            <div style="background-color:white; background-image:none;">
+            <div>
                 <span id="logo"> <img src="img/ariface/logo_ariadna.png" alt="Gdes Od" style="height:30px;"> </span>
             </div>
             <div>
 
             </div>
             <div style="padding-left:5px">
-                <h1> Objetivos y Desempeño</h1>
+                <h1> Áreas de conocimiento</h1>
             </div>
             <!-- end projects dropdown -->
             <!-- #TOGGLE LAYOUT BUTTONS -->
@@ -137,7 +137,7 @@
                 <!-- fullscreen button -->
                 <div id="fullscreen" class="btn-header transparent pull-right">
                     <span>
-                        <a href="javascript:void(0);" data-action="launchFullscreen" title="Full Screen">
+                        <a href="javascript:void(0);" data-action="launchFullscreen" title="Pantalla completa">
                             <i class="fa fa-arrows-alt"></i>
                         </a>
                     </span>
@@ -159,26 +159,92 @@
 
                     <a href="javascript:void(0);" id="show-shortcut">
                         <i class="fa fa-user fa-2x"></i>
-                        <span id="userName">Enrique Mateolan Peribañez</span>
+                        <span id="userName"></span>
                     </a> </span>
             </div>
             <!-- NAVIGATION : This navigation is also responsive-->
             <nav>
                 <ul>
                     <li>
-                        <a href="index.html" title="Dashboard">
+                        <a href="Index.html" title="Dashboard">
                             <i class="fa fa-lg fa-fw fa-home"></i> <span class="menu-item-parent">INICIO</span>
                         </a>
                     </li>
                     <li>
                         <a href="#">
-                            <i class="fa fa-lg fa-fw fa-share-alt"></i> <span class="menu-item-parent">OBJETIVOS</span>
+                            <i class="fa fa-lg fa-fw fa-bank"></i> <span class="menu-item-parent">ADMINISTRACIÓN</span>
                         </a>
+                        <ul>
+                            <li>
+                                <a href="AdministradorGeneral.html">
+                                    <i class="fa fa-mortar-board"></i> Administradores
+                                </a>
+                            </li>
+                            <li>
+                                <a href="ProyectoGeneral.html">
+                                    <i class="fa fa-cubes"></i> Proyectos
+                                </a>
+                            </li>
+                            <li>
+                                <a href="ServicioGeneral.html">
+                                    <i class="fa fa-th-large"></i> Servicios
+                                </a>
+                            </li>
+                            <li>
+                                <a href="HabilidadGeneral.html">
+                                    <i class="fa fa-th"></i> Habilidades
+                                </a>
+                            </li>
+                            <li>
+                                <a href="CatConocimientoGeneral.html">
+                                    <i class="fa fa-sitemap"></i> Cat. conocimiento
+                                </a>
+                            </li>
+                            <li>
+                                <a href="ConocimientoGeneral.html">
+                                    <i class="fa fa-square"></i> Conocimientos
+                                </a>
+                            </li>
+                            <li>
+                                <a href="RolGeneral.html">
+                                    <i class="fa fa-cube"></i> Roles en proyecto
+                                </a>
+                            </li>
+                            <li>
+                                <a href="TrabajadorGeneral.html">
+                                    <i class="fa fa-users"></i> Trabajadores
+                                </a>
+                            </li>
+                        </ul>
                     </li>
                     <li>
                         <a href="#">
-                            <i class="fa fa-lg fa-fw fa-gears"></i> <span class="menu-item-parent">EVALUACION</span>
+                            <i class="fa fa-lg fa-fw fa-puzzle-piece"></i> <span class="menu-item-parent">ASIGNACIONES</span>
                         </a>
+                        <ul>
+                            <li>
+                                <a href="AsgTrabajadorProyecto.html">
+                                    <i class="fa fa-puzzle-piece"></i> Trabajador - Proyecto
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-lg fa-fw fa-gears"></i> <span class="menu-item-parent">EVALUACIONES</span>
+                        </a>
+                        <ul>
+                            <li>
+                                <a href="EvaPorTrabajador.html">
+                                    <i class="fa fa-gears"></i> Por trabajador
+                                </a>
+                            </li>
+                            <li>
+                                <a href="EvaPorProyecto.html">
+                                    <i class="fa fa-gears"></i> Por proyecto
+                                </a>
+                            </li>
+                        </ul>
                     </li>
                 </ul>
             </nav>
@@ -194,7 +260,10 @@
             <div id="ribbon">
                 <!-- breadcrumb -->
                 <ol class="breadcrumb">
-                    <li>Objetivos</li>
+                    <li>Inicio</li>
+                    <li>Administracion</li>
+                    <li>Administradores</li>
+                    <li>Detalle administrador</li>
                 </ol>
                 <!-- end breadcrumb -->
 
@@ -213,7 +282,7 @@
             <!-- END RIBBON -->
 
             <!-- MAIN CONTENT -->
-            <div id="content" style="padding:10px;">
+            <div id="content">
 
                 <!-- row -->
                 <div class="row">
@@ -221,8 +290,10 @@
                     <!-- col -->
                     <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
                         <h1 class="page-title txt-color-blueDark">
+
                             <!-- PAGE HEADER -->
-                            Enrique Peribañez Lopez 
+                            <i class="fa-fw fa fa-mortar-board"></i>
+                            Pruebas <a href="#" title="Ayuda"><i class="fa fa-question"></i></a>
                         </h1>
                     </div>
                     <!-- end col -->
@@ -256,93 +327,138 @@
                 the <section></section> and you can use wells or panels instead 
                 -->
 
-                <div class="row">
-                        <div class="col-md-12">
-                            <h3><i class="fa-fw fa fa-share-alt"></i>Objetivos: Ejercicio 2015</h3>
-                        </div>
-                </div>
-                <hr />
-                <div class="row">
-                    <div class="col-md-12">
-                        <h2>Objetivos puerta de acceso</h2>
+                <!-- widget grid -->
+                <section id="widget-grid" class="">
+
+                    <!-- row -->
+                    <div class="row">
+
+                        <!-- NEW WIDGET START -->
+                        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+                            <!-- Widget ID (each widget will need unique ID)-->
+                            <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false" data-widget-colorbutton="false" data-widget-deletebutton="false">
+                                <!-- widget options:
+                                usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+									
+                                data-widget-colorbutton="false"	
+                                data-widget-editbutton="false"
+                                data-widget-togglebutton="false"
+                                data-widget-deletebutton="false"
+                                data-widget-fullscreenbutton="false"
+                                data-widget-custombutton="false"
+                                data-widget-collapsed="true" 
+                                data-widget-sortable="false"
+									
+                                -->
+                                <header>
+                                    <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+                                    <h2>Mantenimiento administradores </h2>
+
+                                </header>
+
+                                <!-- widget div-->
+                                <div>
+
+                                    <!-- widget edit box -->
+                                    <div class="jarviswidget-editbox">
+                                        <!-- This area used as dropdown edit box -->
+                                        <input class="form-control" type="text">
+                                    </div>
+                                    <!-- end widget edit box -->
+
+                                    <!-- widget content -->
+                                    <div class="widget-body">
+
+                                        <ul id="Tab1" class="nav nav-tabs"> 
+                                            <li class="active">
+                                                <a href="#s1" data-toggle="tab">General</a>
+                                            </li>
+                                            <li>
+                                                <a href="#s2" data-toggle="tab">Conocimientos</a>
+                                            </li>
+                                        </ul>
+                                        <div id="TabContent1" class="tab-content padding-10">
+                                            <div class="tab-pane fade in active" id="s1">
+                                                <form id="frmAdministrador" class="smart-form">
+                                                    <header>
+                                                        Datos del administrador.
+                                                    </header>
+                                                    <fieldset>
+                                                        <div class="row">
+                                                            <section class="col col-md-6">
+                                                                <label class="label">Nombre</label>
+                                                                <label class="input">
+                                                                    <input id="txtNombre" name="txtNombre" type="text" data-bind="value: nombre" />
+                                                                </label>
+                                                            </section>
+                                                            <section class="col col-md-6">
+                                                                <label class="label">Login</label>
+                                                                <label class="input">
+                                                                    <input id="txtLogin" name="txtLogin" type="text" data-bind="value: login" />
+                                                                </label>
+                                                            </section>
+                                                        </div>
+                                                        <div class="row">
+                                                            <section class="col col-md-6">
+                                                                <label class="label">Contraseña</label>
+                                                                <label class="input">
+                                                                    <input id="txtPassword1" name="txtPassword1" type="password" />
+                                                                </label>
+                                                            </section>
+                                                            <section class="col col-md-6">
+                                                                <label class="label">Repita contraseña</label>
+                                                                <label class="input">
+                                                                    <input id="txtPassword2" name="txtPassword2" type="password" />
+                                                                </label>
+                                                            </section>
+                                                        </div>
+                                                        <div class="row">
+                                                            <section class="col col-md-6">
+                                                                <label class="label">Correo electrónico</label>
+                                                                <label class="input">
+                                                                    <input id="txtEmail" name="txtEmail" type="email" data-bind="value: email" />
+                                                                </label>
+                                                            </section>
+                                                            <section class="col col-md-6"></section>
+                                                        </div>
+
+                                                    </fieldset>
+                                                    <fieldset>
+                                                        <div class="pull-right">
+                                                            <button id="btnSalir" title="Salir sin guardar" class="btn btn-warning btn-circle btn-lg">
+                                                                <i class="fa fa-lg fa-sign-out"></i>
+                                                            </button>
+                                                            <button id="btnAceptar" title="Guardar y salir" class="btn btn-success btn-circle btn-lg">
+                                                                <i class="fa fa-lg fa-check"></i>
+                                                            </button>
+                                                        </div>
+                                                    </fieldset>
+                                                </form>
+
+                                            </div>
+                                            <div class="tab-pane fade" id="s2">
+                                            </div>
+                                        </div>
+
+                                        <!-- this is what the user will see -->
+                                    </div>
+                                    <!-- end widget content -->
+
+                                </div>
+                                <!-- end widget div -->
+
+                            </div>
+                            <!-- end widget -->
+
+                        </article>
+                        <!-- WIDGET END -->
+
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="table-responsive">
-                            <table class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th>Objetivo</th>
-                                        <th>Porcentaje mínimo</th>
-                                        <th>Mínimo numérico</th>
-                                        <th>Máximo numérico</th>
-                                        <th>Peso en el variable</th>
-                                        <th>Comentarios</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>DATOS</td>
-                                        <td>DATOS</td>
-                                        <td>DATOS</td>
-                                        <td>DATOS</td>
-                                        <td>DATOS</td>
-                                        <td>DATOS</td>
-                                    </tr>
-                                    <tr>
-                                        <td>DATOS</td>
-                                        <td>DATOS</td>
-                                        <td>DATOS</td>
-                                        <td>DATOS</td>
-                                        <td>DATOS</td>
-                                        <td>DATOS</td>
-                                    </tr>
-                                    <tr>
-                                        <td>DATOS</td>
-                                        <td>DATOS</td>
-                                        <td>DATOS</td>
-                                        <td>DATOS</td>
-                                        <td>DATOS</td>
-                                        <td>DATOS</td>
-                                    </tr>
-                                    <tr>
-                                        <td>DATOS</td>
-                                        <td>DATOS</td>
-                                        <td>DATOS</td>
-                                        <td>DATOS</td>
-                                        <td>DATOS</td>
-                                        <td>DATOS</td>
-                                    </tr>
-                                    <tr>
-                                        <td>DATOS</td>
-                                        <td>DATOS</td>
-                                        <td>DATOS</td>
-                                        <td>DATOS</td>
-                                        <td>DATOS</td>
-                                        <td>DATOS</td>
-                                    </tr>
-                                    <tr>
-                                        <td>DATOS</td>
-                                        <td>DATOS</td>
-                                        <td>DATOS</td>
-                                        <td>DATOS</td>
-                                        <td>DATOS</td>
-                                        <td>DATOS</td>
-                                    </tr>
-                                    <tr>
-                                        <td>DATOS</td>
-                                        <td>DATOS</td>
-                                        <td>DATOS</td>
-                                        <td>DATOS</td>
-                                        <td>DATOS</td>
-                                        <td>DATOS</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
+
+                    <!-- end row -->
+                </section>
+                <!-- end widget grid -->
 
             </div>
             <!-- END MAIN CONTENT -->
@@ -354,7 +470,7 @@
         <div class="page-footer">
             <div class="row">
                 <div class="col-xs-12 col-sm-6">
-                    <span class="txt-color-white">GDESOD <span id="versionFooter">NO VERSION</span> <span class="hidden-xs"> - </span> © Ariadna Software S.L. 2014-2015</span>
+                    <span class="txt-color-white">GDESAC <span id="versionFooter">1.0</span> <span class="hidden-xs"> -Áreas de conocimiento</span> © Ariadna Software S.L. 2014-2015</span>
                 </div>
 
                 <div class="col-xs-6 col-sm-6 text-right hidden-xs">
@@ -445,10 +561,13 @@
         <script src="js/smart-chat-ui/smart.chat.ui.min.js"></script>
         <script src="js/smart-chat-ui/smart.chat.manager.min.js"></script>
 
+        <!--- KNOCKOUT JS -->
+        <script src="//cdnjs.cloudflare.com/ajax/libs/knockout/3.2.0/knockout-min.js"></script>
+
         <!-- PAGE RELATED PLUGIN(S) 
         <script src="..."></script>-->
+        <script src="js/ariadna/administradorDetalle.js"></script>
         <script src="js/ariadna/comun.js"></script>
-        <script src="js/ariadna/paisGeneral.js"></script>
 
         <!-- PAGE RELATED PLUGIN(S) -->
         <script src="js/plugin/datatables/jquery.dataTables.min.js"></script>

@@ -72,6 +72,7 @@
     <Compile Include="lib\trabajadores_api.js" />
     <Compile Include="lib\trabajadores_db_mysql.js" />
     <Compile Include="lib\version_api.js" />
+    <Content Include="public\Prueba.html" />
     <Content Include="public\AdministradorDetalle.html" />
     <Content Include="public\HabilidadDetalle.html" />
     <Content Include="public\HabilidadGeneral.html" />
@@ -97,7 +98,6 @@
     <Content Include="public\ProyectoDetalle.html" />
     <Content Include="public\ProyectoGeneral.html" />
     <Content Include="public\login.html" />
-    <Content Include="public\Prueba.html" />
     <Compile Include="public\datepicker.es.js" />
     <Content Include="obj\Debug\NodeGdesOd.njsproj.FileListAbsolute.txt" />
     <Content Include="public\ajax\email-compose.html" />
