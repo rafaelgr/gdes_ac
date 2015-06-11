@@ -18,8 +18,29 @@ function initForm() {
         return false;
     });
 
-    $("#cmbCatConocimientos").select2();
+    $("#cmbCatConocimientos").select2({
+        language: {
+            errorLoading: function () { return "La carga falló"; }, 
+            inputTooLong: function (e) { var t = e.input.length - e.maximum, n = "Por favor, elimine " + t + " car"; return t == 1?n += "ácter":n += "acteres", n; }, 
+            inputTooShort: function (e) { var t = e.minimum - e.input.length, n = "Por favor, introduzca " + t + " car"; return t == 1?n += "ácter":n += "acteres", n; }, 
+            loadingMore: function () { return "Cargando más resultados…"; }, 
+            maximumSelected: function (e) { var t = "Sólo puede seleccionar " + e.maximum + " elemento"; return e.maximum != 1 && (t += "s"), t; }, 
+            noResults: function () { return "No se encontraron resultados"; }, 
+            searching: function () { return "Buscando…"; }
+        }
+    });
     
+    $("#cmbHabilidades").select2({
+        language: {
+            errorLoading: function () { return "La carga falló"; }, 
+            inputTooLong: function (e) { var t = e.input.length - e.maximum, n = "Por favor, elimine " + t + " car"; return t == 1?n += "ácter":n += "acteres", n; }, 
+            inputTooShort: function (e) { var t = e.minimum - e.input.length, n = "Por favor, introduzca " + t + " car"; return t == 1?n += "ácter":n += "acteres", n; }, 
+            loadingMore: function () { return "Cargando más resultados…"; }, 
+            maximumSelected: function (e) { var t = "Sólo puede seleccionar " + e.maximum + " elemento"; return e.maximum != 1 && (t += "s"), t; }, 
+            noResults: function () { return "No se encontraron resultados"; }, 
+            searching: function () { return "Buscando…"; }
+        }
+    });
 
     conocimientoId = gup('ConocimientoId');
     if (conocimientoId != 0) {
@@ -34,6 +55,32 @@ function initForm() {
             contentType: "application/json",
             data: JSON.stringify(data),
             success: function (data, status) {
+                var conocimiento = data;
+                // hay que buscar las categorias relacionadas
+                $.ajax({
+                    type: "GET",
+                    url: "/api/conocimientos-categorias/" + conocimientoId,
+                    dataType: "json",
+                    contentType: "application/json",
+                    data: JSON.stringify(data),
+                    success: function (data, status) {
+                        var categorias = data;
+                        $.ajax({
+                            type: "GET",
+                            url: "/api/conocimientos-habilidades/" + conocimientoId,
+                            dataType: "json",
+                            contentType: "application/json",
+                            data: JSON.stringify(data),
+                            success: function (data, status) {
+                                var habilidades = data;
+                                // hay que mostrarlo en la zona de datos
+                                loadData(conocimiento, categorias, habilidades);
+                            },
+                            error: errorAjax
+                        });
+                    },
+                    error: errorAjax
+                });
                 // hay que mostrarlo en la zona de datos
                 loadData(data);
             },
@@ -43,6 +90,7 @@ function initForm() {
         // se trata de un alta ponemos el id a cero para indicarlo.
         vm.conocimientoId(0);
         loadCatConocimientos(-1);
+        loadHabilidades(-1);
     }
 }
 
@@ -55,16 +103,19 @@ function conocimientoData() {
     // soporte de combos
     self.posiblesCatConocimientos = ko.observableArray([]);
     self.elegidosCatConocimientos = ko.observableArray([]);
+    self.posiblesHabilidades = ko.observableArray([]);
+    self.elegidosHabilidades = ko.observableArray([]);
     // valores escogidos
     self.scatConocimientoId = ko.observable();
+    self.shabilidadId = ko.observable();
 }
 
-function loadData(data) {
-    vm.conocimientoId(data.conocimientoId);
-    vm.nombre(data.nombre);
-    vm.catConocimiento(data.catConocimiento);
-    vm.tipo(data.tipo);
-    loadCatConocimientos(data.catConocimiento.catConocimientoId);
+function loadData(conocimiento, categorias, habilidades) {
+    vm.conocimientoId(conocimiento.conocimientoId);
+    vm.nombre(conocimiento.nombre);
+    // montaje de las categorías
+    loadCatConocimientos(categorias);
+    loadHabilidades(habilidades);
 }
 
 function loadCatConocimientos(categorias){
@@ -75,24 +126,33 @@ function loadCatConocimientos(categorias){
         contentType: "application/json",
         success: function (data, status){
             vm.posiblesCatConocimientos(data);
-            //vm.scatConocimientoId(catConocimientoId);
-            //vm.elegidosCatConocimientos.push(catConocimientoId);
             $("#cmbCatConocimientos").val(categorias).trigger('change');
         },
         error: errorAjax
     });
 }
 
+function loadHabilidades(habilidades) {
+    $.ajax({
+        type: "GET",
+        url: "/api/habilidades",
+        dataType: "json",
+        contentType: "application/json",
+        success: function (data, status) {
+            vm.posiblesHabilidades(data);
+            $("#cmbHabilidades").val(habilidades).trigger('change');
+        },
+        error: errorAjax
+    });
+}
 function datosOK() {
     $('#frmConocimiento').validate({
         rules: {
-            txtNombre: { required: true },
-            cmbCatConocimientos: { required: true }
+            txtNombre: { required: true }
         },
         // Messages for form validation
         messages: {
-            txtNombre: {required: 'Introduzca el nombre'},
-            cmbCatConocimientos: {required: 'Seleccione una categoría'}
+            txtNombre: {required: 'Introduzca el nombre'}
         },
         // Do not change code below
         errorPlacement: function (error, element) {
@@ -107,7 +167,7 @@ function datosOK() {
     return $('#frmConocimiento').valid();
 }
 
-function aceptar() {
+function aceptar2() {
     var mf = function () {
         if (!datosOK())
             return;
@@ -148,6 +208,157 @@ function aceptar() {
                 },
                 error: errorAjax
             });
+        }
+    };
+    return mf;
+}
+
+
+function aceptar() {
+    var mf = function () {
+        if (!datosOK())
+            return;
+        var data = {
+            conocimiento: {
+                "conocimientoId": vm.conocimientoId(),
+                "nombre": vm.nombre()
+            }
+        };
+        if (conocimientoId == 0) {
+            async.series(
+                [
+                    function (callback) {
+                        $.ajax({
+                            type: "POST",
+                            url: "api/conocimientos",
+                            dataType: "json",
+                            contentType: "application/json",
+                            data: JSON.stringify(data),
+                            success: function (data, status) {
+                                conocimientoId = data.conocimientoId;
+                                callback(null, null);
+                            },
+                            error: function (xhr, textStatus, errorThrwon) { 
+                                callback(xhr, null);
+                            }
+                        });
+                    }, 
+                    function (callback) {
+                        var data = {
+                            "conocimientoId": conocimientoId,
+                            "categorias": vm.elegidosCatConocimientos()
+                        };
+                        $.ajax({
+                            type: "POST",
+                            url: "api/conocimientos-categorias",
+                            dataType: "json",
+                            contentType: "application/json",
+                            data: JSON.stringify(data),
+                            success: function (data, status) {
+                                callback(null, null);
+                            },
+                            error: function (xhr, textStatus, errorThrwon) {
+                                callback(xhr, null);
+                            }
+                        });
+                    }, 
+                    function (callback) {
+                        var data = {
+                            "conocimientoId": conocimientoId,
+                            "habilidades": vm.elegidosHabilidades()
+                        };
+                        $.ajax({
+                            type: "POST",
+                            url: "api/conocimientos-habilidades",
+                            dataType: "json",
+                            contentType: "application/json",
+                            data: JSON.stringify(data),
+                            success: function (data, status) {
+                                callback(null, null);
+                            },
+                            error: function (xhr, textStatus, errorThrwon) {
+                                callback(xhr, null);
+                            }
+                        });
+                    }
+                ], 
+                function (err, results) {
+                    if (err != null) {
+                        errorAjaxSerial(err);
+                    } else {
+                        // Nos volvemos al general
+                        var url = "ConocimientoGeneral.html?ConocimientoId=" + conocimientoId;
+                        window.open(url, '_self');
+                    }
+                }
+            );
+        } else {
+            async.series(
+                [
+                    function (callback) {
+                        $.ajax({
+                            type: "PUT",
+                            url: "api/conocimientos/" + conocimientoId,
+                            dataType: "json",
+                            contentType: "application/json",
+                            data: JSON.stringify(data),
+                            success: function (data, status) {
+                                callback(null, null);
+                            },
+                            error: function (xhr, textStatus, errorThrwon) {
+                                callback(xhr, null);
+                            }
+                        });
+                    }, 
+                    function (callback) {
+                        var data = {
+                            "conocimientoId": vm.conocimientoId(),
+                            "categorias": vm.elegidosCatConocimientos()
+                        };
+                        $.ajax({
+                            type: "POST",
+                            url: "api/conocimientos-categorias",
+                            dataType: "json",
+                            contentType: "application/json",
+                            data: JSON.stringify(data),
+                            success: function (data, status) {
+                                callback(null, null);
+                            },
+                            error: function (xhr, textStatus, errorThrwon) {
+                                callback(xhr, null);
+                            }
+                        });
+                    }, 
+                    function (callback) {
+                        var data = {
+                            "conocimientoId": conocimientoId,
+                            "habilidades": vm.elegidosHabilidades()
+                        };
+                        $.ajax({
+                            type: "POST",
+                            url: "api/conocimientos-habilidades",
+                            dataType: "json",
+                            contentType: "application/json",
+                            data: JSON.stringify(data),
+                            success: function (data, status) {
+                                callback(null, null);
+                            },
+                            error: function (xhr, textStatus, errorThrwon) {
+                                callback(xhr, null);
+                            }
+                        });
+                    }
+                ], 
+                function (err, results) {
+                    if (err != null) {
+                        errorAjaxSerial(err);
+                    } else {
+                        // Nos volvemos al general
+                        var url = "ConocimientoGeneral.html?ConocimientoId=" + conocimientoId;
+                        window.open(url, '_self');
+                    }
+                }
+            );
         }
     };
     return mf;

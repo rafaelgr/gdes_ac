@@ -66,6 +66,9 @@ function initForm() {
     // asignación de eventos al clic
     $("#btnAceptar").click(aceptar());
     $("#btnSalir").click(salir());
+    $("#btnEditar").click(editar());
+    // ocultamos el botón de edición
+    $("#btnEditar").hide();
     $("#cmbCatConocimientos").change(cambioCategoria());
     $("#frmEvaluacion").submit(function () {
         return false;
@@ -142,14 +145,12 @@ function loadData(data) {
 function datosOK() {
     $('#frmEvaluacion').validate({
         rules: {
-            cmbCatConocimientos: { required: true },
             cmbConocimientos: { required: true },
             txtDFecha: { required: true, date:true },
             txtHFecha: { date:true, greaterThan: "#txtDFecha" }
         },
         // Messages for form validation
         messages: {
-            cmbCatConocimientos: {required: 'Seleccione una categoría'},
             cmbConocimientos: { required: 'Seleccione un conocimiento' },
             txtDFecha: { required: 'Introduzca fecha', date: 'Debe ser una fecha válida' },
             txtHFecha: { date: 'Debe ser una fecha válida' },
@@ -201,6 +202,8 @@ function aceptar() {
             success: function (data, status) {
                 // Nos volvemos al general
                 loadTable1Evaluaciones(asgProyectoId);
+                //
+                limpiarCampos();
             },
             error: errorAjax
         });
@@ -255,9 +258,6 @@ function initTablaEvaluaciones() {
         data: dataEvaluaciones,
         columns: [
             {
-                data: "conocimiento.catConocimiento.nombre"
-            }, 
-            {
                 data: "conocimiento.nombre"
             }, 
             {
@@ -289,7 +289,8 @@ function initTablaEvaluaciones() {
                 data: "evaluacionId",
                 render: function (data, type, row) {
                     var bt1 = "<button class='btn btn-circle btn-danger btn-lg' onclick='deleteEvaluacion(" + data + ");' title='Eliminar registro'> <i class='fa fa-trash-o fa-fw'></i> </button>";
-                    var html = "<div class='pull-right'>" + bt1 + "</div>";
+                    var bt2 = "<button class='btn btn-circle btn-success btn-lg' onclick='editEvaluacion(" + data + ");' title='Editar registro'> <i class='fa fa-edit fa-fw'></i> </button>";
+                    var html = "<div class='pull-right'>" + bt1 + " " + bt2 + "</div>";
                     return html;
                     }
             }]
@@ -318,7 +319,8 @@ function loadTable1Evaluaciones(asgProyectoId) {
 function loadTable2Evaluaciones(data) {
     var dt = $('#dt_evaluacion').dataTable();
     if (data !== null && data.length === 0) {
-        //mostrarMensajeSmart('No se han encontrado registros');
+        dt.fnClearTable();
+        dt.fnDraw();
     } else {
         dt.fnClearTable();
         dt.fnAddData(data);
@@ -354,6 +356,20 @@ function loadConocimientos(catConocimientoId) {
         success: function (data, status) {
             vm.posiblesConocimientos(data);
             vm.sconocimientoId(-1);
+        },
+        error: errorAjax
+    });
+}
+
+function loadConocimientosEdit(conocimientoId) {
+    $.ajax({
+        type: "GET",
+        url: "/api/conocimientos",
+        dataType: "json",
+        contentType: "application/json",
+        success: function (data, status) {
+            vm.posiblesConocimientos(data);
+            vm.sconocimientoId(conocimientoId);
         },
         error: errorAjax
     });
@@ -397,4 +413,88 @@ function deleteEvaluacion(id) {
             // no hacemos nada (no quiere borrar)
         }
     });
+}
+
+function editEvaluacion(id){
+    // se muestra el botón de editar y se oculta el de crear.
+    $("#btnAceptar").hide();
+    $("#btnEditar").show();
+    // se obtiene la evaluación que coincide con el id pasado.
+    $.ajax({
+        type: "GET",
+        url: "/api/evaluaciones/" + id,
+        dataType: "json",
+        contentType: "application/json",
+        success: function (data, status) {
+            vm.evaluacionId(data.evaluacionId);
+            // cargar los valores en los campos correspondientes.
+            loadConocimientosEdit(data.conocimiento.conocimientoId);
+            if (data.hFecha != null) {
+                vm.hFecha(moment(data.hFecha).format('DD/MM/YYYY'));
+            } else {
+                vm.hFecha(null);
+            }
+            if (data.dFecha != null) {
+                vm.dFecha(moment(data.dFecha).format('DD/MM/YYYY'));
+            } else {
+                vm.dFecha(null);
+            }
+            vm.observaciones(data.observaciones);
+        },
+        error: errorAjax
+    });
+}
+
+function editar() {
+    var mf = function () {
+        if (!datosOK())
+            return;
+        // control de fechas 
+        var fecha1, fecha2;
+        if (moment(vm.dFecha(), "DD/MM/YYYY").isValid())
+            fecha1 = moment(vm.dFecha(), "DD/MM/YYYY").format("YYYY-MM-DD");
+        if (moment(vm.hFecha(), "DD/MM/YYYY").isValid()) {
+            fecha2 = moment(vm.hFecha(), "DD/MM/YYYY").format("YYYY-MM-DD");
+        } else {
+            fecha2 = null;
+        }
+        var data = {
+            evaluacion: {
+                "evaluacionId": vm.evaluacionId(),
+                "asgProyecto": {
+                    "asgProyectoId": asgProyectoId
+                },
+                "conocimiento": {
+                    "conocimientoId": vm.sconocimientoId()
+                },
+                "dFecha": fecha1,
+                "hFecha": fecha2,
+                "observaciones": vm.observaciones()
+            }
+        };
+        $.ajax({
+            type: "PUT",
+            url: "api/evaluaciones/" + vm.evaluacionId(),
+            dataType: "json",
+            contentType: "application/json",
+            data: JSON.stringify(data),
+            success: function (data, status) {
+                // se oculta el botón de edición y se muestra el de creación
+                $("#btnAceptar").show();
+                $("#btnEditar").hide();
+                // recargamos la tabla con los cambios
+                loadTable1Evaluaciones(asgProyectoId);
+                //
+                limpiarCampos();
+            },
+            error: errorAjax
+        });
+    }
+    return mf;
+}
+
+function limpiarCampos(){
+    loadCatConocimientos(-1);
+    vm.sconocimientoId(-1);
+    vm.observaciones(null);
 }

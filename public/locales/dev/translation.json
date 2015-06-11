@@ -7,6 +7,7 @@
         "mensaje": "Mensaje",
         "aceptar": "Aceptar",
         "cancelar": "Cancelar",
+        "editar": "Editar",
         "eliminar": "Eliminar registro",
         "evaluar": "Evaluar asignación",
         "salir": "Salir",
@@ -81,6 +82,7 @@
         "hfecha": "Hasta fecha: ",
         "observaciones": "Observaciones: ",
         "btnSalir": "Salir sin guardar",
-        "btnAceptar":  "Agregar registro"
+        "btnAceptar": "Agregar registro",
+        "btnEditar":  "Editar registro"
     }
 }

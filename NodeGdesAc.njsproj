@@ -18,7 +18,9 @@
   <ItemGroup>
     <Content Include="config.json" />
     <Content Include="package.json" />
+    <Compile Include="lib\conocimientos_habilidades_api.js" />
     <Compile Include="lib\conocimientos_categorias_api.js" />
+    <Compile Include="lib\conocimientos_habilidades_db_mysql.js" />
     <Compile Include="lib\conocimientos_categorias_db_mysql.js" />
     <Compile Include="lib\habilidades_api.js" />
     <Compile Include="lib\habilidades_db_mysql.js" />
@@ -48,6 +50,7 @@
     <Compile Include="public\js\ariadna\proyectoDetalle.js" />
     <Compile Include="public\js\ariadna\proyectoGeneral.js" />
     <Compile Include="public\js\c3_renderers.js" />
+    <Compile Include="public\js\es.js" />
     <Compile Include="public\js\handlebars-v3.0.3.js" />
     <Compile Include="public\js\i18next-1.9.0.js" />
     <Compile Include="public\js\pivot.es.js" />

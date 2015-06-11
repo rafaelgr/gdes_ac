@@ -374,17 +374,26 @@
                                             </header>
                                             <fieldset>
                                                 <div class="row">
-                                                    <section class="col col-md-8">
+                                                    <section class="col col-md-12">
                                                         <label class="label">Nombre</label>
                                                         <label class="input">
                                                             <input id="txtNombre" name="txtNombre" type="text" data-bind="value: nombre" />
                                                         </label>
                                                     </section>
-                                                    <section class="col col-md-4">
-                                                        <label class="label">Categoria</label>
+                                                </div>
+                                                <div class="row">
+                                                    <section class="col col-md-6">
+                                                        <label class="label">Categorias</label>
                                                         <label style="width:100%;">
-                                                            <select style="width:100%;" id="cmbCatConocimientos" multiple="multiple" name="cmbCatConocimientos" 
+                                                            <select style="width:100%;" id="cmbCatConocimientos" multiple="multiple" name="cmbCatConocimientos"
                                                                     data-bind="options: posiblesCatConocimientos, optionsText: 'nombre', optionsValue: 'catConocimientoId', valueAllowUnset: true, selectedOptions: elegidosCatConocimientos, selected2:{}"></select><i></i>
+                                                        </label>
+                                                    </section>
+                                                    <section class="col col-md-6">
+                                                        <label class="label">Habilidades</label>
+                                                        <label style="width:100%;">
+                                                            <select style="width:100%;" id="cmbHabilidades" multiple="multiple" name="cmbCatConocimientos"
+                                                                    data-bind="options: posiblesHabilidades, optionsText: 'nombre', optionsValue: 'habilidadId', valueAllowUnset: true, selectedOptions: elegidosHabilidades, selected2:{}"></select><i></i>
                                                         </label>
                                                     </section>
                                                 </div>
@@ -539,6 +548,7 @@
         <script src="js/plugin/datatables/dataTables.bootstrap.min.js"></script>
         <script src="js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
+        <script src="js/async.js"></script>
 
         <script type="text/javascript">
             (function ($) {

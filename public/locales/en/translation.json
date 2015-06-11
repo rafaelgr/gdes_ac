@@ -7,6 +7,7 @@
         "mensaje": "Message",
         "aceptar": "Accept",
         "cancelar": "Cancel",
+        "editar": "Edit",
         "eliminar": "Delete record",
         "evaluar": "Evaluate assignement",
         "salir": "Exit",
@@ -80,6 +81,7 @@
         "hfecha": "To Date: ",
         "observaciones": "Comments: ",
         "btnSalir": "Exit wihtout saving",
-        "btnAceptar": "Add record"
+        "btnAceptar": "Add record",
+        "btnEditar":  "Edit record"
     }
 }

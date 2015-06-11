@@ -67,6 +67,12 @@ var errorAjax = function (xhr, textStatus, errorThrwon) {
     mostrarMensajeSmart(m);
 }
 
+var errorAjaxSerial = function (xhr) {
+    var m = xhr.responseText;
+    if (!m) m = "Error general posiblemente falla la conexión";
+    mostrarMensajeSmart(m);
+}
+
 // gup stands from Get Url Parameters
 function gup(name) {
     name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");

@@ -32,6 +32,7 @@ var informes_api = require("./lib/informes_api.js");
 var servicios_api = require("./lib/servicios_api.js");
 var habilidades_api = require("./lib/habilidades_api.js");
 var conocimientos_categorias_api = require("./lib/conocimientos_categorias_api.js");
+var conocimientos_habilidades_api = require("./lib/conocimientos_habilidades_api.js");
 
 
 // ficheros en los que se grabarán los log de aplicación
@@ -280,6 +281,13 @@ router.route("/conocimientos-categorias")
 
 router.route("/conocimientos-categorias/:conocimientoId")
 	.get(conocimientos_categorias_api.getConocimientoCategorias);
+
+// relaciones de conocimientos con habilidades
+router.route("/conocimientos-habilidades")
+	.post(conocimientos_habilidades_api.postConocimientoHabilidades);
+
+router.route("/conocimientos-habilidades/:conocimientoId")
+	.get(conocimientos_habilidades_api.getConocimientoHabilidades);
 
 //================================================================
 // Registro de rutas y arranque del servidor
