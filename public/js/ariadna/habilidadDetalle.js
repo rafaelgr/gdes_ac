@@ -35,6 +35,7 @@ function initForm() {
             success: function (data, status) {
                 // hay que mostrarlo en la zona de datos
                 loadData(data);
+                loadTemplatePC1();
             },
             error: errorAjax
         });
@@ -155,4 +156,38 @@ function salir() {
         window.open(url, '_self');
     }
     return mf;
+}
+
+function loadTemplatePC1() {
+    // cargar la tabla con un único valor que es el que corresponde.
+    var data = {
+        informe: "phabilidadtrabajador",
+        tipo: "j",
+        id: habilidadId
+    }
+    // hay que buscar ese elemento en concreto
+    $.ajax({
+        type: "POST",
+        url: myconfig.apiUrl + "/api/informes",
+        dataType: "json",
+        contentType: "application/json",
+        data: JSON.stringify(data),
+        success: function (data, status) {
+            // hay que mostrarlo en la zona de datos
+            // vm.asignaciones(data);
+            loadTemplatePC2(data[0]);
+        },
+        error: errorAjax
+    });
+}
+function loadTemplatePC2(data) {
+    //
+    // Grab the template script
+    var theTemplateScript = $("#ac-conocimientos").html();
+    // Compile the template
+    var theTemplate = Handlebars.compile(theTemplateScript);
+    // Pass our data to the template
+    var theCompiledHtml = theTemplate(data);
+    // Add the compiled html to the page
+    $('#hdbContent').html(theCompiledHtml);
 }

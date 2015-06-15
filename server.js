@@ -33,6 +33,7 @@ var servicios_api = require("./lib/servicios_api.js");
 var habilidades_api = require("./lib/habilidades_api.js");
 var conocimientos_categorias_api = require("./lib/conocimientos_categorias_api.js");
 var conocimientos_habilidades_api = require("./lib/conocimientos_habilidades_api.js");
+var empresas_api = require("./lib/empresas_api.js");
 
 
 // ficheros en los que se grabarán los log de aplicación
@@ -288,6 +289,21 @@ router.route("/conocimientos-habilidades")
 
 router.route("/conocimientos-habilidades/:conocimientoId")
 	.get(conocimientos_habilidades_api.getConocimientoHabilidades);
+
+
+// --> Relacionadas con empresas
+router.route("/empresas")
+	.get(empresas_api.getEmpresas)
+	.post(empresas_api.postEmpresa);
+
+
+router.route("/empresas/:empresaId")
+	.get(empresas_api.getEmpresa)
+	.put(empresas_api.putEmpresa)
+	.delete(empresas_api.deleteEmpresa);
+
+router.route("/empresas-buscar")
+	.post(empresas_api.postEmpresasBuscar);
 
 //================================================================
 // Registro de rutas y arranque del servidor

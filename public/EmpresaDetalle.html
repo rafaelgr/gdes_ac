@@ -2,7 +2,7 @@
 <html lang="en-us">
     <head>
         <meta charset="utf-8">
-        <title> GDES AC </title>
+        <title>  GDESOD (Empresas) </title>
         <meta name="description" content="">
         <meta name="author" content="">
 
@@ -20,7 +20,6 @@
 
         <!-- SmartAdmin RTL Support -->
         <link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-rtl.min.css">
-        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
 
         <!-- We recommend you use "your_style.css" to override SmartAdmin
         specific styles this will also ensure you retrain your customization with each SmartAdmin update.
@@ -101,19 +100,18 @@
     <body class="">
 
         <!-- #HEADER -->
-        <header id="header" style="background-color:#E0ECFF; background-image:none;">
+        <header id="header" style="background-color:beige; background-image:none;">
             <!-- #PROJECTS: projects dropdown -->
             <div>
-                <span id="logo"> <img src="img/ariface/logo_ariadna.png" alt="GDESOD" style="height:30px;"> </span>
+                <span id="logo"> <img src="img/ariface/logo_ariadna.png" alt="Gdes Od" style="height:30px;"> </span>
             </div>
             <div>
 
             </div>
             <div style="padding-left:5px">
-                <h1> Áreas de conocimiento</h1>
+                <h1>Objetivos y Desempeño</h1>
             </div>
             <!-- end projects dropdown -->
-
             <!-- #TOGGLE LAYOUT BUTTONS -->
             <!-- pulled right: nav area -->
             <div class="pull-right">
@@ -121,7 +119,7 @@
                 <!-- collapse menu button -->
                 <div id="hide-menu" class="btn-header pull-right">
                     <span>
-                        <a href="javascript:void(0);" data-action="toggleMenu" title="Menú">
+                        <a href="javascript:void(0);" data-action="toggleMenu" title="Collapse Menu">
                             <i class="fa fa-reorder"></i>
                         </a>
                     </span>
@@ -136,7 +134,6 @@
                     </span>
                 </div>
                 <!-- end logout button -->
-
                 <!-- fullscreen button -->
                 <div id="fullscreen" class="btn-header transparent pull-right">
                     <span>
@@ -146,6 +143,7 @@
                     </span>
                 </div>
                 <!-- end fullscreen button -->
+
             </div>
             <!-- end pulled right: nav area -->
 
@@ -168,7 +166,7 @@
             <nav>
                 <ul>
                     <li>
-                        <a href="Index.html" title="Dashboard">
+                        <a href="index.html" title="Dashboard">
                             <i class="fa fa-lg fa-fw fa-home"></i> <span class="menu-item-parent">INICIO</span>
                         </a>
                     </li>
@@ -183,38 +181,38 @@
                                 </a>
                             </li>
                             <li>
+                                <a href="EjercicioGeneral.html">
+                                    <i class="fa fa-cubes"></i> Ejercicios
+                                </a>
+                            </li>
+                            <li>
+                                <a href="PaisGeneral.html">
+                                    <i class="fa fa-globe"></i> Areas
+                                </a>
+                            </li>
+                            <li>
                                 <a href="EmpresaGeneral.html">
                                     <i class="fa fa-th-large"></i> Empresas
                                 </a>
                             </li>
                             <li>
-                                <a href="ProyectoGeneral.html">
-                                    <i class="fa fa-cubes"></i> Proyectos
+                                <a href="ColectivoGeneral.html">
+                                    <i class="fa fa-th"></i> Colectivos
                                 </a>
                             </li>
                             <li>
-                                <a href="ServicioGeneral.html">
-                                    <i class="fa fa-th-large"></i> Servicios
+                                <a href="UnidadNegocioGeneral.html">
+                                    <i class="fa fa-sitemap"></i> Unidades negocio
                                 </a>
                             </li>
                             <li>
-                                <a href="HabilidadGeneral.html">
-                                    <i class="fa fa-th"></i> Habilidades
+                                <a href="PuestoTrabajoGeneral.html">
+                                    <i class="fa fa-random"></i> Puestos de trabajo
                                 </a>
                             </li>
                             <li>
-                                <a href="CatConocimientoGeneral.html">
-                                    <i class="fa fa-sitemap"></i> Cat. conocimiento
-                                </a>
-                            </li>
-                            <li>
-                                <a href="ConocimientoGeneral.html">
-                                    <i class="fa fa-square"></i> Conocimientos
-                                </a> 
-                            </li>
-                            <li>
-                                <a href="RolGeneral.html">
-                                    <i class="fa fa-cube"></i> Roles en proyecto
+                                <a href="AreaGeneral.html">
+                                    <i class="fa fa-square"></i> Áreas de trabajo
                                 </a>
                             </li>
                             <li>
@@ -222,33 +220,26 @@
                                     <i class="fa fa-users"></i> Trabajadores
                                 </a>
                             </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="fa fa-lg fa-fw fa-puzzle-piece"></i> <span class="menu-item-parent">ASIGNACIONES</span>
-                        </a>
-                        <ul>
                             <li>
-                                <a href="AsgTrabajadorProyecto.html">
-                                    <i class="fa fa-puzzle-piece"></i> Trabajador - Proyecto
+                                <a href="ObjetivoGeneral.html">
+                                    <i class="fa fa-bullseye"></i> Objetivos
                                 </a>
                             </li>
                         </ul>
                     </li>
                     <li>
                         <a href="#">
-                            <i class="fa fa-lg fa-fw fa-gears"></i> <span class="menu-item-parent">EVALUACIONES</span>
+                            <i class="fa fa-lg fa-fw fa-gears"></i> <span class="menu-item-parent">ASIGNACIONES</span>
                         </a>
                         <ul>
                             <li>
-                                <a href="EvaPorTrabajador.html">
-                                    <i class="fa fa-gears"></i> Por trabajador
+                                <a href="AsgTrabajadorGeneral.html">
+                                    <i class="fa fa-puzzle-piece"></i> Asg. Trabajadores
                                 </a>
                             </li>
                             <li>
-                                <a href="EvaPorProyecto.html">
-                                    <i class="fa fa-gears"></i> Por proyecto
+                                <a href="AsgObjetivoGeneral.html">
+                                    <i class="fa fa-share-alt"></i> Asg. Objetivos
                                 </a>
                             </li>
                         </ul>
@@ -268,23 +259,26 @@
                 <!-- breadcrumb -->
                 <ol class="breadcrumb">
                     <li>Inicio</li>
-                    <li>Administración</li>
-                    <li>Categorias de conocimiento</li>
+                    <li>Administracion</li>
+                    <li>Empresas</li>
+                    <li>Detalle empresa</li>
                 </ol>
                 <!-- end breadcrumb -->
+
                 <!-- You can also add more buttons to the
-            ribbon for further usability
+                ribbon for further usability
 
-            Example below:
+                Example below:
 
-            <span class="ribbon-button-alignment pull-right">
-            <span id="search" class="btn btn-ribbon hidden-xs" data-title="search"><i class="fa-grid"></i> Change Grid</span>
-            <span id="add" class="btn btn-ribbon hidden-xs" data-title="add"><i class="fa-plus"></i> Add</span>
-            <span id="search" class="btn btn-ribbon" data-title="search"><i class="fa-search"></i> <span class="hidden-mobile">Search</span></span>
-            </span> -->
+                <span class="ribbon-button-alignment pull-right">
+                <span id="search" class="btn btn-ribbon hidden-xs" data-title="search"><i class="fa-grid"></i> Change Grid</span>
+                <span id="add" class="btn btn-ribbon hidden-xs" data-title="add"><i class="fa-plus"></i> Add</span>
+                <span id="search" class="btn btn-ribbon" data-title="search"><i class="fa-search"></i> <span class="hidden-mobile">Search</span></span>
+                </span> -->
 
             </div>
             <!-- END RIBBON -->
+
             <!-- MAIN CONTENT -->
             <div id="content">
 
@@ -296,38 +290,41 @@
                         <h1 class="page-title txt-color-blueDark">
 
                             <!-- PAGE HEADER -->
-                            <i class="fa-fw fa fa-sitemap"></i>
-                            Categorias de conocimiento <a href="#" title="Ayuda"><i class="fa fa-question"></i></a>
+                            <i class="fa-fw fa fa-th-large"></i>
+                            Detalle empresa <a href="#" title="Ayuda"><i class="fa fa-question"></i></a>
                         </h1>
                     </div>
                     <!-- end col -->
+
                     <!-- right side of the page with the sparkline graphs -->
                     <!-- col -->
                     <div class="col-xs-12 col-sm-5 col-md-5 col-lg-8">
                         <!-- sparks -->
                         <!--                        <ul id="sparks">
-                    <li class="sparks-info">
-                    <h5>
-                    Facturas pendientes <span class="txt-color-blue">3520</span>
-                    </h5>
-                    </li>
-                    <li class="sparks-info">
-                    <h5>
-                    Clientes <span class="txt-color-purple"><i class="fa fa-arrow-circle-up" data-rel="bootstrap-tooltip" title="Increased"></i>&nbsp;45%</span>
-                    </h5>
-                    </li>
-                    </ul>-->
+                        <li class="sparks-info">
+                        <h5>
+                        Facturas pendientes <span class="txt-color-blue">3520</span>
+                        </h5>
+                        </li>
+                        <li class="sparks-info">
+                        <h5>
+                        Clientes <span class="txt-color-purple"><i class="fa fa-arrow-circle-up" data-rel="bootstrap-tooltip" title="Increased"></i>&nbsp;45%</span>
+                        </h5>
+                        </li>
+                        </ul>-->
                         <!-- end sparks -->
                     </div>
                     <!-- end col -->
 
                 </div>
                 <!-- end row -->
+
                 <!--
-            The ID "widget-grid" will start to initialize all widgets below
-            You do not need to use widgets if you dont want to. Simply remove
-            the <section></section> and you can use wells or panels instead
-            -->
+                The ID "widget-grid" will start to initialize all widgets below 
+                You do not need to use widgets if you dont want to. Simply remove 
+                the <section></section> and you can use wells or panels instead 
+                -->
+
                 <!-- widget grid -->
                 <section id="widget-grid" class="">
 
@@ -340,21 +337,21 @@
                             <!-- Widget ID (each widget will need unique ID)-->
                             <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false" data-widget-colorbutton="false" data-widget-deletebutton="false">
                                 <!-- widget options:
-                            usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
-
-                            data-widget-colorbutton="false"
-                            data-widget-editbutton="false"
-                            data-widget-togglebutton="false"
-                            data-widget-deletebutton="false"
-                            data-widget-fullscreenbutton="false"
-                            data-widget-custombutton="false"
-                            data-widget-collapsed="true"
-                            data-widget-sortable="false"
-
-                            -->
+                                usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+									
+                                data-widget-colorbutton="false"	
+                                data-widget-editbutton="false"
+                                data-widget-togglebutton="false"
+                                data-widget-deletebutton="false"
+                                data-widget-fullscreenbutton="false"
+                                data-widget-custombutton="false"
+                                data-widget-collapsed="true" 
+                                data-widget-sortable="false"
+									
+                                -->
                                 <header>
                                     <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
-                                    <h2>Mantenimiento categorias de conocimiento </h2>
+                                    <h2>Mantenimiento empresas </h2>
 
                                 </header>
 
@@ -367,48 +364,35 @@
                                         <input class="form-control" type="text">
                                     </div>
                                     <!-- end widget edit box -->
+
                                     <!-- widget content -->
                                     <div class="widget-body">
                                         <!-- this is what the user will see -->
-                                        <form id="frmBuscar" class="smart-form">
+                                        <form id="frmEmpresa" class="smart-form">
                                             <header>
-                                                Buscar categorias por nombre.
+                                                Datos del area.
                                             </header>
                                             <fieldset>
                                                 <div class="row">
                                                     <section class="col col-md-12">
-                                                        <label class="label">Introduzca el texto a buscar (* = Ver todos)</label>
+                                                        <label class="label">Nombre</label>
                                                         <label class="input">
-                                                            <input id="txtBuscar" name="txtBuscar" type="text" />
+                                                            <input id="txtNombre" name="txtNombre" type="text" data-bind="value: nombre" />
                                                         </label>
                                                     </section>
                                                 </div>
                                             </fieldset>
                                             <fieldset>
                                                 <div class="pull-right">
-                                                    <button id="btnBuscar" title="Buscar" class="btn btn-primary btn-circle btn-lg">
-                                                        <i class="fa fa-lg fa-search"></i>
+                                                    <button id="btnSalir" title="Salir sin guardar" class="btn btn-warning btn-circle btn-lg">
+                                                        <i class="fa fa-lg fa-sign-out"></i>
                                                     </button>
-                                                    <button id="btnAlta" title="Crear nuevo registro" class="btn btn-success btn-circle btn-lg">
-                                                        <i class="fa fa-lg fa-plus"></i>
+                                                    <button id="btnAceptar" title="Guardar y salir" class="btn btn-success btn-circle btn-lg">
+                                                        <i class="fa fa-lg fa-check"></i>
                                                     </button>
                                                 </div>
                                             </fieldset>
                                         </form>
-                                        <div id="tbCatConocimiento" style="display:none;">
-                                            <table id="dt_catConocimiento" class="table table-striped table-bordered table-hover" width="100%">
-                                                <thead>
-                                                    <tr>
-                                                        <th data-class="expand">
-                                                            <i class="fa fa-fw fa-user text-muted hidden-md hidden-sm hidden-xs"></i> Nombre
-                                                        </th>
-                                                        <th>
-
-                                                        </th>
-                                                    </tr>
-                                                </thead>
-                                            </table>
-                                        </div>
                                     </div>
                                     <!-- end widget content -->
 
@@ -437,7 +421,7 @@
         <div class="page-footer">
             <div class="row">
                 <div class="col-xs-12 col-sm-6">
-                    <span class="txt-color-white">GDESAC <span id="versionFooter">NO VERSION</span> <span class="hidden-xs"> - Áreas de conocimiento</span> © Ariadna Software S.L. 2014-2015</span>
+                    <span class="txt-color-white">GDESOD <span id="versionFooter">1.0</span> <span class="hidden-xs"></span> © Ariadna Software S.L. 2014-2015</span>
                 </div>
 
                 <div class="col-xs-6 col-sm-6 text-right hidden-xs">
@@ -516,8 +500,6 @@
 
         <!-- Demo purpose only -->
         <!--<script src="js/demo.min.js"></script>-->
-        <!-- Numeral para manipular números -->
-        <script src="js/numeral.min.js"></script>
 
         <!-- MAIN APP JS FILE -->
         <script src="js/app.min.js"></script>
@@ -526,20 +508,17 @@
         <!-- Voice command : plugin -->
         <script src="js/speech/voicecommand.min.js"></script>
 
-        <!--- KNOCKOUT JS -->
-        <script src="//cdnjs.cloudflare.com/ajax/libs/knockout/3.2.0/knockout-min.js"></script>
-
         <!-- SmartChat UI : plugin -->
         <script src="js/smart-chat-ui/smart.chat.ui.min.js"></script>
         <script src="js/smart-chat-ui/smart.chat.manager.min.js"></script>
 
-        <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+        <!--- KNOCKOUT JS -->
+        <script src="//cdnjs.cloudflare.com/ajax/libs/knockout/3.2.0/knockout-min.js"></script>
 
         <!-- PAGE RELATED PLUGIN(S) 
         <script src="..."></script>-->
+        <script src="js/ariadna/empresaDetalle.js"></script>
         <script src="js/ariadna/comun.js"></script>
-        <script src="js/ariadna/catConocimientoGeneral.js"></script>
 
         <!-- PAGE RELATED PLUGIN(S) -->
         <script src="js/plugin/datatables/jquery.dataTables.min.js"></script>

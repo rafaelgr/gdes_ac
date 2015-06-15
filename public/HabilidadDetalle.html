@@ -183,6 +183,11 @@
                                 </a>
                             </li>
                             <li>
+                                <a href="EmpresaGeneral.html">
+                                    <i class="fa fa-th-large"></i> Empresas
+                                </a>
+                            </li>
+                            <li>
                                 <a href="ProyectoGeneral.html">
                                     <i class="fa fa-cubes"></i> Proyectos
                                 </a>
@@ -365,45 +370,58 @@
                                     <!-- end widget edit box -->
                                     <!-- widget content -->
                                     <div class="widget-body">
-                                        <!-- this is what the user will see -->
-                                        <form id="frmHabilidad" class="smart-form">
-                                            <header>
-                                                Datos de la habilidad.
-                                            </header>
-                                            <fieldset>
-                                                <div class="row">
-                                                    <section class="col col-md-8">
-                                                        <label class="label">Nombre</label>
-                                                        <label class="input">
-                                                            <input id="txtNombre" name="txtNombre" type="text" data-bind="value: nombre" />
-                                                        </label>
-                                                    </section>
-                                                    <section class="col col-md-4">
-                                                        <label class="label">Servicio</label>
-                                                        <label class="select">
-                                                            <select id="cmbServicios" name="cmbServicios" data-bind="options: posiblesServicios, optionsText: 'nombre', optionsValue: 'servicioId', value: sservicioId, valueAllowUnset: true"></select><i></i>
-                                                        </label>
-                                                    </section>
-                                                </div>
-                                            </fieldset>
-                                            <fieldset>
-                                                <div class="pull-right">
-                                                    <button id="btnSalir" title="Salir sin guardar" class="btn btn-warning btn-circle btn-lg">
-                                                        <i class="fa fa-lg fa-sign-out"></i>
-                                                    </button>
-                                                    <button id="btnAceptar" title="Guardar y salir" class="btn btn-success btn-circle btn-lg">
-                                                        <i class="fa fa-lg fa-check"></i>
-                                                    </button>
-                                                </div>
-                                            </fieldset>
-                                        </form>
+                                        <ul id="Tab1" class="nav nav-tabs">
+                                            <li class="active">
+                                                <a href="#s1" data-toggle="tab">General</a>
+                                            </li>
+                                            <li>
+                                                <a href="#s2" data-toggle="tab">Trabajadores relacionados</a>
+                                            </li>
+                                        </ul>
+                                        <div id="TabContent1" class="tab-content padding-10">
+                                            <div class="tab-pane fade in active" id="s1">
+                                                <!-- this is what the user will see -->
+                                                <form id="frmHabilidad" class="smart-form">
+                                                    <header>
+                                                        Datos de la habilidad.
+                                                    </header>
+                                                    <fieldset>
+                                                        <div class="row">
+                                                            <section class="col col-md-8">
+                                                                <label class="label">Nombre</label>
+                                                                <label class="input">
+                                                                    <input id="txtNombre" name="txtNombre" type="text" data-bind="value: nombre" />
+                                                                </label>
+                                                            </section>
+                                                            <section class="col col-md-4">
+                                                                <label class="label">Servicio</label>
+                                                                <label class="select">
+                                                                    <select id="cmbServicios" name="cmbServicios" data-bind="options: posiblesServicios, optionsText: 'nombre', optionsValue: 'servicioId', value: sservicioId, valueAllowUnset: true"></select><i></i>
+                                                                </label>
+                                                            </section>
+                                                        </div>
+                                                    </fieldset>
+                                                    <fieldset>
+                                                        <div class="pull-right">
+                                                            <button id="btnSalir" title="Salir sin guardar" class="btn btn-warning btn-circle btn-lg">
+                                                                <i class="fa fa-lg fa-sign-out"></i>
+                                                            </button>
+                                                            <button id="btnAceptar" title="Guardar y salir" class="btn btn-success btn-circle btn-lg">
+                                                                <i class="fa fa-lg fa-check"></i>
+                                                            </button>
+                                                        </div>
+                                                    </fieldset>
+                                                </form>
+                                            </div>
+                                            <div class="tab-pane fade" id="s2">
+                                                <div id="hdbContent"></div>
+                                            </div>
+                                            <!-- end widget content -->
+
+                                        </div>
+                                        <!-- end widget div -->
+
                                     </div>
-                                    <!-- end widget content -->
-
-                                </div>
-                                <!-- end widget div -->
-
-                            </div>
                             <!-- end widget -->
 
                         </article>
@@ -436,6 +454,40 @@
             </div>
         </div>
         <!-- END PAGE FOOTER -->
+
+        <!-- BEGIN TEMPLATES -->
+        <script id="ac-conocimientos" type="text/x-handlebars-template">
+            <div class="well">
+                <h1>Habilidad ({{nhabilidad}})</h1>
+                {{#each trabajadores}}
+                <h3>{{ntrabajador}}</h3>
+                <hr />
+                <table class="table table-stripped table-forum">
+                    <thead class="txt-color-blue">
+                        <tr>
+                            <th>Conocimiento</th>
+                            <th>Proyecto</th>
+                            <th>F.Inicio</th>
+                            <th>F.Final</th>
+                            <th>Comentarios</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each conocimientos}}
+                        <tr>
+                            <td>{{nconocimiento}}</td>
+                            <td>{{proyecto}}</td>
+                            <td>{{dFecha}}</td>
+                            <td>{{hFecha}}</td>
+                            <td>{{observaciones}}</td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+                {{/each}}
+            </div>
+        </script>
+        <!-- EN TEMPLATES-->
 
         <!--================================================== -->
 
@@ -528,6 +580,7 @@
         <script src="..."></script>-->
         <script src="js/ariadna/comun.js"></script>
         <script src="js/ariadna/habilidadDetalle.js"></script>
+        <script src="myconfig.js"></script>
 
         <!-- PAGE RELATED PLUGIN(S) -->
         <script src="js/plugin/datatables/jquery.dataTables.min.js"></script>
@@ -535,6 +588,7 @@
         <script src="js/plugin/datatables/dataTables.tableTools.min.js"></script>
         <script src="js/plugin/datatables/dataTables.bootstrap.min.js"></script>
         <script src="js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
+        <script src="js/handlebars-v3.0.3.js"></script>
 
         <script type="text/javascript">
             (function ($) {

@@ -22,6 +22,8 @@
     <Compile Include="lib\conocimientos_categorias_api.js" />
     <Compile Include="lib\conocimientos_habilidades_db_mysql.js" />
     <Compile Include="lib\conocimientos_categorias_db_mysql.js" />
+    <Compile Include="lib\empresas_api.js" />
+    <Compile Include="lib\empresas_db_mysql.js" />
     <Compile Include="lib\habilidades_api.js" />
     <Compile Include="lib\habilidades_db_mysql.js" />
     <Compile Include="lib\informes_api.js" />
@@ -34,6 +36,8 @@
     <Compile Include="lib\catConocimientos_api.js" />
     <Compile Include="lib\roles_db_mysql.js" />
     <Compile Include="lib\catConocimientos_db_mysql.js" />
+    <Compile Include="public\js\ariadna\empresaDetalle.js" />
+    <Compile Include="public\js\ariadna\empresaGeneral.js" />
     <Compile Include="public\js\ariadna\habilidadDetalle.js" />
     <Compile Include="public\js\ariadna\habilidadGeneral.js" />
     <Compile Include="public\js\ariadna\servicioDetalle.js" />
@@ -72,6 +76,8 @@
     <Compile Include="lib\trabajadores_api.js" />
     <Compile Include="lib\trabajadores_db_mysql.js" />
     <Compile Include="lib\version_api.js" />
+    <Content Include="public\EmpresaDetalle.html" />
+    <Content Include="public\EmpresaGeneral.html" />
     <Content Include="public\Prueba.html" />
     <Content Include="public\AdministradorDetalle.html" />
     <Content Include="public\HabilidadDetalle.html" />

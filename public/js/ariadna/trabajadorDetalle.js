@@ -55,6 +55,7 @@ function initForm() {
         // se trata de un alta ponemos el id a cero para indicarlo.
         vm.trabajadorId(0);
         // y ocultamos el campo adicional en alta
+        loadEmpresas(-1);
     }
 }
 
@@ -70,6 +71,10 @@ function admData() {
     self.trabajadorEvaluado = ko.observable();
     self.posiblesIdiomas = ko.observableArray(myconfig.idiomas);
     self.idioma = ko.observable();
+    // soporte de combos
+    self.posiblesEmpresas = ko.observableArray([]);
+    // valores escogidos
+    self.sempresaId = ko.observable();
 }
 
 function loadData(data) {
@@ -84,7 +89,27 @@ function loadData(data) {
         cargarEvaluados(vm.trabajadorId());
     }
     vm.idioma(data.idioma);
+    if (data.empresaId != null){
+        loadEmpresas(data.empresaId);
+    } else {
+        loadEmpresas(-1);
+    }
 }
+
+function loadEmpresas(empresaId) {
+    $.ajax({
+        type: "GET",
+        url: "/api/empresas",
+        dataType: "json",
+        contentType: "application/json",
+        success: function (data, status) {
+            vm.posiblesEmpresas(data);
+            vm.sempresaId(empresaId);
+        },
+        error: errorAjax
+    });
+}
+
 
 function datosOK() {
     $('#frmTrabajador').validate({
@@ -118,6 +143,7 @@ function aceptar() {
                 "password": vm.password(),
                 "evaluador": vm.evaluador(),
                 "idioma": vm.idioma(),
+                "empresaId": vm.sempresaId()
             }
         };
         if (trabajadorId == 0) {
@@ -274,8 +300,11 @@ function initTablaAsgProyectos() {
 function loadTablaAsgProyectos(data) {
     var dt = $('#dt_asgProyecto').dataTable();
     if (data !== null && data.length === 0) {
-        mostrarMensajeSmart('No se han encontrado registros');
-        $("#tbAsgProyecto").hide();
+        // mostrarMensajeSmart('No se han encontrado registros');
+        // $("#tbAsgProyecto").hide();
+        dt.fnClearTable();
+        dt.fnDraw();
+        $("#tbAsgProyecto").show();
     } else {
         dt.fnClearTable();
         dt.fnAddData(data);
