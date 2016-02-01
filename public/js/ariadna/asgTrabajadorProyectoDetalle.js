@@ -2,7 +2,8 @@
 asgTrabajadorProyectoDetalle.js
 Funciones js par la página AsgTrabajadorProyectoDetalle.html
 ---------------------------------------------------------------------------*/
-var asgProyectoId = 0; 
+var asgProyectoId = 0;
+
 function initForm() {
     // comprobarLogin();
     // de smart admin
@@ -14,25 +15,26 @@ function initForm() {
     // asignación de eventos al clic
     $("#btnAceptar").click(aceptar());
     $("#btnSalir").click(salir());
-    $("#frmAsgProyecto").submit(function () {
+    $("#cmbProyectos").change(cambiaProyecto());
+    $("#frmAsgProyecto").submit(function() {
         return false;
     });
-    
-    
+
+
 
     asgProyectoId = gup('AsgProyectoId');
     if (asgProyectoId != 0) {
         var data = {
-            asgProyectoId: asgProyectoId
-        }
-        // hay que buscar ese elemento en concreto
+                asgProyectoId: asgProyectoId
+            }
+            // hay que buscar ese elemento en concreto
         $.ajax({
             type: "GET",
             url: "/api/asg-proyectos/" + asgProyectoId,
             dataType: "json",
             contentType: "application/json",
             data: JSON.stringify(data),
-            success: function (data, status) {
+            success: function(data, status) {
                 // hay que mostrarlo en la zona de datos
                 loadData(data);
             },
@@ -55,6 +57,7 @@ function asgProyectoData() {
     self.proyecto = ko.observable();
     self.nombre = ko.observable();
     self.rol = ko.observable();
+    self.descripcion = ko.observable();
     // soporte de combos
     self.posiblesTrabajadores = ko.observableArray([]);
     self.posiblesProyectos = ko.observableArray([]);
@@ -65,6 +68,10 @@ function asgProyectoData() {
     self.sproyectoId = ko.observable();
     self.srolId = ko.observable();
     self.sevaluadorId = ko.observable();
+
+    self.fechaInicio = ko.observable();
+    self.fechaFinal = ko.observable();
+
 }
 
 function loadData(data) {
@@ -73,6 +80,7 @@ function loadData(data) {
     vm.trabajador(data.trabajador);
     vm.proyecto(data.proyecto);
     vm.rol(data.rol);
+    vm.descripcion(data.descripcion);
     loadTrabajadores(data.trabajador.trabajadorId);
     loadProyectos(data.proyecto.proyectoId);
     loadRoles(data.rol.rolId);
@@ -81,15 +89,25 @@ function loadData(data) {
     } else {
         loadEvaluadores(-1);
     }
+    if (data.fechaInicio != null) {
+        vm.fechaInicio(moment(data.fechaInicio).format("DD/MM/YYYY"));
+    } else {
+        vm.fechaInicio(null);
+    }
+    if (data.fechaFinal != null) {
+        vm.fechaFinal(moment(data.fechaFinal).format("DD/MM/YYYY"));
+    } else {
+        vm.fechaFinal(null);
+    }
 }
 
-function loadTrabajadores(trabajadorId){
+function loadTrabajadores(trabajadorId) {
     $.ajax({
         type: "GET",
         url: "/api/trabajadores",
         dataType: "json",
         contentType: "application/json",
-        success: function (data, status){
+        success: function(data, status) {
             vm.posiblesTrabajadores(data);
             vm.strabajadorId(trabajadorId);
         },
@@ -103,7 +121,7 @@ function loadEvaluadores(evaluadorId) {
         url: "/api/evaluadores",
         dataType: "json",
         contentType: "application/json",
-        success: function (data, status) {
+        success: function(data, status) {
             vm.posiblesEvaluadores(data);
             vm.sevaluadorId(evaluadorId);
         },
@@ -117,7 +135,7 @@ function loadProyectos(proyectoId) {
         url: "/api/proyectos",
         dataType: "json",
         contentType: "application/json",
-        success: function (data, status) {
+        success: function(data, status) {
             vm.posiblesProyectos(data);
             vm.sproyectoId(proyectoId);
         },
@@ -131,7 +149,7 @@ function loadRoles(rolId) {
         url: "/api/roles",
         dataType: "json",
         contentType: "application/json",
-        success: function (data, status) {
+        success: function(data, status) {
             vm.posiblesRoles(data);
             vm.srolId(rolId);
         },
@@ -144,18 +162,30 @@ function loadRoles(rolId) {
 function datosOK() {
     $('#frmAsgProyecto').validate({
         rules: {
-            cmbTrabajadores: { required: true },
-            cmbProyectos: { required: true },
-            cmbRoles: { required: true }
+            cmbTrabajadores: {
+                required: true
+            },
+            cmbProyectos: {
+                required: true
+            },
+            cmbRoles: {
+                required: true
+            }
         },
         // Messages for form validation
         messages: {
-            cmbTrabajadores: {required: 'Seleccione una categoría'},
-            cmbProyectos: { required: 'Seleccione un proyecto' },
-            cmbRoles: { required: 'Seleccione un rol' }
+            cmbTrabajadores: {
+                required: 'Seleccione una categoría'
+            },
+            cmbProyectos: {
+                required: 'Seleccione un proyecto'
+            },
+            cmbRoles: {
+                required: 'Seleccione un rol'
+            }
         },
         // Do not change code below
-        errorPlacement: function (error, element) {
+        errorPlacement: function(error, element) {
             error.insertAfter(element.parent());
         }
     });
@@ -168,13 +198,28 @@ function datosOK() {
 }
 
 function aceptar() {
-    var mf = function () {
+    var mf = function() {
         if (!datosOK())
             return;
+        // control de fechas 
+        var fecha1, fecha2;
+        if (moment(vm.fechaInicio(), "DD/MM/YYYY").isValid()) {
+            fecha1 = moment(vm.fechaInicio(), "DD/MM/YYYY").format("YYYY-MM-DD");
+        } else {
+            fecha1 = null;
+        }
+        if (moment(vm.fechaFinal(), "DD/MM/YYYY").isValid()) {
+            fecha2 = moment(vm.fechaFinal(), "DD/MM/YYYY").format("YYYY-MM-DD");
+        } else {
+            fecha2 = null;
+        }
         var data = {
             asgProyecto: {
                 "asgProyectoId": vm.asgProyectoId(),
                 "nombre": vm.nombre(),
+                "descripcion": vm.descripcion(),
+                "fechaInicio": fecha1,
+                "fechaFinal": fecha2,
                 "trabajador": {
                     "trabajadorId": vm.strabajadorId()
                 },
@@ -199,7 +244,7 @@ function aceptar() {
                 dataType: "json",
                 contentType: "application/json",
                 data: JSON.stringify(data),
-                success: function (data, status) {
+                success: function(data, status) {
                     // Nos volvemos al general
                     var url = "AsgTrabajadorProyecto.html?AsgProyectoId=" + data.asgProyectoId;
                     window.open(url, '_self');
@@ -213,7 +258,7 @@ function aceptar() {
                 dataType: "json",
                 contentType: "application/json",
                 data: JSON.stringify(data),
-                success: function (data, status) {
+                success: function(data, status) {
                     // Nos volvemos al general
                     var url = "AsgTrabajadorProyecto.html?AsgProyectoId=" + data.asgProyectoId;
                     window.open(url, '_self');
@@ -226,9 +271,19 @@ function aceptar() {
 }
 
 function salir() {
-    var mf = function () {
+    var mf = function() {
         var url = "AsgTrabajadorProyecto.html";
         window.open(url, '_self');
+    }
+    return mf;
+}
+
+function cambiaProyecto() {
+    var mf = function() {
+        // solo en alta
+        if (asgProyectoId == 0) {
+
+        }
     }
     return mf;
 }

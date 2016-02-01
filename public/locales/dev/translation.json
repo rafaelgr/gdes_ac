@@ -60,8 +60,17 @@
 
     },
     "cliEvaPorTrabajador": {
-        "titulo": "Seleccione aquí el trabajador al que registrará conocimientos",
+        "titulo": "Seleccione aquí el trabajador al que registrará experiencia",
         "buscar": "Buscar asignaciones por trabajador.",
+        "trabajador": "Trabajador",
+        "btnBuscar": "Buscar",
+        "nombre": "Nombre",
+        "proyecto": "Proyecto",
+        "rol": "Rol"
+    },
+    "cliEvaPorProyecto": {
+        "titulo": "Seleccione aquí el proyecto al que registrará conocimientos",
+        "buscar": "Buscar asignaciones por proyecto.",
         "trabajador": "Trabajador",
         "btnBuscar": "Buscar",
         "nombre": "Nombre",

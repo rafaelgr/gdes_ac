@@ -57,30 +57,26 @@ function initForm() {
     //
 
     // carga del desplegable.
-    loadTrabajadores(trabajador.trabajadorId);
+    loadProyectos(null);
 }
 
 function asgProyectoData() {
     var self = this;
     // soporte de combos
-    self.posiblesTrabajadores = ko.observableArray([]);
+    self.posiblesProyectos = ko.observableArray([]);
     // valores escogidos
-    self.strabajadorId = ko.observable();
+    self.sproyectoId = ko.observable();
 }
 
-function loadTrabajadores(evaluadorId) {
-    data = {
-        "evaluadorId": evaluadorId
-    };
+function loadProyectos(proyectoId) {
     $.ajax({
-        type: "POST",
-        url: "/api/trabajadores-buscar",
+        type: "GET",
+        url: "/api/proyectos",
         dataType: "json",
         contentType: "application/json",
-        data: JSON.stringify(data),
         success: function (data, status) {
-            vm.posiblesTrabajadores(data);
-            vm.strabajadorId(-1);
+            vm.posiblesProyectos(data);
+            vm.sproyectoId(proyectoId);
         },
         error: errorAjax
     });
@@ -145,7 +141,7 @@ function datosOK() {
     //TODO: Incluir en la validación si el certificado figura en el almacén de certificados.
     $('#frmBuscar').validate({
         rules: {
-            cmbTrabajadores: { required: true },
+            cmbProyectos: { required: true },
         },
         // Do not change code below
         errorPlacement: function (error, element) {
@@ -168,6 +164,7 @@ function loadTablaAsgProyectos(data) {
     }
 }
 
+
 function buscarAsgProyectos() {
     var mf = function () {
         if (!datosOK()) {
@@ -175,7 +172,7 @@ function buscarAsgProyectos() {
         }
         // enviar la consulta por la red (AJAX)
         var data = {
-            "trabajadorId": vm.strabajadorId()
+            "proyectoId": vm.sproyectoId()
         };
         $.ajax({
             type: "POST",
@@ -192,7 +189,6 @@ function buscarAsgProyectos() {
     };
     return mf;
 }
-
 
 function editAsgProyecto(id) {
     // hay que abrir la página de detalle de asgProyecto

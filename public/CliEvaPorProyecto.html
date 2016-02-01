@@ -159,7 +159,7 @@
 
                 <div class="row"> 
                     <div class="col-md-12">
-                        <h2><i class="fa fa-lg fa-fw fa-gears"></i> <span data-i18n="cliEvaPorTrabajador.titulo">Seleccione aquí el trabajador al que registrará experiencia*</span> </h2>
+                        <h2><i class="fa fa-lg fa-fw fa-gears"></i> <span data-i18n="cliEvaPorProyecto.titulo">Seleccione aquí el proyecto al que registrará experiencia*</span> </h2>
                     </div>
                 </div>
                 <div class="row">
@@ -167,21 +167,21 @@
                         <div class="well">
                             <form id="frmBuscar" class="smart-form">
                                 <header>
-                                    <span data-i18n="cliEvaPorTrabajador.buscar">Buscar asignaciones por trabajador.*</span>
+                                    <span data-i18n="cliEvaPorProyecto.buscar">Buscar asignaciones por proyecto.*</span>
                                 </header>
                                 <fieldset>
                                     <div class="row">
                                         <section class="col col-md-12">
-                                            <label class="label"><span data-i18n="cliEvaPorTrabajador.trabajador">Trabajador*</span></label>
+                                            <label class="label"><span data-i18n="cliEvaPorTrabajador.proyecto">Proyectos*</span></label>
                                             <label class="select">
-                                                <select id="cmbTrabajadores" name="cmbTrabajadores" data-bind="options: posiblesTrabajadores, optionsText: 'nombre', optionsValue: 'trabajadorId', value: strabajadorId, valueAllowUnset: true"></select><i></i>
+                                                <select id="cmbProyectos" name="cmbProyectos" data-bind="options: posiblesProyectos, optionsText: 'nombre', optionsValue: 'proyectoId', value: sproyectoId, valueAllowUnset: true"></select><i></i>
                                             </label>
                                         </section>
                                     </div>
                                 </fieldset>
                                 <fieldset>
                                     <div class="pull-right">
-                                        <button id="btnBuscar" title="Buscar" data-i18n="[title]cliEvaPorTrabajador.btnBuscar" class="btn btn-primary btn-circle btn-lg">
+                                        <button id="btnBuscar" title="Buscar" data-i18n="[title]cliEvaPorProyecto.btnBuscar" class="btn btn-primary btn-circle btn-lg">
                                             <i class="fa fa-lg fa-search"></i>
                                         </button>
                                     </div>
@@ -197,13 +197,13 @@
                                             </th>
                                         -->                                            
                                             <th data-hide="phone">
-                                                <span data-i18n="cliEvaPorTrabajador.trabajador">Trabajador*</span>
+                                                <span data-i18n="cliEvaPorProyecto.trabajador">Trabajador*</span>
                                             </th>
                                             <th data-hide="phone">
-                                                <span data-i18n="cliEvaPorTrabajador.proyecto">Proyecto*</span>
+                                                <span data-i18n="cliEvaPorProyecto.proyecto">Proyecto*</span>
                                             </th>
                                             <th data-hide="phone">
-                                                <span data-i18n="cliEvaPorTrabajador.rol">Rol*</span>
+                                                <span data-i18n="cliEvaPorProyecto.rol">Rol*</span>
                                             </th>
                                             <th>
 
@@ -325,7 +325,7 @@
         <!-- PAGE RELATED PLUGIN(S) 
         <script src="..."></script>-->
         <script src="js/ariadna/comun.js"></script>
-        <script src="js/ariadna/cliEvaPorTrabajador.js"></script>
+        <script src="js/ariadna/cliEvaPorProyecto.js"></script>
 
         <!-- PAGE RELATED PLUGIN(S) -->
         <script src="js/plugin/datatables/jquery.dataTables.min.js"></script>

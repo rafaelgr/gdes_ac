@@ -2,7 +2,8 @@
 proyectoDetalle.js
 Funciones js par la página ProyectoDetalle.html
 ---------------------------------------------------------------------------*/
-var proyectoId = 0; 
+var proyectoId = 0;
+
 function initForm() {
     // comprobarLogin();
     // de smart admin
@@ -10,26 +11,26 @@ function initForm() {
     //
     // $.datepicker.setDefaults($.datepicker.regional['es']);
     //
-    $.validator.addMethod("greaterThan", 
-        function (value, element, params) {
-        var fv = moment(value, "DD/MM/YYYY").format("YYYY-MM-DD");
-        var fp = moment($(params).val(), "DD/MM/YYYY").format("YYYY-MM-DD");
+    $.validator.addMethod("greaterThan",
+        function(value, element, params) {
+            var fv = moment(value, "DD/MM/YYYY").format("YYYY-MM-DD");
+            var fp = moment($(params).val(), "DD/MM/YYYY").format("YYYY-MM-DD");
             if (!/Invalid|NaN/.test(new Date(fv))) {
                 return new Date(fv) > new Date(fp);
-        } else {
-            // esto es debido a que permitimos que la segunda fecha nula
-            return true;
-        }
-    }, 'La fecha final debe ser mayor que la inicial.');
-    
+            } else {
+                // esto es debido a que permitimos que la segunda fecha nula
+                return true;
+            }
+        }, 'La fecha final debe ser mayor que la inicial.');
+
 
     $.datepicker.regional['es'] = {
         closeText: 'Cerrar',
         prevText: '&#x3C;Ant',
         nextText: 'Sig&#x3E;',
         currentText: 'Hoy',
-        monthNames: ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio','julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'],
-        monthNamesShort: ['ene', 'feb', 'mar', 'abr', 'may', 'jun','jul', 'ago', 'sep', 'oct', 'nov', 'dic'],
+        monthNames: ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'],
+        monthNamesShort: ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'],
         dayNames: ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'],
         dayNamesShort: ['dom', 'lun', 'mar', 'mié', 'jue', 'vie', 'sáb'],
         dayNamesMin: ['D', 'L', 'M', 'X', 'J', 'V', 'S'],
@@ -40,10 +41,10 @@ function initForm() {
         showMonthAfterYear: false,
         yearSuffix: ''
     };
-    
+
 
     $.datepicker.setDefaults($.datepicker.regional['es']);
-    
+
 
     getVersionFooter();
     vm = new admData();
@@ -51,23 +52,23 @@ function initForm() {
     // asignación de eventos al clic
     $("#btnAceptar").click(aceptar());
     $("#btnSalir").click(salir());
-    $("#frmProyecto").submit(function () {
+    $("#frmProyecto").submit(function() {
         return false;
     });
 
     proyectoId = gup('ProyectoId');
     if (proyectoId != 0) {
         var data = {
-            proyectoId: proyectoId
-        }
-        // hay que buscar ese elemento en concreto
+                proyectoId: proyectoId
+            }
+            // hay que buscar ese elemento en concreto
         $.ajax({
             type: "GET",
             url: "/api/proyectos/" + proyectoId,
             dataType: "json",
             contentType: "application/json",
             data: JSON.stringify(data),
-            success: function (data, status) {
+            success: function(data, status) {
                 // hay que mostrarlo en la zona de datos
                 loadData(data);
                 loadTemplatePC1();
@@ -86,52 +87,92 @@ function admData() {
     self.nombre = ko.observable();
     self.fechaInicio = ko.observable();
     self.fechaFinal = ko.observable();
+    self.ocultar = ko.observable();
+    // soporte de combos
+    self.posiblesEmpresas = ko.observableArray([]);
+    // valores escogidos
+    self.sempresaId = ko.observable();
 }
 
 function loadData(data) {
     vm.proyectoId(data.proyectoId);
     vm.nombre(data.nombre);
     vm.fechaInicio(moment(data.fechaInicio).format("DD/MM/YYYY"));
-    if (data.fechaFinal != null){
+    if (data.fechaFinal != null) {
         vm.fechaFinal(moment(data.fechaFinal).format("DD/MM/YYYY"));
     } else {
         vm.fechaFinal(null);
     }
+    vm.ocultar(data.ocultar);
+    if (data.empresaId != null){
+        loadEmpresas(data.empresaId);
+    } else {
+        loadEmpresas(-1);
+    }
+}
+
+function loadEmpresas(empresaId) {
+    $.ajax({
+        type: "GET",
+        url: "/api/empresas",
+        dataType: "json",
+        contentType: "application/json",
+        success: function (data, status) {
+            vm.posiblesEmpresas(data);
+            vm.sempresaId(empresaId);
+        },
+        error: errorAjax
+    });
 }
 
 function datosOK() {
     $('#frmProyecto').validate({
         rules: {
-            txtNombre: { required: true },
-            txtFechaInicio: { required: true, date: true },
-            txtFechaFinal: { date: true, greaterThan: "#txtFechaInicio"}
+            txtNombre: {
+                required: true
+            },
+            txtFechaInicio: {
+                required: true,
+                date: true
+            },
+            txtFechaFinal: {
+                date: true,
+                greaterThan: "#txtFechaInicio"
+            }
         },
         // Messages for form validation
         messages: {
-            txtNombre: {required: 'Introduzca el nombre'},
-            txtFechaInicio: {required: 'Introduzca una fecha de inicio', date: 'Debe ser una fecha válida'},
-            txtFechaFinal: { date: 'Debe ser una fecha válida' }
+            txtNombre: {
+                required: 'Introduzca el nombre'
+            },
+            txtFechaInicio: {
+                required: 'Introduzca una fecha de inicio',
+                date: 'Debe ser una fecha válida'
+            },
+            txtFechaFinal: {
+                date: 'Debe ser una fecha válida'
+            }
         },
         // Do not change code below
-        errorPlacement: function (error, element) {
+        errorPlacement: function(error, element) {
             error.insertAfter(element.parent());
         }
     });
-    $.validator.methods.date = function (value, element) {
+    $.validator.methods.date = function(value, element) {
         return this.optional(element) || moment(value, "DD/MM/YYYY").isValid();
     }
     return $('#frmProyecto').valid();
 }
 
 function aceptar() {
-    var mf = function () {
+    var mf = function() {
         if (!datosOK())
             return;
         // control de fechas 
         var fecha1, fecha2;
         if (moment(vm.fechaInicio(), "DD/MM/YYYY").isValid())
             fecha1 = moment(vm.fechaInicio(), "DD/MM/YYYY").format("YYYY-MM-DD");
-        if (moment(vm.fechaFinal(), "DD/MM/YYYY").isValid()){
+        if (moment(vm.fechaFinal(), "DD/MM/YYYY").isValid()) {
             fecha2 = moment(vm.fechaFinal(), "DD/MM/YYYY").format("YYYY-MM-DD");
         } else {
             fecha2 = null;
@@ -141,7 +182,9 @@ function aceptar() {
                 "proyectoId": vm.proyectoId(),
                 "nombre": vm.nombre(),
                 "fechaInicio": fecha1,
-                "fechaFinal": fecha2
+                "fechaFinal": fecha2,
+                "ocultar": vm.ocultar(),
+                "empresaId": vm.sempresaId()
             }
         };
         if (proyectoId == 0) {
@@ -151,7 +194,7 @@ function aceptar() {
                 dataType: "json",
                 contentType: "application/json",
                 data: JSON.stringify(data),
-                success: function (data, status) {
+                success: function(data, status) {
                     // hay que mostrarlo en la zona de datos
                     loadData(data);
                     // Nos volvemos al general
@@ -167,7 +210,7 @@ function aceptar() {
                 dataType: "json",
                 contentType: "application/json",
                 data: JSON.stringify(data),
-                success: function (data, status) {
+                success: function(data, status) {
                     // hay que mostrarlo en la zona de datos
                     loadData(data);
                     // Nos volvemos al general
@@ -182,28 +225,28 @@ function aceptar() {
 }
 
 function salir() {
-    var mf = function () {
+    var mf = function() {
         var url = "ProyectoGeneral.html";
         window.open(url, '_self');
     }
     return mf;
 }
 
-function loadTemplatePC1(){
+function loadTemplatePC1() {
     // cargar la tabla con un único valor que es el que corresponde.
     var data = {
-        informe: "pproyectoconocimiento",
-        tipo: "j",
-        id: proyectoId
-    }
-    // hay que buscar ese elemento en concreto
+            informe: "pproyectoconocimiento",
+            tipo: "j",
+            id: proyectoId
+        }
+        // hay que buscar ese elemento en concreto
     $.ajax({
         type: "POST",
         url: myconfig.apiUrl + "/api/informes",
         dataType: "json",
         contentType: "application/json",
         data: JSON.stringify(data),
-        success: function (data, status) {
+        success: function(data, status) {
             // hay que mostrarlo en la zona de datos
             // vm.asignaciones(data);
             loadTemplatePC2(data[0]);
@@ -211,6 +254,7 @@ function loadTemplatePC1(){
         error: errorAjax
     });
 }
+
 function loadTemplatePC2(data) {
     //
     // Grab the template script

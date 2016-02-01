@@ -34,27 +34,29 @@ function initForm() {
         lang = "es";
     }
     // control del idioma    
-    i18n.init({ lng: lang }, function (t) {
+    i18n.init({
+        lng: lang
+    }, function(t) {
         $(".I18N").i18n();
         initTablaEvaluaciones();
         $.datepicker.setDefaults($.datepicker.regional[lang]);
-        $.validator.addMethod("greaterThan", 
-        function (value, element, params) {
-            var fv = moment(value, i18n.t("app.dateFormat")).format("YYYY-MM-DD");
-            var fp = moment($(params).val(), i18n.t("app.dateFormat")).format("YYYY-MM-DD");
-            if (!/Invalid|NaN/.test(new Date(fv))) {
-                return new Date(fv) > new Date(fp);
-            } else {
-                return true;
-            }
-        
-        }, i18n.t("app.dateInicialFinal"));
+        $.validator.addMethod("greaterThan",
+            function(value, element, params) {
+                var fv = moment(value, i18n.t("app.dateFormat")).format("YYYY-MM-DD");
+                var fp = moment($(params).val(), i18n.t("app.dateFormat")).format("YYYY-MM-DD");
+                if (!/Invalid|NaN/.test(new Date(fv))) {
+                    return new Date(fv) > new Date(fp);
+                } else {
+                    return true;
+                }
+
+            }, i18n.t("app.dateInicialFinal"));
         validator_languages(lang);
     });
-    
+
     controlBotones(trabajador);
     $("#userName").text(trabajador.nombre);
-    
+
     // 
     getVersionFooter();
     vm = new asgProyectoData();
@@ -63,28 +65,28 @@ function initForm() {
     $("#btnAceptar").click(aceptar());
     $("#btnSalir").click(salir());
     $("#cmbCatConocimientos").change(cambioCategoria());
-    $("#frmEvaluacion").submit(function () {
+    $("#frmEvaluacion").submit(function() {
         return false;
     });
     $("#btnEditar").click(editar());
     // ocultamos el botón de edición
     $("#btnEditar").hide();
-    
+
     //initTablaEvaluaciones();
 
     asgProyectoId = gup('AsgProyectoId');
     if (asgProyectoId != 0) {
         var data = {
-            asgProyectoId: asgProyectoId
-        }
-        // hay que buscar ese elemento en concreto
+                asgProyectoId: asgProyectoId
+            }
+            // hay que buscar ese elemento en concreto
         $.ajax({
             type: "GET",
             url: "/api/asg-proyectos/" + asgProyectoId,
             dataType: "json",
             contentType: "application/json",
             data: JSON.stringify(data),
-            success: function (data, status) {
+            success: function(data, status) {
                 // hay que mostrarlo en la zona de datos
                 loadData(data);
                 loadTable1Evaluaciones(asgProyectoId);
@@ -130,40 +132,50 @@ function loadData(data) {
     vm.rol(data.rol);
     vm.nomRol(data.rol.nombre);
 
-    // fechas por defecto igual a las del proyecto
-    vm.dFecha(moment(data.proyecto.fechaInicio).format(i18n.t("app.dateFormat")));
-    if (data.proyecto.fechaFinal != null) {
-        vm.hFecha(moment(data.proyecto.fechaFinal).format(i18n.t("app.dateFormat")));
+    // fechas por defecto igual a las de la asignacion
+    if (data.fechaInicial != null) {
+        vm.hFecha(moment(data.fechaInicial).format(i18n.t("app.dateFormat")));
+    }
+    if (data.fechaFinal != null) {
+        vm.hFecha(moment(data.fechaFinal).format(i18n.t("app.dateFormat")));
     }
 }
 
 function datosOK() {
     $('#frmEvaluacion').validate({
         rules: {
-            cmbConocimientos: { required: true },
-            txtDFecha: { required: true, date:true },
-            txtHFecha: { date:true, greaterThan: "#txtDFecha" }
+            cmbConocimientos: {
+                required: true
+            },
+            txtDFecha: {
+                required: true,
+                date: true
+            },
+            txtHFecha: {
+                date: true,
+                greaterThan: "#txtDFecha"
+            }
         },
         // Do not change code below
-        errorPlacement: function (error, element) {
+        errorPlacement: function(error, element) {
             error.insertAfter(element.parent());
         }
     });
-    $.validator.methods.date = function (value, element) {
+    $.validator.methods.date = function(value, element) {
         return this.optional(element) || moment(value, i18n.t("app.dateFormat")).isValid();
     }
     return $('#frmEvaluacion').valid();
 }
 
 function aceptar() {
-    var mf = function () {
+    var mf = function() {
         if (!datosOK())
             return;
         // control de fechas 
         var fecha1, fecha2;
         if (moment(vm.dFecha(), i18n.t("app.dateFormat")).isValid())
             fecha1 = moment(vm.dFecha(), i18n.t("app.dateFormat")).format("YYYY-MM-DD");
-        if (moment(vm.hFecha(), i18n.t("app.dateFormat")).isValid()){
+        if (moment(vm.hFecha(), i18n.t("app.dateFormat")).isValid()) {
             fecha2 = moment(vm.hFecha(), i18n.t("app.dateFormat")).format("YYYY-MM-DD");
         } else {
             fecha2 = null;
@@ -188,7 +200,7 @@ function aceptar() {
             dataType: "json",
             contentType: "application/json",
             data: JSON.stringify(data),
-            success: function (data, status) {
+            success: function(data, status) {
                 loadTable1Evaluaciones(asgProyectoId);
                 limpiarCampos();
             },
@@ -199,8 +211,8 @@ function aceptar() {
 }
 
 function salir() {
-    var mf = function () {
-        var url = "CliEvaPorTrabajador.html";
+    var mf = function() {
+        var url = "CliEvaPorProyecto.html";
         window.open(url, '_self');
     }
     return mf;
@@ -210,16 +222,16 @@ function salir() {
 function initTablaEvaluaciones() {
     tablaCarro = $('#dt_evaluacion').dataTable({
         autoWidth: true,
-        preDrawCallback: function () {
+        preDrawCallback: function() {
             // Initialize the responsive datatables helper once.
             if (!responsiveHelper_dt_basic) {
                 responsiveHelper_dt_basic = new ResponsiveDatatablesHelper($('#dt_evaluacion'), breakpointDefinition);
             }
         },
-        rowCallback: function (nRow) {
+        rowCallback: function(nRow) {
             responsiveHelper_dt_basic.createExpandIcon(nRow);
         },
-        drawCallback: function (oSettings) {
+        drawCallback: function(oSettings) {
             responsiveHelper_dt_basic.respond();
         },
         language: {
@@ -243,44 +255,39 @@ function initTablaEvaluaciones() {
             }
         },
         data: dataEvaluaciones,
-        columns: [
-            {
-                data: "conocimiento.nombre"
-            }, 
-            {
-                data: "dFecha",
-                render: function (data) {
-                    // controlamos que si la fecha es nula no se muestre
-                    if (moment(data).isValid())
-                        return moment(data).format(i18n.t("app.dateFormat"));
-                    else
-                        return "";
-                },
-                class: "text-center"
-            }, 
-            {
-                data: "hFecha",
-                render: function (data) {
-                    // controlamos que si la fecha es nula no se muestre
-                    if (moment(data).isValid())
-                        return moment(data).format(i18n.t("app.dateFormat"));
-                    else
-                        return "";
-                },
-                class: "text-center"
-            }, 
-            {
-                data: "observaciones"
-            }, 
-            {
-                data: "evaluacionId",
-                render: function (data, type, row) {
-                    var bt1 = "<button class='btn btn-circle btn-danger btn-lg' onclick='deleteEvaluacion(" + data + ");' title='" + i18n.t("app.eliminar") + "'> <i class='fa fa-trash-o fa-fw'></i> </button>";
-                    var bt2 = "<button class='btn btn-circle btn-success btn-lg' onclick='editEvaluacion(" + data + ");' title='" + i18n.t("app.editar") + "'> <i class='fa fa-edit fa-fw'></i> </button>";
-                    var html = "<div class='pull-right'>" + bt1 + " " + bt2 + "</div>";
-                    return html;
-                    }
-            }]
+        columns: [{
+            data: "conocimiento.nombre"
+        }, {
+            data: "dFecha",
+            render: function(data) {
+                // controlamos que si la fecha es nula no se muestre
+                if (moment(data).isValid())
+                    return moment(data).format(i18n.t("app.dateFormat"));
+                else
+                    return "";
+            },
+            class: "text-center"
+        }, {
+            data: "hFecha",
+            render: function(data) {
+                // controlamos que si la fecha es nula no se muestre
+                if (moment(data).isValid())
+                    return moment(data).format(i18n.t("app.dateFormat"));
+                else
+                    return "";
+            },
+            class: "text-center"
+        }, {
+            data: "observaciones"
+        }, {
+            data: "evaluacionId",
+            render: function(data, type, row) {
+                var bt1 = "<button class='btn btn-circle btn-danger btn-lg' onclick='deleteEvaluacion(" + data + ");' title='" + i18n.t("app.eliminar") + "'> <i class='fa fa-trash-o fa-fw'></i> </button>";
+                var bt2 = "<button class='btn btn-circle btn-success btn-lg' onclick='editEvaluacion(" + data + ");' title='" + i18n.t("app.editar") + "'> <i class='fa fa-edit fa-fw'></i> </button>";
+                var html = "<div class='pull-right'>" + bt1 + " " + bt2 + "</div>";
+                return html;
+            }
+        }]
     });
 }
 
@@ -295,7 +302,7 @@ function loadTable1Evaluaciones(asgProyectoId) {
         dataType: "json",
         contentType: "application/json",
         data: JSON.stringify(data),
-        success: function (data, status) {
+        success: function(data, status) {
             // hay que mostrarlo en la zona de datos
             loadTable2Evaluaciones(data);
         },
@@ -321,7 +328,7 @@ function loadCatConocimientos(catConocimientoId) {
         url: "/api/catConocimientos",
         dataType: "json",
         contentType: "application/json",
-        success: function (data, status) {
+        success: function(data, status) {
             vm.posiblesCatConocimientos(data);
             vm.scatConocimientoId(catConocimientoId);
         },
@@ -335,7 +342,7 @@ function loadConocimientosEdit(conocimientoId) {
         url: "/api/conocimientos",
         dataType: "json",
         contentType: "application/json",
-        success: function (data, status) {
+        success: function(data, status) {
             vm.posiblesConocimientos(data);
             vm.sconocimientoId(conocimientoId);
         },
@@ -353,7 +360,7 @@ function loadConocimientos(catConocimientoId) {
         dataType: "json",
         contentType: "application/json",
         data: JSON.stringify(data),
-        success: function (data, status) {
+        success: function(data, status) {
             vm.posiblesConocimientos(data);
             vm.sconocimientoId(-1);
         },
@@ -362,7 +369,7 @@ function loadConocimientos(catConocimientoId) {
 }
 
 function cambioCategoria() {
-    var mf = function () {
+    var mf = function() {
         loadConocimientos(vm.scatConocimientoId());
     }
     return mf;
@@ -377,8 +384,8 @@ function deleteEvaluacion(id) {
     $.SmartMessageBox({
         title: "<i class='fa fa-info'></i> " + i18n.t("app.mensaje"),
         content: mens,
-        buttons: '['+ i18n.t("app.aceptar") +'][' + i18n.t("app.cancelar") + ']'
-    }, function (ButtonPressed) {
+        buttons: '[' + i18n.t("app.aceptar") + '][' + i18n.t("app.cancelar") + ']'
+    }, function(ButtonPressed) {
         if (ButtonPressed === i18n.t("app.aceptar")) {
             var data = {
                 proyectoId: id
@@ -389,7 +396,7 @@ function deleteEvaluacion(id) {
                 dataType: "json",
                 contentType: "application/json",
                 data: JSON.stringify(data),
-                success: function (data, status) {
+                success: function(data, status) {
                     loadTable1Evaluaciones(asgProyectoId);
                 },
                 error: errorAjax
@@ -411,7 +418,7 @@ function editEvaluacion(id) {
         url: "/api/evaluaciones/" + id,
         dataType: "json",
         contentType: "application/json",
-        success: function (data, status) {
+        success: function(data, status) {
             vm.evaluacionId(data.evaluacionId);
             // cargar los valores en los campos correspondientes.
             loadConocimientosEdit(data.conocimiento.conocimientoId);
@@ -432,7 +439,7 @@ function editEvaluacion(id) {
 }
 
 function editar() {
-    var mf = function () {
+    var mf = function() {
         if (!datosOK())
             return;
         // control de fechas 
@@ -464,7 +471,7 @@ function editar() {
             dataType: "json",
             contentType: "application/json",
             data: JSON.stringify(data),
-            success: function (data, status) {
+            success: function(data, status) {
                 // se oculta el botón de edición y se muestra el de creación
                 $("#btnAceptar").show();
                 $("#btnEditar").hide();

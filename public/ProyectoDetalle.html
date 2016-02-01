@@ -180,7 +180,7 @@
                         </li>
                         <li>
                             <a href="HabilidadGeneral.html">
-                                <i class="fa fa-th"></i> Habilidades
+                                <i class="fa fa-th"></i> Habilitaciones
                             </a>
                         </li>
                         <li>
@@ -219,7 +219,7 @@
                 </li>
                 <li>
                     <a href="#">
-                        <i class="fa fa-lg fa-fw fa-gears"></i> <span class="menu-item-parent">EVALUACIONES</span>
+                        <i class="fa fa-lg fa-fw fa-gears"></i> <span class="menu-item-parent">REGISTROS</span>
                     </a>
                     <ul>
                         <li>
@@ -375,6 +375,20 @@
                                                                     <input id="txtFechaFinal" type="text" name="txtFechaFinal" data-bind="value: fechaFinal" class="form-control datepicker" data-dateformat="dd/mm/yy" />
                                                                 </label>
                                                             </div>
+                                                        </section>
+                                                    </div>
+                                                    <div class="row">
+                                                        <section class="col col-md-6">
+                                                            <label class="label">Empresa</label>
+                                                            <label class="select">
+                                                                <select id="cmbEmpresas" name="cmbEmpresas" data-bind="options: posiblesEmpresas, optionsText: 'nombre', optionsValue: 'empresaId', value: sempresaId, valueAllowUnset: true"></select><i></i>
+                                                            </label>
+                                                        </section>
+                                                        <section class="col col-md-6">
+                                                            <label class="checkbox">
+                                                                <input type="checkbox" id="chkOcultar" name="chkOcultar" checked="false" data-bind="checked: ocultar">
+                                                                <i></i>Ocultar proyecto
+                                                            </label>
                                                         </section>
                                                     </div>
                                                 </fieldset>

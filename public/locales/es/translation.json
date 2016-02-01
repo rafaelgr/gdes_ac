@@ -68,6 +68,15 @@
         "proyecto": "Proyecto",
         "rol": "Rol"
     },
+    "cliEvaPorProyecto": {
+        "titulo": "Seleccione aquí el proyecto al que registrará conocimientos",
+        "buscar": "Buscar asignaciones por proyecto.",
+        "trabajador": "Trabajador",
+        "btnBuscar": "Buscar",
+        "nombre": "Nombre",
+        "proyecto": "Proyecto",
+        "rol": "Rol"
+    },
     "cliEvaAsgDetalle": {
         "titulo": "Detalles de áreas de conocimiento en esta asignación",
         "datosAsignacion": "Datos de la asignación",

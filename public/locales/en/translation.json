@@ -67,6 +67,15 @@
         "proyecto": "Project",
         "rol": "Rol"
     },
+    "cliEvaPorProyecto": {
+        "titulo": "Select here the project who you'll register knowledge",
+        "buscar": "Buscar asignaciones por proyecto.",
+        "trabajador": "Worker",
+        "btnBuscar": "Search",
+        "nombre": "Name",
+        "proyecto": "Project",
+        "rol": "Rol"
+    },
     "cliEvaAsgDetalle": {
         "titulo": "Areas of knowledge details, in this assignement",
         "datosAsignacion": "Assignement data",

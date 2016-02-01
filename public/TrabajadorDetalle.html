@@ -197,7 +197,7 @@
                             </li>
                             <li>
                                 <a href="HabilidadGeneral.html">
-                                    <i class="fa fa-th"></i> Habilidades
+                                    <i class="fa fa-th"></i> Habilitaciones
                                 </a>
                             </li>
                             <li>
@@ -236,7 +236,7 @@
                     </li>
                     <li>
                         <a href="#">
-                            <i class="fa fa-lg fa-fw fa-gears"></i> <span class="menu-item-parent">EVALUACIONES</span>
+                            <i class="fa fa-lg fa-fw fa-gears"></i> <span class="menu-item-parent">REGISTROS</span>
                         </a>
                         <ul>
                             <li>
@@ -424,18 +424,28 @@
                                                         </label>
                                                     </section>
                                                     <section class="col col-md-2">
-                                                        <label class="label">Es evaluador</label>
+                                                        <label class="label">Gestor</label>
                                                         <label class="checkbox">
                                                             <input id="chkEvaluador" name="chkEvaluador" type="checkbox" data-bind="checked: evaluador" />
                                                             <i></i>
                                                         </label>
                                                     </section>
                                                 </div>
+                                                <div class="row">
+                                                    <section class="col col-md-5">
+                                                            <label class="label">Estado</label>
+                                                            <label class="select">
+                                                                <select id="cmbEstados" name="cmbEstados" data-bind="options: posiblesEstados, optionsText: 'nombre', optionsValue: 'estadoId', value: sestadoId, valueAllowUnset: true"></select><i></i>
+                                                            </label>                                                        
+                                                    </section>
+                                                    <section class="col col-md-7">
+                                                    </section>
+                                                </div>
                                             </fieldset>
                                             <fieldset id="flEvaluados" style="display:none;">
                                                 <div class="row">
                                                     <section class="col col-md-12">
-                                                        <label class="label">ASIGNACIONES QUE EVALÚA</label>
+                                                        <label class="label">ASIGNACIONES QUE GESTIONA</label>
                                                     </section>
                                                 </div>
                                                 <div class="row">

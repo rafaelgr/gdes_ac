@@ -30,7 +30,7 @@ function initForm() {
         }
     });
     
-    $("#cmbHabilidades").select2({
+    $("#cmbHabilitaciones").select2({
         language: {
             errorLoading: function () { return "La carga falló"; }, 
             inputTooLong: function (e) { var t = e.input.length - e.maximum, n = "Por favor, elimine " + t + " car"; return t == 1?n += "ácter":n += "acteres", n; }, 
@@ -90,7 +90,7 @@ function initForm() {
         // se trata de un alta ponemos el id a cero para indicarlo.
         vm.conocimientoId(0);
         loadCatConocimientos(-1);
-        loadHabilidades(-1);
+        loadHabilitaciones(-1);
     }
 }
 
@@ -103,8 +103,8 @@ function conocimientoData() {
     // soporte de combos
     self.posiblesCatConocimientos = ko.observableArray([]);
     self.elegidosCatConocimientos = ko.observableArray([]);
-    self.posiblesHabilidades = ko.observableArray([]);
-    self.elegidosHabilidades = ko.observableArray([]);
+    self.posiblesHabilitaciones = ko.observableArray([]);
+    self.elegidosHabilitaciones = ko.observableArray([]);
     // valores escogidos
     self.scatConocimientoId = ko.observable();
     self.shabilidadId = ko.observable();
@@ -115,7 +115,7 @@ function loadData(conocimiento, categorias, habilidades) {
     vm.nombre(conocimiento.nombre);
     // montaje de las categorías
     loadCatConocimientos(categorias);
-    loadHabilidades(habilidades);
+    loadHabilitaciones(habilidades);
 }
 
 function loadCatConocimientos(categorias){
@@ -132,15 +132,15 @@ function loadCatConocimientos(categorias){
     });
 }
 
-function loadHabilidades(habilidades) {
+function loadHabilitaciones(habilidades) {
     $.ajax({
         type: "GET",
         url: "/api/habilidades",
         dataType: "json",
         contentType: "application/json",
         success: function (data, status) {
-            vm.posiblesHabilidades(data);
-            $("#cmbHabilidades").val(habilidades).trigger('change');
+            vm.posiblesHabilitaciones(data);
+            $("#cmbHabilitaciones").val(habilidades).trigger('change');
         },
         error: errorAjax
     });
@@ -265,7 +265,7 @@ function aceptar() {
                     function (callback) {
                         var data = {
                             "conocimientoId": conocimientoId,
-                            "habilidades": vm.elegidosHabilidades()
+                            "habilidades": vm.elegidosHabilitaciones()
                         };
                         $.ajax({
                             type: "POST",
@@ -332,7 +332,7 @@ function aceptar() {
                     function (callback) {
                         var data = {
                             "conocimientoId": conocimientoId,
-                            "habilidades": vm.elegidosHabilidades()
+                            "habilidades": vm.elegidosHabilitaciones()
                         };
                         $.ajax({
                             type: "POST",

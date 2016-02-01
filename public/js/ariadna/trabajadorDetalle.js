@@ -75,6 +75,14 @@ function admData() {
     self.posiblesEmpresas = ko.observableArray([]);
     // valores escogidos
     self.sempresaId = ko.observable();
+    // soporte de combos
+    self.posiblesEstados = ko.observableArray([
+        {estadoId:0, nombre:"Activo"},
+        {estadoId:1, nombre:"Baja"},
+        {estadoId:2, nombre:"Otros"}
+        ]);
+    // valores escogidos
+    self.sestadoId = ko.observable();
 }
 
 function loadData(data) {
@@ -93,6 +101,11 @@ function loadData(data) {
         loadEmpresas(data.empresaId);
     } else {
         loadEmpresas(-1);
+    }
+    if (data.estado != null){
+        vm.sestadoId(data.estado);
+    } else {
+        vm.sestadoId(0);
     }
 }
 
@@ -143,7 +156,8 @@ function aceptar() {
                 "password": vm.password(),
                 "evaluador": vm.evaluador(),
                 "idioma": vm.idioma(),
-                "empresaId": vm.sempresaId()
+                "empresaId": vm.sempresaId(),
+                "estado": vm.sestadoId()
             }
         };
         if (trabajadorId == 0) {

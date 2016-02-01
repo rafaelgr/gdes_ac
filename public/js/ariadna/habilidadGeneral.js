@@ -8,7 +8,7 @@ var responsiveHelper_datatable_fixed_column = undefined;
 var responsiveHelper_datatable_col_reorder = undefined;
 var responsiveHelper_datatable_tabletools = undefined;
 
-var dataHabilidades;
+var dataHabilitaciones;
 var habilidadId;
 
 var breakpointDefinition = {
@@ -23,17 +23,17 @@ function initForm() {
     pageSetUp();
     getVersionFooter();
     //
-    $('#btnBuscar').click(buscarHabilidades());
+    $('#btnBuscar').click(buscarHabilitaciones());
     $('#btnAlta').click(crearHabilidad());
     $('#frmBuscar').submit(function () {
         return false
     });
     //$('#txtBuscar').keypress(function (e) {
     //    if (e.keyCode == 13)
-    //        buscarHabilidades();
+    //        buscarHabilitaciones();
     //});
     //
-    initTablaHabilidades();
+    initTablaHabilitaciones();
     // comprobamos parámetros
     habilidadId = gup('HabilidadId');
     if (habilidadId !== '') {
@@ -51,14 +51,14 @@ function initForm() {
             success: function (data, status) {
                 // hay que mostrarlo en la zona de datos
                 var data2 = [data];
-                loadTablaHabilidades(data2);
+                loadTablaHabilitaciones(data2);
             },
             error: errorAjax
         });
     }
 }
 
-function initTablaHabilidades() {
+function initTablaHabilitaciones() {
     tablaCarro = $('#dt_habilidad').dataTable({
         "autoWidth": true,
         "columnDefs": [
@@ -108,7 +108,7 @@ function initTablaHabilidades() {
                 sortDescending: ": Activar para ordenar la columna de manera descendente"
             }
         },
-        "data": dataHabilidades,
+        "data": dataHabilitaciones,
         columns: [
             {
             data: "nombre"
@@ -148,7 +148,7 @@ function datosOK() {
     return $('#frmBuscar').valid();
 }
 
-function loadTablaHabilidades(data) {
+function loadTablaHabilitaciones(data) {
     var dt = $('#dt_habilidad').dataTable();
     if (data !== null && data.length === 0) {
         mostrarMensajeSmart('No se han encontrado registros');
@@ -161,7 +161,7 @@ function loadTablaHabilidades(data) {
     }
 }
 
-function buscarHabilidades() {
+function buscarHabilitaciones() {
     var mf = function () {
         if (!datosOK()) {
             return;
@@ -180,7 +180,7 @@ function buscarHabilidades() {
             data: JSON.stringify(data),
             success: function (data, status) {
                 // hay que mostrarlo en la zona de datos
-                loadTablaHabilidades(data);
+                loadTablaHabilitaciones(data);
             },
             error: errorAjax
         });
@@ -215,7 +215,7 @@ function deleteHabilidad(id) {
                 contentType: "application/json",
                 data: JSON.stringify(data),
                 success: function (data, status) {
-                    var fn = buscarHabilidades();
+                    var fn = buscarHabilitaciones();
                     fn();
                 },
                 error: errorAjax
