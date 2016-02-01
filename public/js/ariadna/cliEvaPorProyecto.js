@@ -71,7 +71,7 @@ function asgProyectoData() {
 function loadProyectos(proyectoId) {
     $.ajax({
         type: "GET",
-        url: "/api/proyectos",
+        url: "/api/proyectos2",
         dataType: "json",
         contentType: "application/json",
         success: function (data, status) {

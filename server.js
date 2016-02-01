@@ -113,6 +113,8 @@ router.route("/proyectos")
 	.get(proyectos_api.getProyectos)
 	.post(proyectos_api.postProyecto);
 
+router.route("/proyectos2")
+	.get(proyectos_api.getProyectos2)
 
 router.route("/proyectos/:proyectoId")
 	.get(proyectos_api.getProyecto)
