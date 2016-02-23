@@ -175,7 +175,7 @@ function buscarAsgProyectos() {
         }
         // enviar la consulta por la red (AJAX)
         var data = {
-            "trabajadorId": vm.strabajadorId()
+            "trabajadorId": vm.strabajadorId()[0]
         };
         $.ajax({
             type: "POST",

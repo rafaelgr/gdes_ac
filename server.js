@@ -45,8 +45,8 @@ var console_log_file = __dirname + "/logs/node.console.log";
 app.use(bodyParser());
 
 // preparar y activar con morgan el fichero para grabar el log
-var logfile = fs.createWriteStream(express_log_file,{
-	"flags":"a"
+var logfile = fs.createWriteStream(express_log_file, {
+    "flags": "a"
 });
 
 /*
@@ -60,7 +60,7 @@ app.use (morgan({
 app.use(cors());
 
 // servidor html estático
-app.use(express.static(__dirname+"/public"));
+app.use(express.static(__dirname + "/public"));
 
 /*
 // al funcionar como servicio redireccionamos la consola y las pantallas
@@ -85,18 +85,18 @@ process.__defineGetter__("stdout", function(){
 var router = express.Router();
 
 // paso común de todas las rutas
-router.use(function(req, res, next){
-	// aquí irá código que se desea ejecutar de manera común a todas las rutas
+router.use(function(req, res, next) {
+    // aquí irá código que se desea ejecutar de manera común a todas las rutas
     // -----------
     console.log(req.body);
-	next();
+    next();
 });
 
-router.get("/", function(req, res){
-//	res.json({
-//		mensaje: "API GDES AC"
-//	});
-	res.send("API GDES OD [A la escucha]");
+router.get("/", function(req, res) {
+    //	res.json({
+    //		mensaje: "API GDES AC"
+    //	});
+    res.send("API GDES OD [A la escucha]");
 });
 
 //================================================================
@@ -105,207 +105,210 @@ router.get("/", function(req, res){
 
 // --> Relacionadas con control de versiones
 router.route("/version")
-	.get(version_api.getVersion);
+    .get(version_api.getVersion);
 
 
 // --> Relacionadas con proyectos
 router.route("/proyectos")
-	.get(proyectos_api.getProyectos)
-	.post(proyectos_api.postProyecto);
+    .get(proyectos_api.getProyectos)
+    .post(proyectos_api.postProyecto);
 
 router.route("/proyectos2")
-	.get(proyectos_api.getProyectos2)
+    .get(proyectos_api.getProyectos2);
+
+router.route("/proyectos/evaluador")
+    .get(proyectos_api.getProyectosEvaluador)
 
 router.route("/proyectos/:proyectoId")
-	.get(proyectos_api.getProyecto)
-	.put(proyectos_api.putProyecto)
-	.delete(proyectos_api.deleteProyecto);
+    .get(proyectos_api.getProyecto)
+    .put(proyectos_api.putProyecto)
+    .delete(proyectos_api.deleteProyecto);
 
 router.route("/proyectos-buscar")
-	.post(proyectos_api.postProyectosBuscar);
+    .post(proyectos_api.postProyectosBuscar);
 
 // --> Relacionadas con administradores
 router.route("/administradores")
-	.get(administradores_api.getAdministradores)
-	.post(administradores_api.postAdministrador);
+    .get(administradores_api.getAdministradores)
+    .post(administradores_api.postAdministrador);
 
 
 router.route("/administradores/:administradorId")
-	.get(administradores_api.getAdministrador)
-	.put(administradores_api.putAdministrador)
-	.delete(administradores_api.deleteAdministrador);
+    .get(administradores_api.getAdministrador)
+    .put(administradores_api.putAdministrador)
+    .delete(administradores_api.deleteAdministrador);
 
 router.route("/administradores-buscar")
-	.post(administradores_api.postAdministradoresBuscar);
+    .post(administradores_api.postAdministradoresBuscar);
 
 
 // --> Relacionadas con categorias de conocimientos
 router.route("/catConocimientos")
-	.get(catConocimientos_api.getCatConocimientos)
-	.post(catConocimientos_api.postCatConocimiento);
+    .get(catConocimientos_api.getCatConocimientos)
+    .post(catConocimientos_api.postCatConocimiento);
 
 
 router.route("/catConocimientos/:catConocimientoId")
-	.get(catConocimientos_api.getCatConocimiento)
-	.put(catConocimientos_api.putCatConocimiento)
-	.delete(catConocimientos_api.deleteCatConocimiento);
+    .get(catConocimientos_api.getCatConocimiento)
+    .put(catConocimientos_api.putCatConocimiento)
+    .delete(catConocimientos_api.deleteCatConocimiento);
 
 router.route("/catConocimientos-buscar")
-	.post(catConocimientos_api.postCatConocimientosBuscar);
+    .post(catConocimientos_api.postCatConocimientosBuscar);
 
 
 // --> Relacionadas con categorias de conocimientos
 router.route("/conocimientos")
-	.get(conocimientos_api.getConocimientos)
-	.post(conocimientos_api.postConocimiento);
+    .get(conocimientos_api.getConocimientos)
+    .post(conocimientos_api.postConocimiento);
 
 
 router.route("/conocimientos/:conocimientoId")
-	.get(conocimientos_api.getConocimiento)
-	.put(conocimientos_api.putConocimiento)
-	.delete(conocimientos_api.deleteConocimiento);
+    .get(conocimientos_api.getConocimiento)
+    .put(conocimientos_api.putConocimiento)
+    .delete(conocimientos_api.deleteConocimiento);
 
 router.route("/conocimientos-buscar")
-	.post(conocimientos_api.postConocimientosBuscar);
-    
+    .post(conocimientos_api.postConocimientosBuscar);
+
 
 // --> Relacionadas con categorias de roles
 router.route("/roles")
-	.get(roles_api.getRoles)
-	.post(roles_api.postRol);
+    .get(roles_api.getRoles)
+    .post(roles_api.postRol);
 
 
 router.route("/roles/:rolId")
-	.get(roles_api.getRol)
-	.put(roles_api.putRol)
-	.delete(roles_api.deleteRol);
+    .get(roles_api.getRol)
+    .put(roles_api.putRol)
+    .delete(roles_api.deleteRol);
 
 router.route("/roles-buscar")
-	.post(roles_api.postRolesBuscar);
+    .post(roles_api.postRolesBuscar);
 
 // --> Relacionadas con trabajadores
 router.route("/trabajadores")
-	.get(trabajadores_api.getTrabajadores)
-	.post(trabajadores_api.postTrabajador);
+    .get(trabajadores_api.getTrabajadores)
+    .post(trabajadores_api.postTrabajador);
 
 
 router.route("/trabajadores/:trabajadorId")
-	.get(trabajadores_api.getTrabajador)
-	.put(trabajadores_api.putTrabajador)
-	.delete(trabajadores_api.deleteTrabajador);
+    .get(trabajadores_api.getTrabajador)
+    .put(trabajadores_api.putTrabajador)
+    .delete(trabajadores_api.deleteTrabajador);
 
 router.route("/trabajadores-buscar")
-	.post(trabajadores_api.postTrabajadoresBuscar);
+    .post(trabajadores_api.postTrabajadoresBuscar);
 
 router.route("/trabajadores-login")
-	.post(trabajadores_api.postTrabajadorLogin);
+    .post(trabajadores_api.postTrabajadorLogin);
 
 router.route("/evaluadores")
-	.get(trabajadores_api.getEvaluadores)
+    .get(trabajadores_api.getEvaluadores)
 
 // --> Relacionadas con evaluador - evaluado
 
 router.route("/evaluados/:id")
-	.post(evaluados_api.postTrabajadorEvaluado)
-	.delete(evaluados_api.deleteTrabajadorEvaluado);
+    .post(evaluados_api.postTrabajadorEvaluado)
+    .delete(evaluados_api.deleteTrabajadorEvaluado);
 
 router.route("/evaluados-buscar")
-	.post(evaluados_api.postEvaluadosBuscar);
+    .post(evaluados_api.postEvaluadosBuscar);
 
 
 // --> Relacionadas con asignación de proyectos
 router.route("/asg-proyectos")
-	.get(asg_proyectos_api.getAsgProyectos)
-	.post(asg_proyectos_api.postAsgProyecto);
+    .get(asg_proyectos_api.getAsgProyectos)
+    .post(asg_proyectos_api.postAsgProyecto);
 
 
 router.route("/asg-proyectos/:asgProyectoId")
-	.get(asg_proyectos_api.getAsgProyecto)
-	.put(asg_proyectos_api.putAsgProyecto)
-	.delete(asg_proyectos_api.deleteAsgProyecto);
+    .get(asg_proyectos_api.getAsgProyecto)
+    .put(asg_proyectos_api.putAsgProyecto)
+    .delete(asg_proyectos_api.deleteAsgProyecto);
 
 router.route("/asg-proyectos-buscar")
-	.post(asg_proyectos_api.postAsgProyectosBuscar);
+    .post(asg_proyectos_api.postAsgProyectosBuscar);
 
 router.route("/asg-proyecto-buscar")
-	.post(asg_proyectos_api.postAsgProyectoBuscar);
+    .post(asg_proyectos_api.postAsgProyectoBuscar);
 
 router.route("/asg-proyecto-evaluador-buscar")
-	.post(asg_proyectos_api.postAsgProyectoEvaluadorBuscar);
+    .post(asg_proyectos_api.postAsgProyectoEvaluadorBuscar);
 
 // --> Relacionadas con evaluaciones
 router.route("/evaluaciones")
-	.get(evaluaciones_api.getEvaluaciones)
-	.post(evaluaciones_api.postEvaluacion);
+    .get(evaluaciones_api.getEvaluaciones)
+    .post(evaluaciones_api.postEvaluacion);
 
 
 router.route("/evaluaciones/:evaluacionId")
-	.get(evaluaciones_api.getEvaluacion)
-	.put(evaluaciones_api.putEvaluacion)
-	.delete(evaluaciones_api.deleteEvaluacion);
+    .get(evaluaciones_api.getEvaluacion)
+    .put(evaluaciones_api.putEvaluacion)
+    .delete(evaluaciones_api.deleteEvaluacion);
 
 router.route("/evaluaciones-buscar")
-	.post(evaluaciones_api.postEvaluacionesBuscar);
+    .post(evaluaciones_api.postEvaluacionesBuscar);
 
 // --> Relacionadas con informes
 router.route("/informes")
-	.post(informes_api.postInformes);
+    .post(informes_api.postInformes);
 
 // --> Relacionadas con servicios
 router.route("/servicios")
-	.get(servicios_api.getServicios)
-	.post(servicios_api.postServicio);
+    .get(servicios_api.getServicios)
+    .post(servicios_api.postServicio);
 
 
 router.route("/servicios/:servicioId")
-	.get(servicios_api.getServicio)
-	.put(servicios_api.putServicio)
-	.delete(servicios_api.deleteServicio);
+    .get(servicios_api.getServicio)
+    .put(servicios_api.putServicio)
+    .delete(servicios_api.deleteServicio);
 
 router.route("/servicios-buscar")
-	.post(servicios_api.postServiciosBuscar);
+    .post(servicios_api.postServiciosBuscar);
 
 // --> Relacionadas con habilidades
 router.route("/habilidades")
-	.get(habilidades_api.getHabilidades)
-	.post(habilidades_api.postHabilidad);
+    .get(habilidades_api.getHabilidades)
+    .post(habilidades_api.postHabilidad);
 
 router.route("/habilidades/:habilidadId")
-	.get(habilidades_api.getHabilidad)
-	.put(habilidades_api.putHabilidad)
-	.delete(habilidades_api.deleteHabilidad);
+    .get(habilidades_api.getHabilidad)
+    .put(habilidades_api.putHabilidad)
+    .delete(habilidades_api.deleteHabilidad);
 
 router.route("/habilidades-buscar")
-	.post(habilidades_api.postHabilidadesBuscar);
+    .post(habilidades_api.postHabilidadesBuscar);
 
 // relaciones de conocimientos con categorias
 router.route("/conocimientos-categorias")
-	.post(conocimientos_categorias_api.postConocimientoCategorias);
+    .post(conocimientos_categorias_api.postConocimientoCategorias);
 
 router.route("/conocimientos-categorias/:conocimientoId")
-	.get(conocimientos_categorias_api.getConocimientoCategorias);
+    .get(conocimientos_categorias_api.getConocimientoCategorias);
 
 // relaciones de conocimientos con habilidades
 router.route("/conocimientos-habilidades")
-	.post(conocimientos_habilidades_api.postConocimientoHabilidades);
+    .post(conocimientos_habilidades_api.postConocimientoHabilidades);
 
 router.route("/conocimientos-habilidades/:conocimientoId")
-	.get(conocimientos_habilidades_api.getConocimientoHabilidades);
+    .get(conocimientos_habilidades_api.getConocimientoHabilidades);
 
 
 // --> Relacionadas con empresas
 router.route("/empresas")
-	.get(empresas_api.getEmpresas)
-	.post(empresas_api.postEmpresa);
+    .get(empresas_api.getEmpresas)
+    .post(empresas_api.postEmpresa);
 
 
 router.route("/empresas/:empresaId")
-	.get(empresas_api.getEmpresa)
-	.put(empresas_api.putEmpresa)
-	.delete(empresas_api.deleteEmpresa);
+    .get(empresas_api.getEmpresa)
+    .put(empresas_api.putEmpresa)
+    .delete(empresas_api.deleteEmpresa);
 
 router.route("/empresas-buscar")
-	.post(empresas_api.postEmpresasBuscar);
+    .post(empresas_api.postEmpresasBuscar);
 
 //================================================================
 // Registro de rutas y arranque del servidor
