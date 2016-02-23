@@ -181,7 +181,10 @@
                                         <strong><span data-i18n="cliEvaAsgDetalle.trabajador">Trabajador: *</span></strong><span data-bind="text: nomTrabajador"></span>
                                     </section>
                                     <section class="col col-md-6">
-                                        <strong><span data-i18n="cliEvaAsgDetalle.rol">Rol: *</span></strong><span data-bind="text: nomRol"></span>
+                                        <label class="label"> <strong><span data-i18n="cliEvaAsgDetalle.rol">Rol: *</span></strong></label>
+                                        <label class="select">
+                                            <select id="cmbRoles" name="cmbRoles" data-bind="options: posiblesRoles, optionsText: 'nombre', optionsValue: 'rolId', value: srolId, valueAllowUnset: true"></select><i></i>
+                                        </label>
                                     </section>
                                 </div>
                             </fieldset>

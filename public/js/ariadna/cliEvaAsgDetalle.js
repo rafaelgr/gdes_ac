@@ -7,6 +7,8 @@ var responsiveHelper_datatable_fixed_column = undefined;
 var responsiveHelper_datatable_col_reorder = undefined;
 var responsiveHelper_datatable_tabletools = undefined;
 
+var asgProyectoObj;
+
 var dataEvaluaciones;
 var areaId;
 
@@ -65,6 +67,7 @@ function initForm() {
     $("#btnAceptar").click(aceptar());
     $("#btnSalir").click(salir());
     $("#cmbCatConocimientos").change(cambioCategoria());
+    $("#cmbRoles").change(cambioRol());
     $("#frmEvaluacion").submit(function() {
         return false;
     });
@@ -88,6 +91,7 @@ function initForm() {
             data: JSON.stringify(data),
             success: function(data, status) {
                 // hay que mostrarlo en la zona de datos
+                asgProyectoObj = data;
                 loadData(data);
                 loadTable1Evaluaciones(asgProyectoId);
                 loadCatConocimientos(-1);
@@ -116,10 +120,12 @@ function asgProyectoData() {
     self.hFecha = ko.observable();
     self.observaciones = ko.observable();
     // desplegables 2
+    self.posiblesRoles = ko.observableArray([]);
     self.posiblesCatConocimientos = ko.observableArray([]);
     self.posiblesConocimientos = ko.observableArray([]);
     self.scatConocimientoId = ko.observable();
     self.sconocimientoId = ko.observable();
+    self.srolId = ko.observable();
 }
 
 function loadData(data) {
@@ -131,6 +137,8 @@ function loadData(data) {
     vm.nomProyecto(data.proyecto.nombre);
     vm.rol(data.rol);
     vm.nomRol(data.rol.nombre);
+
+    loadRoles(data.rol.rolId);
 
     // fechas por defecto igual a las de la asignacion
     if (data.fechaInicial != null) {
@@ -322,6 +330,21 @@ function loadTable2Evaluaciones(data) {
     }
 }
 
+function loadRoles(rolId) {
+    $.ajax({
+        type: "GET",
+        url: "/api/roles",
+        dataType: "json",
+        contentType: "application/json",
+        success: function(data, status) {
+            vm.posiblesRoles(data);
+            vm.srolId(rolId);
+        },
+        error: errorAjax
+    });
+}
+
+
 function loadCatConocimientos(catConocimientoId) {
     $.ajax({
         type: "GET",
@@ -375,6 +398,12 @@ function cambioCategoria() {
     return mf;
 }
 
+function cambioRol() {
+    var mf = function() {
+        alert('Cambio de rol');
+    }
+    return mf;
+}
 
 
 
