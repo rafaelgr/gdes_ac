@@ -23,6 +23,74 @@ var evaluacionId = 0;
 var trabajador;
 var lang;
 
+
+$("#cmbCatConocimientos").select2({
+    allowClear: true,
+    language: {
+        errorLoading: function() {
+            return "La carga falló";
+        },
+        inputTooLong: function(e) {
+            var t = e.input.length - e.maximum,
+                n = "Por favor, elimine " + t + " car";
+            return t == 1 ? n += "ácter" : n += "acteres", n;
+        },
+        inputTooShort: function(e) {
+            var t = e.minimum - e.input.length,
+                n = "Por favor, introduzca " + t + " car";
+            return t == 1 ? n += "ácter" : n += "acteres", n;
+        },
+        loadingMore: function() {
+            return "Cargando más resultados…";
+        },
+        maximumSelected: function(e) {
+            var t = "Sólo puede seleccionar " + e.maximum + " elemento";
+            return e.maximum != 1 && (t += "s"), t;
+        },
+        noResults: function() {
+            return "No se encontraron resultados";
+        },
+        searching: function() {
+            return "Buscando…";
+        }
+    }
+});
+
+$("#cmbConocimientos").select2({
+    allowClear: true,
+    language: {
+        errorLoading: function() {
+            return "La carga falló";
+        },
+        inputTooLong: function(e) {
+            var t = e.input.length - e.maximum,
+                n = "Por favor, elimine " + t + " car";
+            return t == 1 ? n += "ácter" : n += "acteres", n;
+        },
+        inputTooShort: function(e) {
+            var t = e.minimum - e.input.length,
+                n = "Por favor, introduzca " + t + " car";
+            return t == 1 ? n += "ácter" : n += "acteres", n;
+        },
+        loadingMore: function() {
+            return "Cargando más resultados…";
+        },
+        maximumSelected: function(e) {
+            var t = "Sólo puede seleccionar " + e.maximum + " elemento";
+            return e.maximum != 1 && (t += "s"), t;
+        },
+        noResults: function() {
+            return "No se encontraron resultados";
+        },
+        searching: function() {
+            return "Buscando…";
+        }
+    }
+});
+
+
+
+
 function initForm() {
     // comprobarLogin();
     // de smart admin
@@ -122,7 +190,9 @@ function asgProyectoData() {
     // desplegables 2
     self.posiblesRoles = ko.observableArray([]);
     self.posiblesCatConocimientos = ko.observableArray([]);
+    self.elegidosCatConocimientos = ko.observableArray([]);
     self.posiblesConocimientos = ko.observableArray([]);
+    self.elegidosConocimientos = ko.observableArray([]);
     self.scatConocimientoId = ko.observable();
     self.sconocimientoId = ko.observable();
     self.srolId = ko.observable();
@@ -188,32 +258,48 @@ function aceptar() {
         } else {
             fecha2 = null;
         }
-        var data = {
-            evaluacion: {
-                "evaluacionId": 0,
-                "asgProyecto": {
-                    "asgProyectoId": asgProyectoId
-                },
-                "conocimiento": {
-                    "conocimientoId": vm.sconocimientoId()
-                },
-                "dFecha": fecha1,
-                "hFecha": fecha2,
-                "observaciones": vm.observaciones()
-            }
-        };
-        $.ajax({
-            type: "POST",
-            url: "api/evaluaciones",
-            dataType: "json",
-            contentType: "application/json",
-            data: JSON.stringify(data),
-            success: function(data, status) {
-                loadTable1Evaluaciones(asgProyectoId);
-                limpiarCampos();
+        // ahora hay que hacer tantas llamadas como conocimientos /experiencias hayan escogido
+        async.each(vm.elegidosConocimientos(),
+            function(conocimientoId, done) {
+                var data = {
+                    evaluacion: {
+                        "evaluacionId": 0,
+                        "asgProyecto": {
+                            "asgProyectoId": asgProyectoId
+                        },
+                        "conocimiento": {
+                            "conocimientoId": conocimientoId
+                        },
+                        "dFecha": fecha1,
+                        "hFecha": fecha2,
+                        "observaciones": vm.observaciones()
+                    }
+                };
+                $.ajax({
+                    type: "POST",
+                    url: "api/evaluaciones",
+                    dataType: "json",
+                    contentType: "application/json",
+                    data: JSON.stringify(data),
+                    success: function(data, status) {
+                        done();
+                    },
+                    error: function(xhr, textStatus, errorThrwon) {
+                        done(xhr, textStatus, errorThrwon);
+                    }
+                });
+
             },
-            error: errorAjax
-        });
+            function(xhr, textStatus, errorThrwon) {
+                if (!xhr) {
+                    loadTable1Evaluaciones(asgProyectoId);
+                    limpiarCampos();
+                } else {
+                    errorAjax(xhr, textStatus, errorThrwon);
+                }
+
+            });
+
     };
     return mf;
 }
@@ -352,8 +438,11 @@ function loadCatConocimientos(catConocimientoId) {
         dataType: "json",
         contentType: "application/json",
         success: function(data, status) {
-            vm.posiblesCatConocimientos(data);
-            vm.scatConocimientoId(catConocimientoId);
+            var catConocimientos = [{ catConocimientoId: 0, nombre: "" }].concat(data);
+            vm.posiblesCatConocimientos(catConocimientos);
+            if (catConocimientoId) {
+                vm.elegidosCatConocimientos().push(catConocimientoId);
+            }
         },
         error: errorAjax
     });
@@ -366,14 +455,19 @@ function loadConocimientosEdit(conocimientoId) {
         dataType: "json",
         contentType: "application/json",
         success: function(data, status) {
-            vm.posiblesConocimientos(data);
-            vm.sconocimientoId(conocimientoId);
+            var conocimientos = [{ conocimientoId: 0, nombre: "" }].concat(data);
+            vm.posiblesConocimientos(conocimientos);
+            if (conocimientoId) {
+                $("#cmbConocimientos").val([conocimientoId]).trigger('change');
+                //vm.elegidosConocimientos([conocimientoId]);
+            }
         },
         error: errorAjax
     });
 }
 
 function loadConocimientos(catConocimientoId) {
+    if (!catConocimientoId) return;
     var data = {
         catConocimientoId: catConocimientoId
     }
@@ -384,8 +478,9 @@ function loadConocimientos(catConocimientoId) {
         contentType: "application/json",
         data: JSON.stringify(data),
         success: function(data, status) {
-            vm.posiblesConocimientos(data);
-            vm.sconocimientoId(-1);
+            var conocimientos = [{ conocimientoId: 0, nombre: "" }].concat(data);
+            vm.posiblesConocimientos(conocimientos);
+            vm.elegidosConocimientos([]);
         },
         error: errorAjax
     });
@@ -393,7 +488,7 @@ function loadConocimientos(catConocimientoId) {
 
 function cambioCategoria() {
     var mf = function() {
-        loadConocimientos(vm.scatConocimientoId());
+        loadConocimientos(vm.elegidosCatConocimientos()[0]);
     }
     return mf;
 }
@@ -503,7 +598,7 @@ function editar() {
                     "asgProyectoId": asgProyectoId
                 },
                 "conocimiento": {
-                    "conocimientoId": vm.sconocimientoId()
+                    "conocimientoId": vm.elegidosConocimientos()[0]
                 },
                 "dFecha": fecha1,
                 "hFecha": fecha2,
