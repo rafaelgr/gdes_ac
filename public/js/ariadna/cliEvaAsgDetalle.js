@@ -400,7 +400,23 @@ function cambioCategoria() {
 
 function cambioRol() {
     var mf = function() {
-        alert('Cambio de rol');
+        var data = {
+            asgProyecto: asgProyectoObj
+        };
+        data.asgProyecto.rol.rolId = vm.srolId();
+        // modificar el rol
+        $.ajax({
+            type: "PUT",
+            url: "api/asg-proyectos/" + data.asgProyecto.asgProyectoId,
+            dataType: "json",
+            contentType: "application/json",
+            data: JSON.stringify(data),
+            success: function(data, status) {
+                // simplemente lo hemos cambiado
+                mostrarMensajeSmart(i18n.t("cliEvaAsgDetalle.rolCambiado"));
+            },
+            error: errorAjax
+        });
     }
     return mf;
 }

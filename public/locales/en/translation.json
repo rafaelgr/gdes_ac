@@ -91,6 +91,7 @@
         "observaciones": "Comments: ",
         "btnSalir": "Exit wihtout saving",
         "btnAceptar": "Add record",
-        "btnEditar":  "Edit record"
+        "btnEditar":  "Edit record",
+        "rolCambiado": "Rol changed"
     }
 }

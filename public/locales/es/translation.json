@@ -92,6 +92,7 @@
         "observaciones": "Observaciones: ",
         "btnSalir": "Salir sin guardar",
         "btnAceptar": "Agregar registro",
-        "btnEditar":  "Editar registro"
+        "btnEditar":  "Editar registro",
+        "rolCambiado": "Rol cambiado"
     }
 }
