@@ -25,7 +25,7 @@ function initForm() {
     //
     $('#btnBuscar').click(buscarProyectos());
     $('#btnAlta').click(crearProyecto());
-    $('#frmBuscar').submit(function () {
+    $('#frmBuscar').submit(function() {
         return false
     });
     //$('#txtBuscar').keypress(function (e) {
@@ -39,16 +39,16 @@ function initForm() {
     if (proyectoId !== '') {
         // cargar la tabla con un único valor que es el que corresponde.
         var data = {
-            id: proyectoId
-        }
-        // hay que buscar ese elemento en concreto
+                id: proyectoId
+            }
+            // hay que buscar ese elemento en concreto
         $.ajax({
             type: "GET",
             url: "api/proyectos/" + proyectoId,
             dataType: "json",
             contentType: "application/json",
             data: JSON.stringify(data),
-            success: function (data, status) {
+            success: function(data, status) {
                 // hay que mostrarlo en la zona de datos
                 var data2 = [data];
                 loadTablaProyectos(data2);
@@ -61,16 +61,16 @@ function initForm() {
 function initTablaProyectos() {
     tablaCarro = $('#dt_proyecto').dataTable({
         autoWidth: true,
-        preDrawCallback: function () {
+        preDrawCallback: function() {
             // Initialize the responsive datatables helper once.
             if (!responsiveHelper_dt_basic) {
                 responsiveHelper_dt_basic = new ResponsiveDatatablesHelper($('#dt_proyecto'), breakpointDefinition);
             }
         },
-        rowCallback: function (nRow) {
+        rowCallback: function(nRow) {
             responsiveHelper_dt_basic.createExpandIcon(nRow);
         },
-        drawCallback: function (oSettings) {
+        drawCallback: function(oSettings) {
             responsiveHelper_dt_basic.respond();
         },
         language: {
@@ -95,33 +95,36 @@ function initTablaProyectos() {
         },
         data: dataProyectos,
         columns: [
-            { data: "nombre" },
-            { data: "fechaInicio",
-                render: function (data) {
+            { data: "nombre" }, {
+                data: "fechaInicio",
+                render: function(data) {
                     // controlamos que si la fecha es nula no se muestre
                     if (moment(data).isValid())
                         return moment(data).format('DD/MM/YYYY');
                     else
                         return "";
                 },
-                class: "text-center" },
-            { data: "fechaFinal",
-                render: function (data) {
+                class: "text-center"
+            }, {
+                data: "fechaFinal",
+                render: function(data) {
                     // controlamos que si la fecha es nula no se muestre
                     if (moment(data).isValid())
                         return moment(data).format('DD/MM/YYYY');
                     else
                         return "";
                 },
-                class: "text-center" }, 
-            { data: "proyectoId",
-              render: function (data, type, row) {
+                class: "text-center"
+            }, {
+                data: "proyectoId",
+                render: function(data, type, row) {
                     var bt1 = "<button class='btn btn-circle btn-danger btn-lg' onclick='deleteProyecto(" + data + ");' title='Eliminar registro'> <i class='fa fa-trash-o fa-fw'></i> </button>";
                     var bt2 = "<button class='btn btn-circle btn-success btn-lg' onclick='editProyecto(" + data + ");' title='Editar registro'> <i class='fa fa-edit fa-fw'></i> </button>";
                     var html = "<div class='pull-right'>" + bt1 + " " + bt2 + "</div>";
                     return html;
+                }
             }
-        }]
+        ]
     });
 }
 
@@ -138,7 +141,7 @@ function datosOK() {
             }
         },
         // Do not change code below
-        errorPlacement: function (error, element) {
+        errorPlacement: function(error, element) {
             error.insertAfter(element.parent());
         }
     });
@@ -159,7 +162,7 @@ function loadTablaProyectos(data) {
 }
 
 function buscarProyectos() {
-    var mf = function () {
+    var mf = function() {
         if (!datosOK()) {
             return;
         }
@@ -169,24 +172,40 @@ function buscarProyectos() {
         var data = {
             "nombre": aBuscar
         };
-        $.ajax({
-            type: "POST",
-            url: "api/proyectos-buscar",
-            dataType: "json",
-            contentType: "application/json",
-            data: JSON.stringify(data),
-            success: function (data, status) {
-                // hay que mostrarlo en la zona de datos
-                loadTablaProyectos(data);
-            },
-            error: errorAjax
-        });
+        if ($("#chkOcultos").is(':checked')) {
+            $.ajax({
+                type: "POST",
+                url: "api/proyectos-buscar",
+                dataType: "json",
+                contentType: "application/json",
+                data: JSON.stringify(data),
+                success: function(data, status) {
+                    // hay que mostrarlo en la zona de datos
+                    loadTablaProyectos(data);
+                },
+                error: errorAjax
+            });
+        } else {
+            $.ajax({
+                type: "POST",
+                url: "api/proyectos-buscar2",
+                dataType: "json",
+                contentType: "application/json",
+                data: JSON.stringify(data),
+                success: function(data, status) {
+                    // hay que mostrarlo en la zona de datos
+                    loadTablaProyectos(data);
+                },
+                error: errorAjax
+            });
+        }
+
     };
     return mf;
 }
 
 function crearProyecto() {
-    var mf = function () {
+    var mf = function() {
         var url = "ProyectoDetalle.html?ProyectoId=0";
         window.open(url, '_self');
     };
@@ -200,7 +219,7 @@ function deleteProyecto(id) {
         title: "<i class='fa fa-info'></i> Mensaje",
         content: mens,
         buttons: '[Aceptar][Cancelar]'
-    }, function (ButtonPressed) {
+    }, function(ButtonPressed) {
         if (ButtonPressed === "Aceptar") {
             var data = {
                 proyectoId: id
@@ -211,7 +230,7 @@ function deleteProyecto(id) {
                 dataType: "json",
                 contentType: "application/json",
                 data: JSON.stringify(data),
-                success: function (data, status) {
+                success: function(data, status) {
                     var fn = buscarProyectos();
                     fn();
                 },
@@ -230,5 +249,3 @@ function editProyecto(id) {
     var url = "ProyectoDetalle.html?ProyectoId=" + id;
     window.open(url, '_self');
 }
-
-

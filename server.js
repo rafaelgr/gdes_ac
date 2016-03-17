@@ -129,6 +129,9 @@ router.route("/proyectos/:proyectoId")
 router.route("/proyectos-buscar")
     .post(proyectos_api.postProyectosBuscar);
 
+router.route("/proyectos-buscar2")
+    .post(proyectos_api.postProyectosBuscar2);    
+
 // --> Relacionadas con administradores
 router.route("/administradores")
     .get(administradores_api.getAdministradores)
