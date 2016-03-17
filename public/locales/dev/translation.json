@@ -43,7 +43,8 @@
     },
     "menu": {
         "MisConocimientos": "MIS CONOCIMIENTOS",
-        "RegConocimientos": "REG.CONOCIMIENTOS"
+        "RegConocimientos": "REG. / PROYECTO",
+        "RegConocimientos2": "REG. / TRABAJADOR"
     },
     "cliIndex": {
         "titulo": "Estas son sus áreas de conocimiento registradas",

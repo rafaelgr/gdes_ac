@@ -33,7 +33,7 @@ function initForm() {
         lang = "es";
     }
     // fijar idiona
-    i18n.init({ lng: trabajador.idioma }, function (t) {
+    i18n.init({ lng: trabajador.idioma }, function(t) {
         $(".I18N").i18n();
         initTablaAsgProyectos();
         validator_languages(lang);
@@ -41,13 +41,13 @@ function initForm() {
 
     $("#userName").text(trabajador.nombre);
     controlBotones(trabajador);
-    
+
     vm = new asgProyectoData();
     ko.applyBindings(vm);
 
     //
     $('#btnBuscar').click(buscarAsgProyectos());
-    $('#frmBuscar').submit(function () {
+    $('#frmBuscar').submit(function() {
         return false
     });
     //$('#txtBuscar').keypress(function (e) {
@@ -58,29 +58,58 @@ function initForm() {
 
     // carga del desplegable.
     loadTrabajadores(trabajador.trabajadorId);
+
+    $("#cmbTrabajadores").select2({
+        allowClear: true,
+        language: {
+            errorLoading: function() {
+                return "La carga falló";
+            },
+            inputTooLong: function(e) {
+                var t = e.input.length - e.maximum,
+                    n = "Por favor, elimine " + t + " car";
+                return t == 1 ? n += "ácter" : n += "acteres", n;
+            },
+            inputTooShort: function(e) {
+                var t = e.minimum - e.input.length,
+                    n = "Por favor, introduzca " + t + " car";
+                return t == 1 ? n += "ácter" : n += "acteres", n;
+            },
+            loadingMore: function() {
+                return "Cargando más resultados…";
+            },
+            maximumSelected: function(e) {
+                var t = "Sólo puede seleccionar " + e.maximum + " elemento";
+                return e.maximum != 1 && (t += "s"), t;
+            },
+            noResults: function() {
+                return "No se encontraron resultados";
+            },
+            searching: function() {
+                return "Buscando…";
+            }
+        }
+    });
 }
 
 function asgProyectoData() {
     var self = this;
     // soporte de combos
     self.posiblesTrabajadores = ko.observableArray([]);
+    self.elegidosTrabajadores = ko.observableArray([]);
     // valores escogidos
     self.strabajadorId = ko.observable();
 }
 
 function loadTrabajadores(evaluadorId) {
-    data = {
-        "evaluadorId": evaluadorId
-    };
     $.ajax({
-        type: "POST",
-        url: "/api/trabajadores-buscar",
+        type: "GET",
+        url: "/api/trabajadores/evaluador?id=" + evaluadorId,
         dataType: "json",
         contentType: "application/json",
-        data: JSON.stringify(data),
-        success: function (data, status) {
-            vm.posiblesTrabajadores(data);
-            vm.strabajadorId(-1);
+        success: function(data, status) {
+            var trabajadores = [{ trabajadorId: 0, nombre: "" }].concat(data);
+            vm.posiblesTrabajadores(trabajadores);
         },
         error: errorAjax
     });
@@ -89,16 +118,16 @@ function loadTrabajadores(evaluadorId) {
 function initTablaAsgProyectos() {
     tablaCarro = $('#dt_asgProyecto').dataTable({
         autoWidth: true,
-        preDrawCallback: function () {
+        preDrawCallback: function() {
             // Initialize the responsive datatables helper once.
             if (!responsiveHelper_dt_basic) {
                 responsiveHelper_dt_basic = new ResponsiveDatatablesHelper($('#dt_asgProyecto'), breakpointDefinition);
             }
         },
-        rowCallback: function (nRow) {
+        rowCallback: function(nRow) {
             responsiveHelper_dt_basic.createExpandIcon(nRow);
         },
-        drawCallback: function (oSettings) {
+        drawCallback: function(oSettings) {
             responsiveHelper_dt_basic.respond();
         },
         language: {
@@ -122,17 +151,15 @@ function initTablaAsgProyectos() {
             }
         },
         data: dataAsgProyectos,
-        columns: [
-            {
-                data: "trabajador.nombre"
-            }, {
-                data: "proyecto.nombre"
-            }, {
-                data: "rol.nombre"
-            },
-         {
+        columns: [{
+            data: "trabajador.nombre"
+        }, {
+            data: "proyecto.nombre"
+        }, {
+            data: "rol.nombre"
+        }, {
             data: "asgProyectoId",
-            render: function (data, type, row) {
+            render: function(data, type, row) {
                 var bt1 = "<button class='btn btn-circle btn-success btn-lg' onclick='editAsgProyecto(" + data + ");' title='" + i18n.t("app.evaluar") + "'> <i class='fa fa-edit fa-gears'></i> </button>";
                 var html = "<div class='pull-right'>" + bt1 + "</div>";
                 return html;
@@ -148,7 +175,7 @@ function datosOK() {
             cmbTrabajadores: { required: true },
         },
         // Do not change code below
-        errorPlacement: function (error, element) {
+        errorPlacement: function(error, element) {
             error.insertAfter(element.parent());
         }
     });
@@ -169,13 +196,13 @@ function loadTablaAsgProyectos(data) {
 }
 
 function buscarAsgProyectos() {
-    var mf = function () {
+    var mf = function() {
         if (!datosOK()) {
             return;
         }
         // enviar la consulta por la red (AJAX)
         var data = {
-            "trabajadorId": vm.strabajadorId()[0]
+            "trabajadorId": vm.elegidosTrabajadores()[0]
         };
         $.ajax({
             type: "POST",
@@ -183,7 +210,7 @@ function buscarAsgProyectos() {
             dataType: "json",
             contentType: "application/json",
             data: JSON.stringify(data),
-            success: function (data, status) {
+            success: function(data, status) {
                 // hay que mostrarlo en la zona de datos
                 loadTablaAsgProyectos(data);
             },
@@ -200,5 +227,3 @@ function editAsgProyecto(id) {
     var url = "CliEvaAsgDetalle.html?AsgProyectoId=" + id;
     window.open(url, '_self');
 }
-
-

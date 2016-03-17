@@ -43,7 +43,8 @@
     },
     "menu": {
         "MisConocimientos": "MY KNOWLEDGE",
-        "RegConocimientos": "KNOWLEDGE REG."
+        "RegConocimientos": "REG. / PROJECT",
+        "RegConocimientos2": "REG. / WORKER"
     },
     "cliIndex": {
         "titulo": "This are your registered areas of knowledge",

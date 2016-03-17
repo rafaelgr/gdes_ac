@@ -196,6 +196,9 @@ router.route("/trabajadores")
     .get(trabajadores_api.getTrabajadores)
     .post(trabajadores_api.postTrabajador);
 
+router.route("/trabajadores/evaluador")
+    .get(trabajadores_api.getTrabajadoresEvaluador)    
+
 
 router.route("/trabajadores/:trabajadorId")
     .get(trabajadores_api.getTrabajador)
