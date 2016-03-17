@@ -20,8 +20,130 @@ function initForm() {
         return false;
     });
 
-
-
+    $("#cmbTrabajadores").select2({
+        allowClear: true,
+        language: {
+            errorLoading: function() {
+                return "La carga falló";
+            },
+            inputTooLong: function(e) {
+                var t = e.input.length - e.maximum,
+                    n = "Por favor, elimine " + t + " car";
+                return t == 1 ? n += "ácter" : n += "acteres", n;
+            },
+            inputTooShort: function(e) {
+                var t = e.minimum - e.input.length,
+                    n = "Por favor, introduzca " + t + " car";
+                return t == 1 ? n += "ácter" : n += "acteres", n;
+            },
+            loadingMore: function() {
+                return "Cargando más resultados…";
+            },
+            maximumSelected: function(e) {
+                var t = "Sólo puede seleccionar " + e.maximum + " elemento";
+                return e.maximum != 1 && (t += "s"), t;
+            },
+            noResults: function() {
+                return "No se encontraron resultados";
+            },
+            searching: function() {
+                return "Buscando…";
+            }
+        }
+    });
+    $("#cmbProyectos").select2({
+        allowClear: true,
+        language: {
+            errorLoading: function() {
+                return "La carga falló";
+            },
+            inputTooLong: function(e) {
+                var t = e.input.length - e.maximum,
+                    n = "Por favor, elimine " + t + " car";
+                return t == 1 ? n += "ácter" : n += "acteres", n;
+            },
+            inputTooShort: function(e) {
+                var t = e.minimum - e.input.length,
+                    n = "Por favor, introduzca " + t + " car";
+                return t == 1 ? n += "ácter" : n += "acteres", n;
+            },
+            loadingMore: function() {
+                return "Cargando más resultados…";
+            },
+            maximumSelected: function(e) {
+                var t = "Sólo puede seleccionar " + e.maximum + " elemento";
+                return e.maximum != 1 && (t += "s"), t;
+            },
+            noResults: function() {
+                return "No se encontraron resultados";
+            },
+            searching: function() {
+                return "Buscando…";
+            }
+        }
+    });
+    $("#cmbRoles").select2({
+        allowClear: true,
+        language: {
+            errorLoading: function() {
+                return "La carga falló";
+            },
+            inputTooLong: function(e) {
+                var t = e.input.length - e.maximum,
+                    n = "Por favor, elimine " + t + " car";
+                return t == 1 ? n += "ácter" : n += "acteres", n;
+            },
+            inputTooShort: function(e) {
+                var t = e.minimum - e.input.length,
+                    n = "Por favor, introduzca " + t + " car";
+                return t == 1 ? n += "ácter" : n += "acteres", n;
+            },
+            loadingMore: function() {
+                return "Cargando más resultados…";
+            },
+            maximumSelected: function(e) {
+                var t = "Sólo puede seleccionar " + e.maximum + " elemento";
+                return e.maximum != 1 && (t += "s"), t;
+            },
+            noResults: function() {
+                return "No se encontraron resultados";
+            },
+            searching: function() {
+                return "Buscando…";
+            }
+        }
+    });
+    $("#cmbEvaluadores").select2({
+        allowClear: true,
+        language: {
+            errorLoading: function() {
+                return "La carga falló";
+            },
+            inputTooLong: function(e) {
+                var t = e.input.length - e.maximum,
+                    n = "Por favor, elimine " + t + " car";
+                return t == 1 ? n += "ácter" : n += "acteres", n;
+            },
+            inputTooShort: function(e) {
+                var t = e.minimum - e.input.length,
+                    n = "Por favor, introduzca " + t + " car";
+                return t == 1 ? n += "ácter" : n += "acteres", n;
+            },
+            loadingMore: function() {
+                return "Cargando más resultados…";
+            },
+            maximumSelected: function(e) {
+                var t = "Sólo puede seleccionar " + e.maximum + " elemento";
+                return e.maximum != 1 && (t += "s"), t;
+            },
+            noResults: function() {
+                return "No se encontraron resultados";
+            },
+            searching: function() {
+                return "Buscando…";
+            }
+        }
+    });
     asgProyectoId = gup('AsgProyectoId');
     if (asgProyectoId != 0) {
         var data = {
@@ -60,9 +182,13 @@ function asgProyectoData() {
     self.descripcion = ko.observable();
     // soporte de combos
     self.posiblesTrabajadores = ko.observableArray([]);
+    self.elegidosTrabajadores = ko.observableArray([]);
     self.posiblesProyectos = ko.observableArray([]);
+    self.elegidosProyectos = ko.observableArray([]);
     self.posiblesRoles = ko.observableArray([]);
+    self.elegidosRoles = ko.observableArray([]);
     self.posiblesEvaluadores = ko.observableArray([]);
+    self.elegidosEvaluadores = ko.observableArray([]);
     // valores escogidos
     self.strabajadorId = ko.observable();
     self.sproyectoId = ko.observable();
@@ -108,8 +234,9 @@ function loadTrabajadores(trabajadorId) {
         dataType: "json",
         contentType: "application/json",
         success: function(data, status) {
-            vm.posiblesTrabajadores(data);
-            vm.strabajadorId(trabajadorId);
+            var trabajadores = [{ trabajadorId: 0, nombre: "" }].concat(data);
+            vm.posiblesTrabajadores(trabajadores);
+            $("#cmbTrabajadores").val([trabajadorId]).trigger('change');
         },
         error: errorAjax
     });
@@ -122,8 +249,9 @@ function loadEvaluadores(evaluadorId) {
         dataType: "json",
         contentType: "application/json",
         success: function(data, status) {
-            vm.posiblesEvaluadores(data);
-            vm.sevaluadorId(evaluadorId);
+            var evaluadores = [{ trabajadorId: 0, nombre: "" }].concat(data);
+            vm.posiblesEvaluadores(evaluadores);
+            $("#cmbEvaluadores").val([evaluadorId]).trigger('change');
         },
         error: errorAjax
     });
@@ -136,8 +264,9 @@ function loadProyectos(proyectoId) {
         dataType: "json",
         contentType: "application/json",
         success: function(data, status) {
-            vm.posiblesProyectos(data);
-            vm.sproyectoId(proyectoId);
+            var proyectos = [{ proyectoId: 0, nombre: "" }].concat(data);
+            vm.posiblesProyectos(proyectos);
+            $("#cmbProyectos").val([proyectoId]).trigger('change');
         },
         error: errorAjax
     });
@@ -150,8 +279,9 @@ function loadRoles(rolId) {
         dataType: "json",
         contentType: "application/json",
         success: function(data, status) {
-            vm.posiblesRoles(data);
-            vm.srolId(rolId);
+            var roles = [{ rolId: 0, nombre: "" }].concat(data);
+            vm.posiblesRoles(roles);
+            $("#cmbRoles").val([rolId]).trigger('change');
         },
         error: errorAjax
     });
@@ -221,20 +351,20 @@ function aceptar() {
                 "fechaInicio": fecha1,
                 "fechaFinal": fecha2,
                 "trabajador": {
-                    "trabajadorId": vm.strabajadorId()
+                    "trabajadorId": vm.elegidosTrabajadores()[0]
                 },
                 "proyecto": {
-                    "proyectoId": vm.sproyectoId()
+                    "proyectoId": vm.elegidosProyectos()[0]
                 },
                 "rol": {
-                    "rolId": vm.srolId()
+                    "rolId":vm.elegidosRoles()[0]
                 },
                 "evaluador": {
-                    "evaluadorId": vm.sevaluadorId()
+                    "evaluadorId": vm.elegidosEvaluadores()[0]
                 }
             }
         };
-        if (vm.sevaluadorId() == -1) {
+        if (vm.elegidosTrabajadores()[0] == -1) {
             data.asgProyecto.evaluador.evaluadorId = null;
         }
         if (asgProyectoId == 0) {

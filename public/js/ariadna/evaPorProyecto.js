@@ -26,7 +26,7 @@ function initForm() {
     ko.applyBindings(vm);
     //
     $('#btnBuscar').click(buscarAsgProyectos());
-    $('#frmBuscar').submit(function () {
+    $('#frmBuscar').submit(function() {
         return false
     });
     //$('#txtBuscar').keypress(function (e) {
@@ -37,12 +37,45 @@ function initForm() {
     initTablaAsgProyectos();
     // carga del desplegable.
     loadProyectos(-1);
+
+    $("#cmbProyectos").select2({
+        allowClear: true,
+        language: {
+            errorLoading: function() {
+                return "La carga falló";
+            },
+            inputTooLong: function(e) {
+                var t = e.input.length - e.maximum,
+                    n = "Por favor, elimine " + t + " car";
+                return t == 1 ? n += "ácter" : n += "acteres", n;
+            },
+            inputTooShort: function(e) {
+                var t = e.minimum - e.input.length,
+                    n = "Por favor, introduzca " + t + " car";
+                return t == 1 ? n += "ácter" : n += "acteres", n;
+            },
+            loadingMore: function() {
+                return "Cargando más resultados…";
+            },
+            maximumSelected: function(e) {
+                var t = "Sólo puede seleccionar " + e.maximum + " elemento";
+                return e.maximum != 1 && (t += "s"), t;
+            },
+            noResults: function() {
+                return "No se encontraron resultados";
+            },
+            searching: function() {
+                return "Buscando…";
+            }
+        }
+    });
 }
 
 function asgProyectoData() {
     var self = this;
     // soporte de combos
     self.posiblesProyectos = ko.observableArray([]);
+    self.elegidosProyectos = ko.observableArray([]);
     // valores escogidos
     self.sproyectoId = ko.observable();
 }
@@ -53,9 +86,9 @@ function loadProyectos(proyectoId) {
         url: "/api/proyectos",
         dataType: "json",
         contentType: "application/json",
-        success: function (data, status) {
+        success: function(data, status) {
+            var proyectos = [{ propyectoId: 0, nombre: "" }].concat(data);
             vm.posiblesProyectos(data);
-            vm.sproyectoId(proyectoId);
         },
         error: errorAjax
     });
@@ -64,16 +97,16 @@ function loadProyectos(proyectoId) {
 function initTablaAsgProyectos() {
     tablaCarro = $('#dt_asgProyecto').dataTable({
         autoWidth: true,
-        preDrawCallback: function () {
+        preDrawCallback: function() {
             // Initialize the responsive datatables helper once.
             if (!responsiveHelper_dt_basic) {
                 responsiveHelper_dt_basic = new ResponsiveDatatablesHelper($('#dt_asgProyecto'), breakpointDefinition);
             }
         },
-        rowCallback: function (nRow) {
+        rowCallback: function(nRow) {
             responsiveHelper_dt_basic.createExpandIcon(nRow);
         },
-        drawCallback: function (oSettings) {
+        drawCallback: function(oSettings) {
             responsiveHelper_dt_basic.respond();
         },
         language: {
@@ -99,16 +132,15 @@ function initTablaAsgProyectos() {
         data: dataAsgProyectos,
         columns: [{
             data: "nombre"
-            }, {
-                data: "trabajador.nombre"
-            }, {
-                data: "proyecto.nombre"
-            }, {
-                data: "rol.nombre"
-            },
-         {
+        }, {
+            data: "trabajador.nombre"
+        }, {
+            data: "proyecto.nombre"
+        }, {
+            data: "rol.nombre"
+        }, {
             data: "asgProyectoId",
-            render: function (data, type, row) {
+            render: function(data, type, row) {
                 var bt1 = "<button class='btn btn-circle btn-success btn-lg' onclick='editAsgProyecto(" + data + ");' title='Evaluar asignacion'> <i class='fa fa-edit fa-gears'></i> </button>";
                 var html = "<div class='pull-right'>" + bt1 + "</div>";
                 return html;
@@ -130,7 +162,7 @@ function datosOK() {
             }
         },
         // Do not change code below
-        errorPlacement: function (error, element) {
+        errorPlacement: function(error, element) {
             error.insertAfter(element.parent());
         }
     });
@@ -151,13 +183,13 @@ function loadTablaAsgProyectos(data) {
 }
 
 function buscarAsgProyectos() {
-    var mf = function () {
+    var mf = function() {
         if (!datosOK()) {
             return;
         }
         // enviar la consulta por la red (AJAX)
         var data = {
-            "proyectoId": vm.sproyectoId()
+            "proyectoId": vm.elegidosProyectos()[0]
         };
         $.ajax({
             type: "POST",
@@ -165,7 +197,7 @@ function buscarAsgProyectos() {
             dataType: "json",
             contentType: "application/json",
             data: JSON.stringify(data),
-            success: function (data, status) {
+            success: function(data, status) {
                 // hay que mostrarlo en la zona de datos
                 loadTablaAsgProyectos(data);
             },
@@ -182,5 +214,3 @@ function editAsgProyecto(id) {
     var url = "EvaAsgDetalle.html?AsgProyectoId=" + id;
     window.open(url, '_self');
 }
-
-
