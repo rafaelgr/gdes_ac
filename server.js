@@ -31,8 +31,10 @@ var evaluaciones_api = require("./lib/evaluaciones_api.js");
 var informes_api = require("./lib/informes_api.js");
 var servicios_api = require("./lib/servicios_api.js");
 var habilidades_api = require("./lib/habilidades_api.js");
+var areas_api = require("./lib/areas_api.js");
 var conocimientos_categorias_api = require("./lib/conocimientos_categorias_api.js");
 var conocimientos_habilidades_api = require("./lib/conocimientos_habilidades_api.js");
+var conocimientos_areas_api = require("./lib/conocimientos_areas_api.js");
 var empresas_api = require("./lib/empresas_api.js");
 
 
@@ -51,8 +53,8 @@ var logfile = fs.createWriteStream(express_log_file, {
 
 /*
 app.use (morgan({
-	format: "short",
-	stream: logfile
+    format: "short",
+    stream: logfile
 }));
 */
 
@@ -66,15 +68,15 @@ app.use(express.static(__dirname + "/public"));
 // al funcionar como servicio redireccionamos la consola y las pantallas
 // de errores a ficheros de log.
 process.__defineGetter__("stderr", function(){
-	return fs.createWriteStream(error_log_file,{
-		flags: "a"
-	})
+    return fs.createWriteStream(error_log_file,{
+        flags: "a"
+    })
 });
 
 process.__defineGetter__("stdout", function(){
-	return fs.createWriteStream(console_log_file,{
-		flags: "a"
-	})
+    return fs.createWriteStream(console_log_file,{
+        flags: "a"
+    })
 });
 */
 
@@ -93,9 +95,9 @@ router.use(function(req, res, next) {
 });
 
 router.get("/", function(req, res) {
-    //	res.json({
-    //		mensaje: "API GDES AC"
-    //	});
+    //  res.json({
+    //      mensaje: "API GDES AC"
+    //  });
     res.send("API GDES OD [A la escucha]");
 });
 
@@ -296,6 +298,14 @@ router.route("/conocimientos-habilidades/:conocimientoId")
     .get(conocimientos_habilidades_api.getConocimientoHabilidades);
 
 
+// relaciones de conocimientos con areas
+router.route("/conocimientos-areas")
+    .post(conocimientos_areas_api.postConocimientoAreas);
+
+router.route("/conocimientos-areas/:conocimientoId")
+    .get(conocimientos_areas_api.getConocimientoAreas);
+
+
 // --> Relacionadas con empresas
 router.route("/empresas")
     .get(empresas_api.getEmpresas)
@@ -309,6 +319,19 @@ router.route("/empresas/:empresaId")
 
 router.route("/empresas-buscar")
     .post(empresas_api.postEmpresasBuscar);
+
+// --> Relacionadas con areas
+router.route("/areas")
+    .get(areas_api.getAreas)
+    .post(areas_api.postArea);
+
+router.route("/areas/:areaId")
+    .get(areas_api.getArea)
+    .put(areas_api.putArea)
+    .delete(areas_api.deleteArea);
+
+router.route("/areas-buscar")
+    .post(areas_api.postAreasBuscar);
 
 //================================================================
 // Registro de rutas y arranque del servidor

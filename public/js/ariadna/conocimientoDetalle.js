@@ -2,7 +2,8 @@
 conocimientoDetalle.js
 Funciones js par la página ConocimientoDetalle.html
 ---------------------------------------------------------------------------*/
-var conocimientoId = 0; 
+var conocimientoId = 0;
+
 function initForm() {
     // comprobarLogin();
     // de smart admin
@@ -14,47 +15,117 @@ function initForm() {
     // asignación de eventos al clic
     $("#btnAceptar").click(aceptar());
     $("#btnSalir").click(salir());
-    $("#frmConocimiento").submit(function () {
+    $("#frmConocimiento").submit(function() {
         return false;
     });
 
     $("#cmbCatConocimientos").select2({
         language: {
-            errorLoading: function () { return "La carga falló"; }, 
-            inputTooLong: function (e) { var t = e.input.length - e.maximum, n = "Por favor, elimine " + t + " car"; return t == 1?n += "ácter":n += "acteres", n; }, 
-            inputTooShort: function (e) { var t = e.minimum - e.input.length, n = "Por favor, introduzca " + t + " car"; return t == 1?n += "ácter":n += "acteres", n; }, 
-            loadingMore: function () { return "Cargando más resultados…"; }, 
-            maximumSelected: function (e) { var t = "Sólo puede seleccionar " + e.maximum + " elemento"; return e.maximum != 1 && (t += "s"), t; }, 
-            noResults: function () { return "No se encontraron resultados"; }, 
-            searching: function () { return "Buscando…"; }
+            errorLoading: function() {
+                return "La carga falló";
+            },
+            inputTooLong: function(e) {
+                var t = e.input.length - e.maximum,
+                    n = "Por favor, elimine " + t + " car";
+                return t == 1 ? n += "ácter" : n += "acteres", n;
+            },
+            inputTooShort: function(e) {
+                var t = e.minimum - e.input.length,
+                    n = "Por favor, introduzca " + t + " car";
+                return t == 1 ? n += "ácter" : n += "acteres", n;
+            },
+            loadingMore: function() {
+                return "Cargando más resultados…";
+            },
+            maximumSelected: function(e) {
+                var t = "Sólo puede seleccionar " + e.maximum + " elemento";
+                return e.maximum != 1 && (t += "s"), t;
+            },
+            noResults: function() {
+                return "No se encontraron resultados";
+            },
+            searching: function() {
+                return "Buscando…";
+            }
         }
     });
-    
+
     $("#cmbHabilitaciones").select2({
         language: {
-            errorLoading: function () { return "La carga falló"; }, 
-            inputTooLong: function (e) { var t = e.input.length - e.maximum, n = "Por favor, elimine " + t + " car"; return t == 1?n += "ácter":n += "acteres", n; }, 
-            inputTooShort: function (e) { var t = e.minimum - e.input.length, n = "Por favor, introduzca " + t + " car"; return t == 1?n += "ácter":n += "acteres", n; }, 
-            loadingMore: function () { return "Cargando más resultados…"; }, 
-            maximumSelected: function (e) { var t = "Sólo puede seleccionar " + e.maximum + " elemento"; return e.maximum != 1 && (t += "s"), t; }, 
-            noResults: function () { return "No se encontraron resultados"; }, 
-            searching: function () { return "Buscando…"; }
+            errorLoading: function() {
+                return "La carga falló";
+            },
+            inputTooLong: function(e) {
+                var t = e.input.length - e.maximum,
+                    n = "Por favor, elimine " + t + " car";
+                return t == 1 ? n += "ácter" : n += "acteres", n;
+            },
+            inputTooShort: function(e) {
+                var t = e.minimum - e.input.length,
+                    n = "Por favor, introduzca " + t + " car";
+                return t == 1 ? n += "ácter" : n += "acteres", n;
+            },
+            loadingMore: function() {
+                return "Cargando más resultados…";
+            },
+            maximumSelected: function(e) {
+                var t = "Sólo puede seleccionar " + e.maximum + " elemento";
+                return e.maximum != 1 && (t += "s"), t;
+            },
+            noResults: function() {
+                return "No se encontraron resultados";
+            },
+            searching: function() {
+                return "Buscando…";
+            }
         }
     });
+
+    $("#cmbAreas").select2({
+        language: {
+            errorLoading: function() {
+                return "La carga falló";
+            },
+            inputTooLong: function(e) {
+                var t = e.input.length - e.maximum,
+                    n = "Por favor, elimine " + t + " car";
+                return t == 1 ? n += "ácter" : n += "acteres", n;
+            },
+            inputTooShort: function(e) {
+                var t = e.minimum - e.input.length,
+                    n = "Por favor, introduzca " + t + " car";
+                return t == 1 ? n += "ácter" : n += "acteres", n;
+            },
+            loadingMore: function() {
+                return "Cargando más resultados…";
+            },
+            maximumSelected: function(e) {
+                var t = "Sólo puede seleccionar " + e.maximum + " elemento";
+                return e.maximum != 1 && (t += "s"), t;
+            },
+            noResults: function() {
+                return "No se encontraron resultados";
+            },
+            searching: function() {
+                return "Buscando…";
+            }
+        }
+    });
+
 
     conocimientoId = gup('ConocimientoId');
     if (conocimientoId != 0) {
         var data = {
-            conocimientoId: conocimientoId
-        }
-        // hay que buscar ese elemento en concreto
+                conocimientoId: conocimientoId
+            }
+            // hay que buscar ese elemento en concreto
         $.ajax({
             type: "GET",
             url: "/api/conocimientos/" + conocimientoId,
             dataType: "json",
             contentType: "application/json",
             data: JSON.stringify(data),
-            success: function (data, status) {
+            success: function(data, status) {
                 var conocimiento = data;
                 // hay que buscar las categorias relacionadas
                 $.ajax({
@@ -63,7 +134,7 @@ function initForm() {
                     dataType: "json",
                     contentType: "application/json",
                     data: JSON.stringify(data),
-                    success: function (data, status) {
+                    success: function(data, status) {
                         var categorias = data;
                         $.ajax({
                             type: "GET",
@@ -71,10 +142,21 @@ function initForm() {
                             dataType: "json",
                             contentType: "application/json",
                             data: JSON.stringify(data),
-                            success: function (data, status) {
+                            success: function(data, status) {
                                 var habilidades = data;
-                                // hay que mostrarlo en la zona de datos
-                                loadData(conocimiento, categorias, habilidades);
+                                $.ajax({
+                                    type: "GET",
+                                    url: "/api/conocimientos-areas/" + conocimientoId,
+                                    dataType: "json",
+                                    contentType: "application/json",
+                                    data: JSON.stringify(data),
+                                    success: function(data, status) {
+                                        var areas = data;
+                                        // hay que mostrarlo en la zona de datos
+                                        loadData(conocimiento, categorias, habilidades, areas);
+                                    },
+                                    error: errorAjax
+                                });
                             },
                             error: errorAjax
                         });
@@ -91,6 +173,7 @@ function initForm() {
         vm.conocimientoId(0);
         loadCatConocimientos(-1);
         loadHabilitaciones(-1);
+        loadAreas(-1);
     }
 }
 
@@ -105,26 +188,31 @@ function conocimientoData() {
     self.elegidosCatConocimientos = ko.observableArray([]);
     self.posiblesHabilitaciones = ko.observableArray([]);
     self.elegidosHabilitaciones = ko.observableArray([]);
+    self.posiblesAreas = ko.observableArray([]);
+    self.elegidosAreas = ko.observableArray([]);
+
     // valores escogidos
     self.scatConocimientoId = ko.observable();
     self.shabilidadId = ko.observable();
+    self.sareaId = ko.observable();
 }
 
-function loadData(conocimiento, categorias, habilidades) {
+function loadData(conocimiento, categorias, habilidades, areas) {
     vm.conocimientoId(conocimiento.conocimientoId);
     vm.nombre(conocimiento.nombre);
     // montaje de las categorías
     loadCatConocimientos(categorias);
     loadHabilitaciones(habilidades);
+    loadAreas(areas);
 }
 
-function loadCatConocimientos(categorias){
+function loadCatConocimientos(categorias) {
     $.ajax({
         type: "GET",
         url: "/api/catConocimientos",
         dataType: "json",
         contentType: "application/json",
-        success: function (data, status){
+        success: function(data, status) {
             vm.posiblesCatConocimientos(data);
             $("#cmbCatConocimientos").val(categorias).trigger('change');
         },
@@ -138,13 +226,29 @@ function loadHabilitaciones(habilidades) {
         url: "/api/habilidades",
         dataType: "json",
         contentType: "application/json",
-        success: function (data, status) {
+        success: function(data, status) {
             vm.posiblesHabilitaciones(data);
             $("#cmbHabilitaciones").val(habilidades).trigger('change');
         },
         error: errorAjax
     });
 }
+
+function loadAreas(areas) {
+    $.ajax({
+        type: "GET",
+        url: "/api/areas",
+        dataType: "json",
+        contentType: "application/json",
+        success: function(data, status) {
+            vm.posiblesAreas(data);
+            $("#cmbAreas").val(areas).trigger('change');
+        },
+        error: errorAjax
+    });
+}
+
+
 function datosOK() {
     $('#frmConocimiento').validate({
         rules: {
@@ -152,10 +256,10 @@ function datosOK() {
         },
         // Messages for form validation
         messages: {
-            txtNombre: {required: 'Introduzca el nombre'}
+            txtNombre: { required: 'Introduzca el nombre' }
         },
         // Do not change code below
-        errorPlacement: function (error, element) {
+        errorPlacement: function(error, element) {
             error.insertAfter(element.parent());
         }
     });
@@ -168,7 +272,7 @@ function datosOK() {
 }
 
 function aceptar2() {
-    var mf = function () {
+    var mf = function() {
         if (!datosOK())
             return;
         var data = {
@@ -187,7 +291,7 @@ function aceptar2() {
                 dataType: "json",
                 contentType: "application/json",
                 data: JSON.stringify(data),
-                success: function (data, status) {
+                success: function(data, status) {
                     // Nos volvemos al general
                     var url = "ConocimientoGeneral.html?ConocimientoId=" + data.conocimientoId;
                     window.open(url, '_self');
@@ -201,7 +305,7 @@ function aceptar2() {
                 dataType: "json",
                 contentType: "application/json",
                 data: JSON.stringify(data),
-                success: function (data, status) {
+                success: function(data, status) {
                     // Nos volvemos al general
                     var url = "ConocimientoGeneral.html?ConocimientoId=" + data.conocimientoId;
                     window.open(url, '_self');
@@ -215,7 +319,7 @@ function aceptar2() {
 
 
 function aceptar() {
-    var mf = function () {
+    var mf = function() {
         if (!datosOK())
             return;
         var data = {
@@ -227,23 +331,23 @@ function aceptar() {
         if (conocimientoId == 0) {
             async.series(
                 [
-                    function (callback) {
+                    function(callback) {
                         $.ajax({
                             type: "POST",
                             url: "api/conocimientos",
                             dataType: "json",
                             contentType: "application/json",
                             data: JSON.stringify(data),
-                            success: function (data, status) {
+                            success: function(data, status) {
                                 conocimientoId = data.conocimientoId;
                                 callback(null, null);
                             },
-                            error: function (xhr, textStatus, errorThrwon) { 
+                            error: function(xhr, textStatus, errorThrwon) {
                                 callback(xhr, null);
                             }
                         });
-                    }, 
-                    function (callback) {
+                    },
+                    function(callback) {
                         var data = {
                             "conocimientoId": conocimientoId,
                             "categorias": vm.elegidosCatConocimientos()
@@ -254,15 +358,15 @@ function aceptar() {
                             dataType: "json",
                             contentType: "application/json",
                             data: JSON.stringify(data),
-                            success: function (data, status) {
+                            success: function(data, status) {
                                 callback(null, null);
                             },
-                            error: function (xhr, textStatus, errorThrwon) {
+                            error: function(xhr, textStatus, errorThrwon) {
                                 callback(xhr, null);
                             }
                         });
-                    }, 
-                    function (callback) {
+                    },
+                    function(callback) {
                         var data = {
                             "conocimientoId": conocimientoId,
                             "habilidades": vm.elegidosHabilitaciones()
@@ -273,16 +377,35 @@ function aceptar() {
                             dataType: "json",
                             contentType: "application/json",
                             data: JSON.stringify(data),
-                            success: function (data, status) {
+                            success: function(data, status) {
                                 callback(null, null);
                             },
-                            error: function (xhr, textStatus, errorThrwon) {
+                            error: function(xhr, textStatus, errorThrwon) {
+                                callback(xhr, null);
+                            }
+                        });
+                    },
+                    function(callback) {
+                        var data = {
+                            "conocimientoId": conocimientoId,
+                            "areas": vm.elegidosAreas()
+                        };
+                        $.ajax({
+                            type: "POST",
+                            url: "api/conocimientos-areas",
+                            dataType: "json",
+                            contentType: "application/json",
+                            data: JSON.stringify(data),
+                            success: function(data, status) {
+                                callback(null, null);
+                            },
+                            error: function(xhr, textStatus, errorThrwon) {
                                 callback(xhr, null);
                             }
                         });
                     }
-                ], 
-                function (err, results) {
+                ],
+                function(err, results) {
                     if (err != null) {
                         errorAjaxSerial(err);
                     } else {
@@ -295,22 +418,22 @@ function aceptar() {
         } else {
             async.series(
                 [
-                    function (callback) {
+                    function(callback) {
                         $.ajax({
                             type: "PUT",
                             url: "api/conocimientos/" + conocimientoId,
                             dataType: "json",
                             contentType: "application/json",
                             data: JSON.stringify(data),
-                            success: function (data, status) {
+                            success: function(data, status) {
                                 callback(null, null);
                             },
-                            error: function (xhr, textStatus, errorThrwon) {
+                            error: function(xhr, textStatus, errorThrwon) {
                                 callback(xhr, null);
                             }
                         });
-                    }, 
-                    function (callback) {
+                    },
+                    function(callback) {
                         var data = {
                             "conocimientoId": vm.conocimientoId(),
                             "categorias": vm.elegidosCatConocimientos()
@@ -321,15 +444,15 @@ function aceptar() {
                             dataType: "json",
                             contentType: "application/json",
                             data: JSON.stringify(data),
-                            success: function (data, status) {
+                            success: function(data, status) {
                                 callback(null, null);
                             },
-                            error: function (xhr, textStatus, errorThrwon) {
+                            error: function(xhr, textStatus, errorThrwon) {
                                 callback(xhr, null);
                             }
                         });
-                    }, 
-                    function (callback) {
+                    },
+                    function(callback) {
                         var data = {
                             "conocimientoId": conocimientoId,
                             "habilidades": vm.elegidosHabilitaciones()
@@ -340,16 +463,35 @@ function aceptar() {
                             dataType: "json",
                             contentType: "application/json",
                             data: JSON.stringify(data),
-                            success: function (data, status) {
+                            success: function(data, status) {
                                 callback(null, null);
                             },
-                            error: function (xhr, textStatus, errorThrwon) {
+                            error: function(xhr, textStatus, errorThrwon) {
+                                callback(xhr, null);
+                            }
+                        });
+                    },
+                    function(callback) {
+                        var data = {
+                            "conocimientoId": conocimientoId,
+                            "areas": vm.elegidosAreas()
+                        };
+                        $.ajax({
+                            type: "POST",
+                            url: "api/conocimientos-areas",
+                            dataType: "json",
+                            contentType: "application/json",
+                            data: JSON.stringify(data),
+                            success: function(data, status) {
+                                callback(null, null);
+                            },
+                            error: function(xhr, textStatus, errorThrwon) {
                                 callback(xhr, null);
                             }
                         });
                     }
-                ], 
-                function (err, results) {
+                ],
+                function(err, results) {
                     if (err != null) {
                         errorAjaxSerial(err);
                     } else {
@@ -365,7 +507,7 @@ function aceptar() {
 }
 
 function salir() {
-    var mf = function () {
+    var mf = function() {
         var url = "ConocimientoGeneral.html";
         window.open(url, '_self');
     }
